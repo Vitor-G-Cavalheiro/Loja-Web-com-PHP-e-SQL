@@ -11,11 +11,17 @@ $comando = "SELECT * FROM Usuarios";
 $resultado = mysqli_query($conexao, $comando);
 while($registro = mysqli_fetch_assoc($resultado)){
     if($registro["nome"] == $nome && $registro["senha"] == $senha){
-        echo "Te achei";
+        $_SESSION["mensagem"] = "Bem vindo $nome";
+        Header("Location:../index.php");
+        die;
+    } else if($registro["nome"] == $nome){
+        $_SESSION["mensagem"] = "Senha incorreta";
+        Header("Location:login.php");
         die;
     }
 }
 
-echo "Tu não existe parceiro";
+$_SESSION["mensagem"] = "Tu não existe parceiro";
+Header("Location:login.php");
 
 ?>

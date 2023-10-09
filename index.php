@@ -3,6 +3,11 @@
 $sessao = require('pages/session.php');
 $conexao = require('pages/connection.php');
 
+if(isset($_SESSION["mensagem"])){
+    echo $_SESSION["mensagem"];
+    unset($_SESSION["mensagem"]);
+}
+
 ?>
 
 <!DOCTYPE html>
