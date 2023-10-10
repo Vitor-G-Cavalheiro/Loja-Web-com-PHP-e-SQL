@@ -8,6 +8,7 @@ if(isset($_SESSION["mensagem"])){
     unset($_SESSION["mensagem"]);
 }
 
+$comando = "SELECT j.nome, fj.foto FROM jogospublicados jp inner join jogos j on jp.idJogo = j.idJogo inner join fotosjogos fj on fj.idJogo = jp.idJogo";
 ?>
 
 <!DOCTYPE html>

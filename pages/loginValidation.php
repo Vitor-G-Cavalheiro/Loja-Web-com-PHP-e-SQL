@@ -10,7 +10,12 @@ $comando = "SELECT * FROM Usuarios";
 
 $resultado = mysqli_query($conexao, $comando);
 while($registro = mysqli_fetch_assoc($resultado)){
-    if($registro["nome"] == $nome && $registro["senha"] == $senha){
+    if($registro["nome"] == $nome && $registro["senha"] == $senha && $registro["administrador"] == 1){
+        $_SESSION["mensagem"] = "Bem vindo MESTRE $nome";
+        $_SESSION["admin"] = TRUE;
+        Header("Location:../indexAdmin.php");
+        die;
+    } else if($registro["nome"] == $nome && $registro["senha"] == $senha){
         $_SESSION["mensagem"] = "Bem vindo $nome";
         Header("Location:../index.php");
         die;
@@ -21,7 +26,7 @@ while($registro = mysqli_fetch_assoc($resultado)){
     }
 }
 
-$_SESSION["mensagem"] = "Tu não existe parceiro";
+$_SESSION["mensagem"] = "Usuário não Existe";
 Header("Location:login.php");
 
 ?>

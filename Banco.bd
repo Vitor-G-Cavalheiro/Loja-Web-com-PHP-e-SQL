@@ -22,6 +22,8 @@ PRIMARY KEY (idCategoria)
 CREATE TABLE StreetPlay.Desenvolvedoras (
 idDesenvolvedora INT(11) NOT NULL AUTO_INCREMENT,
 nome VARCHAR(150) NOT NULL,
+senha VARCHAR(8) NOT NULL,
+email VARCHAR(255) NOT NULL,
 descricao VARCHAR(255) NULL,
 foto BLOB NULL,
 PRIMARY KEY (idDesenvolvedora)
@@ -30,6 +32,8 @@ PRIMARY KEY (idDesenvolvedora)
 CREATE TABLE StreetPlay.Publicadoras (
 idPublicadora INT(11) NOT NULL AUTO_INCREMENT,
 nome VARCHAR(150) NOT NULL,
+senha VARCHAR(8) NOT NULL,
+email VARCHAR(255) NOT NULL,
 descricao VARCHAR(255) NULL,
 foto BLOB NULL,
 PRIMARY KEY (idPublicadora)
@@ -119,10 +123,11 @@ REFERENCES StreetPlay.Categorias (idCategoria)
 CREATE TABLE StreetPlay.FotosJogos (
 idFotoJogo INT(11) NOT NULL AUTO_INCREMENT,
 idJogo INT(11) NOT NULL,
-Foto BLOB NOT NULL,
+foto BLOB NOT NULL,
 PRIMARY KEY (idFotoJogo),
 CONSTRAINT fk_jogo_fotojogo
 FOREIGN KEY (idJogo)
 REFERENCES StreetPlay.Jogos (idJogo)
 );
 
+INSERT INTO Usuarios (nome, senha, email, administrador) values ('Admin', '2005', 'vitor.cavalheiro@aluno.ifsp.edu.br', TRUE);
