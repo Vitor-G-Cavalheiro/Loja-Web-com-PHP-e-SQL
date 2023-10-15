@@ -19,5 +19,6 @@ if(isset($_SESSION["mensagem"])){
 </head>
 <body>
     <a href="pages/pubGame.php">Publicar Jogo</a>
+    <a href="pages/manageGames.php">Lista de Jogos</a>
 </body>
 </html>

@@ -10,9 +10,11 @@ if(isset($_SESSION["mensagem"])){
 
 $comandoDesenvolvedora = "SELECT * FROM Desenvolvedoras";
 $comandoPublicadora = "SELECT * FROM Publicadoras";
+$comandoCategoria = "SELECT * FROM Categorias";
 
 $resultadoDesenvolvedora = mysqli_query($conexao, $comandoDesenvolvedora);
 $resultadoPublicadora = mysqli_query($conexao, $comandoPublicadora);
+$resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
 
 ?>
 
@@ -27,9 +29,9 @@ $resultadoPublicadora = mysqli_query($conexao, $comandoPublicadora);
 <body>
     <form action="pubGameBD.php" method="post" enctype="multipart/form-data">
         <label for="nome">Nome: </label>
-        <input type="text" name="nome">
+        <input type="text" name="nome" required>
         <label for="descricao">Descrição: </label>
-        <input type="text" name="descricao">
+        <input type="text" name="descricao" required>
         <label for="desenvolvedora">Desenvolvedora: </label>
         <select name="desenvolvedora">
             <?php
@@ -46,8 +48,16 @@ $resultadoPublicadora = mysqli_query($conexao, $comandoPublicadora);
             }
             ?>
         </select>
-        <label for="foto">Fotos do Jogo: </label>
-        <input type="file" name="foto[]" multiple="multiple">
+        <label for="categoria">Categoria: </label>
+        <select name="categoria">
+            <?php
+            while($registroCategoria = mysqli_fetch_assoc($resultadoCategoria)){
+                echo "<option value='".$registroCategoria["idCategoria"]."'>".$registroCategoria["nome"]."</option>";
+            }
+            ?>
+        </select>
+        <label for="foto">Capa do Jogo: </label>
+        <input type="file" name="foto" required>
         <button type="submit">Publicar</button>
     </form>
 </body>
