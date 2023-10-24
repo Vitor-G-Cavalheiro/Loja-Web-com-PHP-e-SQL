@@ -41,10 +41,10 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
     <form action="pubGameBD.php" method="post" enctype="multipart/form-data">
         <label for="nome">Nome: </label>
         <input type="text" name="nome" required>
-        <label for="descricao">Descrição: </label>
-        <input type="text" name="descricao" required>
         <label for="preco">Preço: </label>
         <input type="number" name="preco" required>
+        <label for="descricao">Descrição: </label>
+        <input type="text" name="descricao" required>
         <label for="desenvolvedora">Desenvolvedora: </label>
         <select name="desenvolvedora">
             <?php
