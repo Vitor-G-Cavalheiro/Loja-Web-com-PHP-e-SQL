@@ -5,13 +5,14 @@ $conexao = require('connection.php');
 
 $idJogo = $_POST["idJogo"];
 $nome = $_POST["nome"];
+$preco = $_POST["preco"];
 $descricao = $_POST["descricao"];
 $desenvolvedora = $_POST["desenvolvedora"];
 $publicadora = $_POST["publicadora"];
 $categoria = $_POST["categoria"];
 $foto = isset($_FILES['foto']) ? $_FILES['foto'] : FALSE;
 
-$atualizarJogo = "UPDATE jogos SET nome = '$nome', descricao = '$descricao' WHERE idJogo = '$idJogo'";
+$atualizarJogo = "UPDATE jogos SET nome = '$nome', preco = '$preco', descricao = '$descricao' WHERE idJogo = '$idJogo'";
 if(!$resultadoJogo = mysqli_query($conexao, $atualizarJogo)){
     $_SESSION["mensagem"] = "Falha ao Atualizar Jogo";
     Header("Location:updateGame.php");
