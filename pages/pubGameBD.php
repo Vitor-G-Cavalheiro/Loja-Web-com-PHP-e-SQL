@@ -5,6 +5,7 @@ $conexao = require('connection.php');
 
 $nome = $_POST["nome"];
 $descricao = $_POST["descricao"];
+$preco = $_POST["preco"];
 $desenvolvedora = $_POST["desenvolvedora"];
 $publicadora = $_POST["publicadora"];
 $categoria = $_POST["categoria"];
@@ -20,7 +21,7 @@ while($registro = mysqli_fetch_assoc($existe)){
     }
 }
 
-$adicionarJogo = "INSERT INTO jogos (nome, descricao) values('$nome','$descricao')";
+$adicionarJogo = "INSERT INTO jogos (nome, preco, descricao) values('$nome', '$preco', '$descricao')";
 if(!$resultadoJogo = mysqli_query($conexao, $adicionarJogo)){
     $_SESSION["mensagem"] = "Falha ao Adicionar Jogo";
     Header("Location:pubGame.php");
