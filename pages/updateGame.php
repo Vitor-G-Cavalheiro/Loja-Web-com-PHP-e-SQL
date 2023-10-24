@@ -41,6 +41,8 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
                     <input name="idJogo" type="text" value="<?=$registroJogos["idJogo"]?>" hidden>
                     <label for="nome">Nome: </label>
                     <input name="nome" type="text" value="<?=$registroJogos["nome"]?>" required>
+                    <label for="preco">Preço: </label>
+                    <input type="number" name="preco" value="<?=$registroJogos["preco"]?> required>
                     <label for="descricao">Descrição: </label>
                     <input type="text" name="descricao" value="<?=$registroJogos["descricao"]?>"required>
                     <label for="desenvolvedora">Desenvolvedora: </label>
