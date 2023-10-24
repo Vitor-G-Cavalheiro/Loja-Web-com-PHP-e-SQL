@@ -19,6 +19,14 @@ $comando = "SELECT j.nome, fj.foto FROM jogospublicados jp inner join jogos j on
     <title>Bem-vindo(a) ao StreetPlay</title>
 </head>
 <body>
-    
+    <?php
+    if($_SESSION["user"] != "usuario"):?>
+        <a href="pages/pubGame.php">Publicar Jogo</a>
+        <a href="pages/manageGames.php">Lista de Jogos</a>
+        <?php if($_SESSION["user"] == "admin"):?>
+        <a href="pages/addCategory.php">Adicionar Categoria</a>
+        <?php endif ?>
+    <?php endif ?>
+    <a href="pages/logOut.php">Sair da Conta</a>
 </body>
 </html>

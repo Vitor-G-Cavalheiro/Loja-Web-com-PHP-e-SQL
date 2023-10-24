@@ -20,10 +20,11 @@ if(isset($_SESSION["mensagem"])){
 <body>
     <form action="loginValidation.php" method="post">
         <label for="nome">Nome: </label>
-        <input type="text" name="nome">
+        <input type="text" name="nome" required>
         <label for="senha">Senha: </label>
-        <input type="password" name="senha">
+        <input type="password" name="senha" maxlength="8" required>
         <button type="submit">Logar</button>
     </form>
+    <a href="./register.php">Registrar-se</a>
 </body>
 </html>

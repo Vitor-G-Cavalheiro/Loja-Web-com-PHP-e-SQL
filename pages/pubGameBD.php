@@ -58,7 +58,7 @@ if(!$publicadoJogo){
     $_SESSION["mensagem"] = "Algo deu errado, Tente Novamente";
 } else {
     $_SESSION["mensagem"] = "Jogo Publicado com Sucesso";
-    Header("Location:../indexAdmin.php");
+    Header("Location:../index.php");
 }
 
 ?>

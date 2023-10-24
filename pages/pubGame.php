@@ -2,14 +2,25 @@
 
 $sessao = require('session.php');
 $conexao = require('connection.php');
+$verificacao = require('userVerification.php');
 
 if(isset($_SESSION["mensagem"])){
     echo $_SESSION["mensagem"];
     unset($_SESSION["mensagem"]);
 }
 
-$comandoDesenvolvedora = "SELECT * FROM Desenvolvedoras";
-$comandoPublicadora = "SELECT * FROM Publicadoras";
+if(isset($_SESSION["idDev"])){
+    $comandoDesenvolvedora = 'SELECT * FROM Desenvolvedoras WHERE idDesenvolvedora = '.$_SESSION["idDev"];
+} else {
+    $comandoDesenvolvedora = "SELECT * FROM Desenvolvedoras";
+}
+
+if(isset($_SESSION["idPub"])){
+    $comandoPublicadora = 'SELECT * FROM Publicadoras WHERE idPublicadora = '.$_SESSION["idPub"];
+} else {
+    $comandoPublicadora = "SELECT * FROM Publicadoras";
+}
+
 $comandoCategoria = "SELECT * FROM Categorias";
 
 $resultadoDesenvolvedora = mysqli_query($conexao, $comandoDesenvolvedora);

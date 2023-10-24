@@ -22,7 +22,7 @@ if(isset($_SESSION["mensagem"])){
         <label for="nome">Nome: </label>
         <input type="text" name="nome" required>
         <label for="senha">Senha: </label>
-        <input type="password" name="senha" required>
+        <input type="password" name="senha" maxlength="8" required>
         <label for="email">Email: </label>
         <input type="email" name="email" required>
         <label for="tipoUsuario">Qual seu tipo de conta: </label>

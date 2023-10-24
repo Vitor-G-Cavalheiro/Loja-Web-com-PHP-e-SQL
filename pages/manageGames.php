@@ -2,9 +2,23 @@
 
 $sessao = require('session.php');
 $conexao = require('connection.php');
+$verificacao = require('userVerification.php');
 
 $comandoJogos = "SELECT * FROM jogos";
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
+
+$comandoFotosJogos = "SELECT * FROM fotosJogos";
+$resultadoFotosJogos = mysqli_query($conexao, $comandoFotosJogos);
+
+if(isset($_SESSION["idDev"])){
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo WHERE idDesenvolvedora = '.$_SESSION["idDev"]; 
+} else if (isset($_SESSION["idPub"])){
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo WHERE idPublicadora = '.$_SESSION["idPub"];
+} else{
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo';
+}
+
+$resultadoPublicado = mysqli_query($conexao, $comandoPublicado);
 
 $jogoDuplicado = 0;
 
@@ -18,17 +32,12 @@ $jogoDuplicado = 0;
 </head>
 <body>
     <?php
-    while($registroJogos = mysqli_fetch_assoc($resultadoJogos)){
-        $comandoFotosJogos = "SELECT * FROM fotosJogos";
-        $resultadoFotosJogos = mysqli_query($conexao, $comandoFotosJogos);
-        while($registroFotosJogos = mysqli_fetch_assoc($resultadoFotosJogos)){
-            if($registroFotosJogos["idJogo"] == $registroJogos["idJogo"]){
-                if($jogoDuplicado != $registroJogos["idJogo"]){
-                    echo "<div><img src='".$registroFotosJogos["foto"]."'><h2>".$registroJogos["nome"]."</h2></div>";
-                    echo "<a href='./updateGame.php?idJogo=".$registroJogos["idJogo"]."'>Atualizar Jogo</a>";
-                    $jogoDuplicado = $registroJogos["idJogo"];
-                }
-            }
+    while($registro = mysqli_fetch_assoc($resultadoPublicado)){
+        if($jogoDuplicado != $registro["idJogo"]){
+            echo "<div><img src='".$registro["foto"]."'><h2>".$registro["nome"]."</h2></div>";
+            echo "<a href='./updateGame.php?idJogo=".$registro["idJogo"]."'>Atualizar Jogo</a>";
+            echo "<a href='./deleteGame.php?idJogo=".$registro["idJogo"]."'>Deletar Jogo</a>";
+            $jogoDuplicado = $registro["idJogo"];
         }
     }
     ?>
