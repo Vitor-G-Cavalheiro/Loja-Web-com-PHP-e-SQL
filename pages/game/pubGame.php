@@ -1,8 +1,8 @@
 <?php
 
-$sessao = require('session.php');
-$conexao = require('connection.php');
-$verificacao = require('userVerification.php');
+$sessao = require('../functions/session.php');
+$conexao = require('../functions/connection.php');
+$verificacao = require('../functions/userVerification.php');
 
 if(isset($_SESSION["mensagem"])){
     echo $_SESSION["mensagem"];
@@ -35,14 +35,16 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" src="../../css/main.css">
     <title>Publicar Jogo</title>
 </head>
 <body>
-    <form action="pubGameBD.php" method="post" enctype="multipart/form-data">
+    <?php require('../components/header.php') ?>
+    <form action="./pubGameBD.php" method="post" enctype="multipart/form-data">
         <label for="nome">Nome: </label>
         <input type="text" name="nome" required>
         <label for="preco">Preço: </label>
-        <input type="number" name="preco" required>
+        <input type="number" name="preco" placeholder="00.00" required>
         <label for="descricao">Descrição: </label>
         <input type="text" name="descricao" required>
         <label for="desenvolvedora">Desenvolvedora: </label>
@@ -73,5 +75,6 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
         <input type="file" name="foto" required>
         <button type="submit">Publicar</button>
     </form>
+    <?php require('../components/footer.php') ?>
 </body>
 </html>

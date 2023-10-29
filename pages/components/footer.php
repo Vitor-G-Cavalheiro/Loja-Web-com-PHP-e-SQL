@@ -1,0 +1,3 @@
+<footer>
+    Famoso rodapé
+</footer>

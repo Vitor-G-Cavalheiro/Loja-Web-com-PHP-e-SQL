@@ -1,8 +1,8 @@
 <?php
 
-$sessao = require('session.php');
-$conexao = require('connection.php');
-$verificacao = require('userVerification.php');
+$sessao = require('../functions/session.php');
+$conexao = require('../functions/connection.php');
+$verificacao = require('../functions/userVerification.php');
 
 $comandoJogos = "SELECT * FROM jogos";
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
@@ -12,7 +12,7 @@ $resultadoFotosJogos = mysqli_query($conexao, $comandoFotosJogos);
 
 if(isset($_SESSION["idDev"])){
     $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo WHERE idDesenvolvedora = '.$_SESSION["idDev"]; 
-} else if (isset($_SESSION["idPub"])){
+} elseif (isset($_SESSION["idPub"])){
     $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo WHERE idPublicadora = '.$_SESSION["idPub"];
 } else{
     $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo';
@@ -27,10 +27,13 @@ $jogoDuplicado = 0;
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" src="../../css/main.css">
     <title>Gerenciar jogos</title>
 </head>
 <body>
+    <?php require('../components/header.php') ?>
     <?php
     while($registro = mysqli_fetch_assoc($resultadoPublicado)){
         if($jogoDuplicado != $registro["idJogo"]){
@@ -41,5 +44,6 @@ $jogoDuplicado = 0;
         }
     }
     ?>
+    <?php require('../components/footer.php') ?>
 </body>
 </html>
