@@ -48,7 +48,7 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
         <label for="nome">Nome: </label>
         <input name="nome" type="text" value="<?=$registroJogo["nome"]?>" required>
         <label for="preco">Preço: </label>
-        <input type="number" name="preco" value="<?=$registroJogo["preco"]?>" required>
+        <input type="number" name="preco" value="<?=$registroJogo["preco"]?>" step="0.01" required>
         <label for="descricao">Descrição: </label>
         <input type="text" name="descricao" value="<?=$registroJogo["descricao"]?>"required>
         <label for="desenvolvedora">Desenvolvedora: </label>
