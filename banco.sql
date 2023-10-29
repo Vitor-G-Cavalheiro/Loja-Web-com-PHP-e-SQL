@@ -36,7 +36,7 @@ PRIMARY KEY (idPublicadora)
 CREATE TABLE StreetPlay.Jogos (
 idJogo INT(11) NOT NULL AUTO_INCREMENT,
 nome VARCHAR(150) NOT NULL,
-preco DECIMAL(11) NOT NULL,
+preco DECIMAL(5,2) NOT NULL,
 descricao VARCHAR(255) NULL,
 PRIMARY KEY (idJogo)
 );
