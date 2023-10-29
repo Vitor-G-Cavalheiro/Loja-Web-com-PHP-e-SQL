@@ -44,7 +44,7 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
         <label for="nome">Nome: </label>
         <input type="text" name="nome" required>
         <label for="preco">Preço: </label>
-        <input type="number" name="preco" placeholder="00.00" required>
+        <input type="number" name="preco" step="0.01" required>
         <label for="descricao">Descrição: </label>
         <input type="text" name="descricao" required>
         <label for="desenvolvedora">Desenvolvedora: </label>
