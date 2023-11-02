@@ -2,11 +2,7 @@
 
 $sessao = require('./pages/functions/session.php');
 $conexao = require('./pages/functions/connection.php');
-
-if(isset($_SESSION["mensagem"])){
-    echo $_SESSION["mensagem"];
-    unset($_SESSION["mensagem"]);
-}
+$messagem = require('../functions/message.php');
 
 $comando = "SELECT j.nome, fj.foto FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo";
 
@@ -21,7 +17,7 @@ if(empty($_SESSION["user"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="./css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
     <title>Bem-vindo(a) ao StreetPlay</title>
 </head>
 <body>
@@ -39,11 +35,17 @@ if(empty($_SESSION["user"])){
             <?php endif ?>
         </div>
         <?php endif;
-        if($_SESSION["user"] != "anonimo"):?>
+        if($_SESSION["user"] == "anonimo"):?>
+            <a href="./pages/login&register/login.php">Entrar na Conta</a>
+        <?php elseif ($_SESSION["user"] == "dev/pub" && isset($_SESSION["idDev"])):?>
+            <a href="./pages/dev&pub/profileDevPub.php?idDesenvolvedora=<?=$_SESSION["idDev"]?>">Acessar Minha Página</a>
+        <?php elseif ($_SESSION["user"] == "dev/pub" && isset($_SESSION["idPub"])):?>
+            <a href="./pages/dev&pub/profileDevPub.php?idPublicadora=<?=$_SESSION["idPub"]?>">Acessar Minha Página</a>
+        <?php elseif ($_SESSION["user"] == "usuario" || $_SESSION["user"] == "admin"):?>
             <a href="./pages/user/profileUser.php?idUsuario=<?=$_SESSION["profile"]?>">Acessar Minha Conta</a>
-            <a href="./pages/user/logOut.php">Sair da Conta</a>
-        <?php elseif ($_SESSION["user"] == "anonimo"):?>
-            <a href="./pages/user/login.php">Entrar na Conta</a>
+        <?php endif;
+        if($_SESSION["user"] != "anonimo"):?>
+            <a href="./pages/login&register/logOut.php">Sair da Conta</a>
         <?php endif?>
     </session>
     <!-- Rodapé -->

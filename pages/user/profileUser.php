@@ -9,17 +9,27 @@ $resultado = mysqli_query($conexao, $comando);
 $registro = mysqli_fetch_assoc($resultado);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="Pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuário</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <title>StreetPlay :: Perfil de <?=$registro["nome"]?></title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
     <session>
-        <span><?=$registro["nome"]?></span>
+        <div>
+            <img src="<?=$registro["foto"]?>">
+            <span><?=$registro["nome"]?></span>
+            <span><?=$registro["descricao"]?></span>
+            <?php if($idUsuario == $_SESSION["profile"]):?>
+                <a href="./editProfileUser.php?idUsuario=<?=$idUsuario?>">Editar Perfil</a>
+            <?php endif;?>
+        </div>
     </session>
     <?php require('../components/footer.php') ?>
 </body>

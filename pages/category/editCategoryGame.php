@@ -22,8 +22,8 @@ if($acao == "rem"){
         die;
     }
 
-    $comandoInsert = "INSERT INTO categoriasjogos (idCategoria, idJogo) VALUES ($idCategoria, $idJogo)";
-    if($resultadoInsert = mysqli_query($conexao, $comandoInsert)){
+    $comandoInsercao = "INSERT INTO categoriasjogos (idCategoria, idJogo) VALUES ($idCategoria, $idJogo)";
+    if($resultadoInsercao = mysqli_query($conexao, $comandoInsercao)){
         $_SESSION["mensagem"] = "Categoria Adicionada com Sucesso";
     } else {
         $_SESSION["mensagem"] = "Falha ao Adicionar Categoria";

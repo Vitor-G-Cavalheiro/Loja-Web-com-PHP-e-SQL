@@ -3,11 +3,7 @@
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 $verificacao = require('../functions/userVerification.php');
-
-if(isset($_SESSION["mensagem"])){
-    echo $_SESSION["mensagem"];
-    unset($_SESSION["mensagem"]);
-}
+$messagem = require('../functions/message.php');
 
 if(isset($_SESSION["idDev"])){
     $comandoDesenvolvedora = 'SELECT * FROM Desenvolvedoras WHERE idDesenvolvedora = '.$_SESSION["idDev"];
@@ -35,8 +31,8 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="../../css/main.css">
-    <title>Publicar Jogo</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <title>StreetPlay :: Publicar Jogo</title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
@@ -44,7 +40,7 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
         <label for="nome">Nome: </label>
         <input type="text" name="nome" required>
         <label for="preco">Preço: </label>
-        <input type="number" name="preco" step="0.01" required>
+        <input type="number" name="preco" placeholder="00,00" step="0.01" required>
         <label for="descricao">Descrição: </label>
         <input type="text" name="descricao" required>
         <label for="desenvolvedora">Desenvolvedora: </label>

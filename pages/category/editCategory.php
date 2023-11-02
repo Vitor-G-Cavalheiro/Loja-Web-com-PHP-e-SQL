@@ -8,10 +8,7 @@ if($_SESSION["user"] != "admin"){
     Header("Location:../../index.php");
 }
 
-if(isset($_SESSION["mensagem"])){
-    echo $_SESSION["mensagem"];
-    unset($_SESSION["mensagem"]);
-}
+$messagem = require('../functions/message.php');
 
 $idCategoria = $_GET["idCategoria"];
 $comandoCategoria = "SELECT * FROM Categorias WHERE idCategoria = $idCategoria";
@@ -22,14 +19,15 @@ $comandoLista = "SELECT * FROM CategoriasJogos cj INNER JOIN Jogos j ON cj.idJog
 $resultadoLista = mysqli_query($conexao, $comandoLista);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="../../css/main.css">
-    <title>Editar Categoria</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <title>StreetPlay :: Editar Categoria</title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
@@ -37,7 +35,7 @@ $resultadoLista = mysqli_query($conexao, $comandoLista);
     <div>
         <span><?=$registroCategoria["nome"]?></span>
         <form action="editCategoryBD.php" method="post">
-            <input type="hidden" name="idCategoria" value="<?=$registroCategoria["idCategoria"]?>">
+            <input type="text" name="idCategoria" value="<?=$registroCategoria["idCategoria"]?>" hidden>
             <label for="nome">Novo Nome: </label>
             <input name="nome" type="text" value="<?=$registroCategoria["nome"]?>" required>
             <button type="submit">Atualizar Nome</button>

@@ -3,11 +3,7 @@
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 $verificacao = require('../functions/userVerification.php');
-
-if(isset($_SESSION["mensagem"])){
-    echo $_SESSION["mensagem"];
-    unset($_SESSION["mensagem"]);
-}
+$messagem = require('../functions/message.php');
 
 $idJogo = $_GET["idJogo"];
 $comandoJogo = "SELECT * FROM jogos WHERE idJogo = $idJogo";
@@ -32,6 +28,7 @@ $resultadoCategoriaJogo = mysqli_query($conexao, $comandoCategoriaJogo);
 $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -39,7 +36,7 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/main.css" type="text/css">
-    <title>Atualizar Jogo</title>
+    <title>StreetPlay :: Atualizar Jogo</title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
@@ -83,10 +80,10 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
                 <span><?=$registroCategoriaJogo["nome"]?></span>
                 <a href="../category/editCategoryGame.php?idCategoria=<?=$registroCategoriaJogo["idCategoria"]?>&acao=rem&idJogo=<?=$idJogo?>">X</a>
             <?php endwhile;?>
-            <button type="button" onclick="popAddCategoryGame('open')">+</button>
+            <button type="button" onclick="popUpGen('open')">+</button>
             <!-- Pop Up Adicionar Categoria -->
             <div class="pop-up">
-                <button type="button" onclick="popAddCategoryGame('close')">X</button>
+                <button type="button" onclick="popUpGen('close')">X</button>
                 <?php
                 while($registroCategoria = mysqli_fetch_assoc($resultadoCategoria)):?>
                     <div>
@@ -115,6 +112,6 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
             </div>
         </div>      
     <?php require('../components/footer.php') ?>
+    <script src="../../js/index.js"></script>
 </body>
-<script src="../../js/index.js"></script>
 </html>

@@ -22,6 +22,10 @@ senha VARCHAR(8) NOT NULL,
 email VARCHAR(255) NOT NULL,
 descricao VARCHAR(255) NULL,
 foto BLOB NULL,
+youtube VARCHAR(255) NULL,
+twitter VARCHAR(255) NULL,
+twitch VARCHAR(255) NULL,
+site VARCHAR(255) NULL,
 PRIMARY KEY (idDesenvolvedora)
 );
 CREATE TABLE StreetPlay.Publicadoras (
@@ -31,6 +35,10 @@ senha VARCHAR(8) NOT NULL,
 email VARCHAR(255) NOT NULL,
 descricao VARCHAR(255) NULL,
 foto BLOB NULL,
+youtube VARCHAR(255) NULL,
+twitter VARCHAR(255) NULL,
+twitch VARCHAR(255) NULL,
+site VARCHAR(255) NULL,
 PRIMARY KEY (idPublicadora)
 );
 CREATE TABLE StreetPlay.Jogos (
@@ -139,5 +147,21 @@ CONSTRAINT fk_usuario_favorito
 FOREIGN KEY (idUsuario)
 REFERENCES StreetPlay.Usuarios (idUsuario)
 );
+CREATE TABLE StreetPlay.Seguindo (
+idSeguidor INT(11) NOT NULL AUTO_INCREMENT,
+idUsuario INT(11) NOT NULL,
+idDesenvolvedora INT(11) NULL,
+idPublicadora INT(11) NULL,
+PRIMARY KEY (idSeguidor),
+CONSTRAINT fk_usuario_seguidor
+FOREIGN KEY (idUsuario)
+REFERENCES StreetPlay.Usuarios (idUsuario),
+CONSTRAINT fk_desenvolvedora_seguidor
+FOREIGN KEY (idDesenvolvedora)
+REFERENCES StreetPlay.Desenvolvedoras (idDesenvolvedora),
+CONSTRAINT fk_publicadora_seguidor
+FOREIGN KEY (idPublicadora)
+REFERENCES StreetPlay.Publicadoras (idPublicadora)
+);
 
-INSERT INTO Usuarios (nome, senha, email, administrador) values ('Admin', '2005', 'vitor.cavalheiro@aluno.ifsp.edu.br', TRUE);
+INSERT INTO Usuarios (nome, senha, email, foto, administrador) values ('Admin', '2005', 'vitor.cavalheiro@aluno.ifsp.edu.br', '../../imgs/profile.png', TRUE);

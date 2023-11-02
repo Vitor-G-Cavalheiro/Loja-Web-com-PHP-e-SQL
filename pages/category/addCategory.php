@@ -8,10 +8,7 @@ if($_SESSION["user"] != "admin"){
     Header("Location:../../index.php");
 }
 
-if(isset($_SESSION["mensagem"])){
-    echo $_SESSION["mensagem"];
-    unset($_SESSION["mensagem"]);
-}
+$messagem = require('../functions/message.php');
 
 $comandoCategoria = "SELECT * FROM categorias";
 $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
@@ -44,8 +41,8 @@ if(isset($_POST["categoria"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="../../css/main.css">
-    <title>Adicionar Categoria</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <title>StreetPlay :: Adicionar Categoria</title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
