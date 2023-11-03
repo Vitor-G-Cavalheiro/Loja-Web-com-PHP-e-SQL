@@ -2,7 +2,7 @@
 
 $sessao = require('./pages/functions/session.php');
 $conexao = require('./pages/functions/connection.php');
-$messagem = require('../functions/message.php');
+$messagem = require('./pages/functions/message.php');
 
 $comando = "SELECT j.nome, fj.foto FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo";
 
