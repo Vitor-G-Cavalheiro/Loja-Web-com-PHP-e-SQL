@@ -1,11 +1,17 @@
-/* @import url("./reset.css"); */
+@import url("./reset.css");
 @import url("./pop-up.css");
 @import url("./profile.css");
+@import url("./menu-bar.css");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap');
 
 :root {
     --blue-dark: #4C5D73;
     --blue-light: #8AABBF;
+    --blue-neon: #009fff;
     --green-dark: #3D4026;
     --yellow-dark: #BF9E3B;
     --orange-dark: #BF9039;
+    --white: #fff;
+    --white-gray: #e1e1e1;
+    --black: #000;
 }

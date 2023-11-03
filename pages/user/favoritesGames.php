@@ -1,13 +1,19 @@
-<?php 
+<?php
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
-$messagem = require('../functions/message.php');
+
+$idUsuario = $_SESSION["profile"];
+$comando = "SELECT * FROM Favoritos WHERE idUsuario = $idUsuario";
+$resultado = mysqli_query($conexao, $comando);
+while($registro = mysqli_fetch_assoc($resultado)){
+
+}
 
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="Pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,12 +23,19 @@ $messagem = require('../functions/message.php');
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" type="" href="./imgs/StreetPlayLogo.jpeg">
     <link rel="stylesheet" href="../../css/main.css">
-    <title>StreetPlay :: Editar Perfil de Usuário</title>
+    <title>StreetPlay :: Perfil de <?=$registro["nome"]?></title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
     <session>
-        
+        <div>
+            <img src="<?=$registro["foto"]?>">
+            <span><?=$registro["nome"]?></span>
+            <span><?=$registro["descricao"]?></span>
+            <?php if($idUsuario == $_SESSION["profile"]):?>
+                <a href="./editProfileUser.php?idUsuario=<?=$idUsuario?>">Editar Perfil</a>
+            <?php endif;?>
+        </div>
     </session>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>
