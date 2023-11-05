@@ -7,36 +7,38 @@ $messagem = require('../functions/message.php');
 $idJogo = $_GET["idJogo"];
 
 //Comando Jogo
-$comandoJogo = "SELECT * FROM jogos j INNER JOIN jogospublicados jp ON j.idJogo = jp.idJogo WHERE j.idJogo = $idJogo";
+$comandoJogo = "SELECT * FROM jogos j INNER JOIN jogospublicados jp ON j.idJogo = jp.idJogo INNER JOIN desenvolvedoras d ON jp.idDesenvolvedora = d.idDesenvolvedora INNER JOIN publicadoras p ON jp.idPublicadora = p.idPublicadora WHERE j.idJogo = $idJogo";
 $resultadoJogo = mysqli_query($conexao, $comandoJogo);
 $registroJogo = mysqli_fetch_assoc($resultadoJogo);
-
-//Comando Desenvolvedora
-$comandoDesenvolvedora = "SELECT * FROM desenvolvedoras d INNER JOIN jogospublicados jp ON jp.idDesenvolvedora = d.idDesenvolvedora WHERE jp.idJogo = $idJogo";
-$resultadoDesenvolvedora = mysqli_query($conexao, $comandoDesenvolvedora);
-$registroDesenvolvedora = mysqli_fetch_assoc($resultadoDesenvolvedora);
-
-//Comando Publicadora
-$comandoPublicadora = "SELECT * FROM Publicadoras d INNER JOIN jogospublicados jp ON jp.idPublicadora = d.idPublicadora WHERE jp.idJogo = $idJogo";
-$resultadoPublicadora = mysqli_query($conexao, $comandoPublicadora);
-$registroPublicadora = mysqli_fetch_assoc($resultadoPublicadora);
 
 //Comando Fotos Slide
 $comandoFotos = "SELECT * FROM fotosjogos WHERE idJogo = $idJogo";
 $resultadoFotos = mysqli_query($conexao, $comandoFotos);
 
 //Comando Categorias do jogo
-$comandoCategoriasJogo = "SELECT * FROM categoriasjogos cj INNER JOIN categorias c ON cj.idCategoria = c.idCategoria WHERE idJogo = $idJogo";
+$comandoCategoriasJogo = "SELECT * FROM categoriasjogos cj INNER JOIN categorias c ON cj.idCategoria = c.idCategoria WHERE idJogo = $idJogo ORDER BY c.nome";
 $resultadoCategoriasJogo = mysqli_query($conexao, $comandoCategoriasJogo);
 
 //Comando Jogos da Mesma Dev
 $idDesenvolvedora = $registroJogo["idDesenvolvedora"];
-$comandoJogosDesenvolvedora = "SELECT j.nome, fj.foto, j.preco, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON j.idJogo = fj.idJogo WHERE idDesenvolvedora = $idDesenvolvedora ORDER BY RAND() LIMIT 12";
+$comandoJogosDesenvolvedora = "SELECT j.nome, fj.foto, j.preco, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON j.idJogo = fj.idJogo WHERE idDesenvolvedora = $idDesenvolvedora AND fj.ordem = 1 ORDER BY RAND() LIMIT 12";
 $resultadoJogosDesenvolvedora = mysqli_query($conexao, $comandoJogosDesenvolvedora);
 
 //Jogos Recentes
-$comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo ORDER BY j.idJogo DESC LIMIT 12";
+$comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 12";
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
+
+//Comando Lista de Desejos
+if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
+    $comandoFavoritos = "SELECT * FROM favoritos WHERE idJogoPublicado = $idJogo AND idUsuario = ".$_SESSION["profile"];
+    $resultadoFavoritos = mysqli_query($conexao, $comandoFavoritos);
+    $registroFavoritos = mysqli_fetch_assoc($resultadoFavoritos);
+
+    $comandoCarrinho = "SELECT * FROM carrinho WHERE idJogoPublicado = $idJogo AND idUsuario = ".$_SESSION["profile"];
+    $resultadoCarrinho = mysqli_query($conexao, $comandoCarrinho);
+    $registroCarrinho = mysqli_fetch_assoc($resultadoCarrinho);
+}
+
 
 ?>
 
@@ -60,6 +62,18 @@ $resultadoJogos = mysqli_query($conexao, $comandoJogos);
     <session>
         <!-- Título -->
         <span><?=$registroJogo["nome"]?></span>
+        <?php if($_SESSION["user"] == "admin"):?>
+            <a href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
+        <?php endif;
+        if(isset($_SESSION["idDev"])):
+            if($_SESSION["idDev"] == $registroJogo["idDesenvolvedora"]):?> 
+            <a href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
+        <?php endif;
+        elseif(isset($_SESSION["idPub"])):
+            if($_SESSION["idPub"] == $registroJogo["idPublicadora"]):?>
+            <a href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
+        <?php endif;
+        endif; ?>
         <!-- Slide Sobre o Jogo -->
         <div class="back-swiper">
             <div class="swiper swiper-game mySwiper">
@@ -82,8 +96,18 @@ $resultadoJogos = mysqli_query($conexao, $comandoJogos);
             <span>Comprar <?=$registroJogo["nome"]?></span>
             <div>
                 <span><?=$registroJogo["preco"]?></span>
-                <!-- Verificação se já tem comprado ou não -->
-                <a href="?idJogo=<?=$idJogo?>">Comprar</a>
+                <!-- Verificação se já tem na lista de desejos ou não -->
+                <?php if(isset($registroFavoritos) && $registroFavoritos["idUsuario"] == $_SESSION["profile"]):?>
+                    <a href="../user/editFavoriteGames.php?idJogo=<?=$idJogo?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=nao&pagina=jogo">Remover da Lista de Desejos</a>
+                <?php else: ?>
+                    <a href="../user/editFavoriteGames.php?idJogo=<?=$idJogo?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=sim">Adicionar a Lista de Desejos</a>
+                <?php endif; ?>
+                <!-- Verificação se já ta no carrinho ou não FALTA VERSÃO COMPRADO -->
+                <?php if(isset($registroCarrinho) && $registroCarrinho["idUsuario"] == $_SESSION["profile"]):?>
+                    <a href="./cartGames.php?idUsuario=<?=$_SESSION["profile"]?>">Comprar</a>
+                <?php else: ?>
+                    <a href="./editCartGame.php?idJogo=<?=$idJogo?>&idUsuario=<?=$_SESSION["profile"]?>&comprar=sim">Comprar</a>
+                <?php endif; ?>
             </div>
         </div>
         <!-- Descrição -->
@@ -91,23 +115,23 @@ $resultadoJogos = mysqli_query($conexao, $comandoJogos);
             <span><?=$registroJogo["descricao"]?></span>
             <!-- Desenvolvedora e Publicadora -->
             <div>
-                <a href="../dev&pub/profileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedora["idDesenvolvedora"]?>"><?=$registroDesenvolvedora["nome"]?></a >
-                <a href="../dev&pub/profileDevPub.php?idPublicadora=<?=$registroPublicadora["idPublicadora"]?>"><?=$registroPublicadora["nome"]?></a >
+                <a href="../dev&pub/profileDevPub.php?idDesenvolvedora=<?=$registroJogo["idDesenvolvedora"]?>"><?=$registroJogo["nomeDev"]?></a >
+                <a href="../dev&pub/profileDevPub.php?idPublicadora=<?=$registroJogo["idPublicadora"]?>"><?=$registroJogo["nomePub"]?></a >
             </div>
         </div>
         <!-- Categorias -->
         <div>
             <?php while($registroCategoriasJogo = mysqli_fetch_assoc($resultadoCategoriasJogo)):?>
-            <a href="./listGames.php?idCategoria=<?=$registroCategoriasJogo["idCategoria"]?>"><?=$registroCategoriasJogo["nome"]?></a>
+            <a href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategoriasJogo["idCategoria"]?>"><?=$registroCategoriasJogo["nome"]?></a>
             <?php endwhile; ?>
         </div>
         <!-- Jogos da Mesma Dev -->
         <div class="back-swiper">
-            <span>Jogos de <?=$registroDesenvolvedora["nome"]?></span>
+            <span>Jogos de <?=$registroJogo["nomeDev"]?></span>
             <div class="swiper swiper-game-recomedation mySwiper-recomedation">
                 <div class="swiper-wrapper">
                 <?php while($registroJogosDesenvolvedora = mysqli_fetch_assoc($resultadoJogosDesenvolvedora)):
-                    if($registroJogosDesenvolvedora["ordem"] == '1' && $registroJogosDesenvolvedora["idJogo"] != $idJogo):?>
+                    if($registroJogosDesenvolvedora["idJogo"] != $idJogo):?>
                     <div class="swiper-slide">
                         <a class="swiper-content-recomedation" href="./gamePage.php?idJogo=<?=$registroJogosDesenvolvedora["idJogo"]?>">
                             <div class="swiper-content-recomedation">
@@ -132,7 +156,7 @@ $resultadoJogos = mysqli_query($conexao, $comandoJogos);
             <div class="swiper swiper-game-recomedation mySwiper-recomedation">
                 <div class="swiper-wrapper">
                 <?php while($registroJogos = mysqli_fetch_assoc($resultadoJogos)):
-                    if($registroJogos["ordem"] == '1' && $registroJogos["idJogo"] != $idJogo):?>
+                    if($registroJogos["idJogo"] != $idJogo):?>
                     <div class="swiper-slide">
                         <a class="swiper-content-recomedation" href="./gamePage.php?idJogo=<?=$registroJogos["idJogo"]?>">
                             <div class="swiper-content-recomedation">

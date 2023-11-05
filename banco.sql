@@ -17,7 +17,7 @@ PRIMARY KEY (idCategoria)
 );
 CREATE TABLE StreetPlay.Desenvolvedoras (
 idDesenvolvedora INT(11) NOT NULL AUTO_INCREMENT,
-nome VARCHAR(150) NOT NULL,
+nomeDev VARCHAR(150) NOT NULL,
 senha VARCHAR(8) NOT NULL,
 email VARCHAR(255) NOT NULL,
 descricao VARCHAR(255) NULL,
@@ -30,7 +30,7 @@ PRIMARY KEY (idDesenvolvedora)
 );
 CREATE TABLE StreetPlay.Publicadoras (
 idPublicadora INT(11) NOT NULL AUTO_INCREMENT,
-nome VARCHAR(150) NOT NULL,
+nomePub VARCHAR(150) NOT NULL,
 senha VARCHAR(8) NOT NULL,
 email VARCHAR(255) NOT NULL,
 descricao VARCHAR(255) NULL,

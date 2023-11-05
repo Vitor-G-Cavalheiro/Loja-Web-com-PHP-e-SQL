@@ -3,6 +3,7 @@
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 $verificacao = require('../functions/userVerification.php');
+$message = require('../functions/message.php');
 
 $comandoJogos = "SELECT * FROM jogos";
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
@@ -40,15 +41,17 @@ $jogoDuplicado = 0;
 <body>
     <?php require('../components/header.php') ?>
     <?php
-    while($registro = mysqli_fetch_assoc($resultadoPublicado)){
-        if($jogoDuplicado != $registro["idJogo"]){
-            echo "<div><img src='".$registro["foto"]."'><h2>".$registro["nome"]."</h2></div>";
-            echo "<a href='./updateGame.php?idJogo=".$registro["idJogo"]."'>Atualizar Jogo</a>";
-            echo "<a href='./deleteGame.php?idJogo=".$registro["idJogo"]."'>Deletar Jogo</a>";
-            $jogoDuplicado = $registro["idJogo"];
-        }
-    }
-    ?>
+    while($registro = mysqli_fetch_assoc($resultadoPublicado)):
+        if($jogoDuplicado != $registro["idJogo"]):?>
+            <div>
+                <img src="<?=$registro["foto"]?>">
+                <h2><?=$registro["nome"]?></h2>
+            </div>
+            <a href="./updateGame.php?idJogo=<?=$registro["idJogo"]?>">Atualizar Jogo</a>
+            <a href="./deleteGame.php?idJogo=<?=$registro["idJogo"]?>">Deletar Jogo</a>
+    <?php $jogoDuplicado = $registro["idJogo"];
+    endif;
+    endwhile;?>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>
 </body>

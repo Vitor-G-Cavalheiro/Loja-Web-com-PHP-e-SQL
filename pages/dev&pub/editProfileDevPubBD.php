@@ -3,50 +3,65 @@
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 
-if(isset($_SESSION["idDev"])){
-    $idDevPub = $_SESSION["idDev"];
-    $nomeColuna = "idDesenvolvedora";
-    $tabela = "Desenvolvedoras";
-} elseif (isset($_SESSION["idPub"])){
-    $idDevPub = $_SESSION["idPub"];
-    $nomeColuna = "idPublicadora";
-    $tabela = "Publicadoras";
+if(isset($_FILES["foto"])){
+    $foto = $_FILES["foto"];
 }
+
+if(isset($_POST["idDesenvolvedora"]) || isset($_GET["idDesenvolvedora"])){
+    if(isset($_POST["idDesenvolvedora"])){
+        $idDevPub = $_POST["idDesenvolvedora"];
+    } elseif(isset($_GET["idDesenvolvedora"])){
+        $idDevPub = $_GET["idDesenvolvedora"];
+    }
+    $idColuna = "idDesenvolvedora";
+    $tabela = "Desenvolvedoras";
+    $nomeColuna = "nomeDev";
+} elseif (isset($_POST["idPublicadora"]) || isset($_GET["idPublicadora"])){
+    if(isset($_POST["idPublicadora"])){
+        $idDevPub = $_POST["idPublicadora"];
+    } elseif(isset($_GET["idPublicadora"])){
+        $idDevPub = $_GET["idPublicadora"];
+    }
+    $idColuna = "idPublicadora";
+    $tabela = "Publicadoras";
+    $nomeColuna = "nomePub";
+}
+
 
 if(isset($_POST["nome"]) && $_POST["nome"] != NULL){
     $nome = $_POST["nome"];
-    $atualizarNome = "UPDATE $tabela SET nome = '$nome' WHERE $nomeColuna = $idDevPub";
+    $atualizarNome = "UPDATE $tabela SET $nomeColuna = '$nome' WHERE $idColuna = $idDevPub";
     $resultado = mysqli_query($conexao, $atualizarNome);
 }
-if(isset($_POST["descricao"]) && $_POST["descricao"] != NULL){
+if(isset($_POST["descricao"])){
     $descricao = $_POST["descricao"];
-    $atualizarDescricao = "UPDATE $tabela SET descricao = '$descricao' WHERE $nomeColuna = $idDevPub";
+    $atualizarDescricao = "UPDATE $tabela SET descricao = '$descricao' WHERE $idColuna = $idDevPub";
     $resultado = mysqli_query($conexao, $atualizarDescricao);
 }
-if(isset($_FILES['foto'])){
-    $destino = '../../imgs/' . $_FILES['foto']['name'];
+if(isset($foto) && $foto["error"] == NULL){
+    $destino = '../../imgs/user/' . $_FILES['foto']['name'];
     $arquivo_tmp = $_FILES['foto']['tmp_name'];
     move_uploaded_file($arquivo_tmp, $destino);
-    $atualizarFoto = "UPDATE $tabela SET foto = '$destino' WHERE $nomeColuna = $idDevPub";
+    $atualizarFoto = "UPDATE $tabela SET foto = '$destino' WHERE $idColuna = $idDevPub";
     $resultado = mysqli_query($conexao, $atualizarFoto);
 }
 if(isset($_POST["senha"])){
     $senha = $_POST["senha"];
     $confSenha = $_POST["confSenha"];
-    $verificarSenha = "SELECT * FROM $tabela WHERE $nomeColuna = $idDevPub";
+    $verificarSenha = "SELECT * FROM $tabela WHERE $idColuna = $idDevPub";
     $resultadoVerificacao = mysqli_query($conexao, $verificarSenha);
     $registroVerificacao = mysqli_fetch_assoc($resultadoVerificacao);
     if($registroVerificacao["senha"] == $senha){
         $_SESSION["mensagem"] = "A Senha Não Pode Ser Igual A Antiga";
-        Header("Location:./editProfileDevPub.php?$nomeColuna=$idDevPub");
+        Header("Location:./editProfileDevPub.php?$idColuna=$idDevPub");
         die;
     }
     if($senha != $confSenha){
         $_SESSION["mensagem"] = "As Senhas Devem Ser Iguais";
-        Header("Location:./editProfileDevPub.php?$nomeColuna=$idDevPub");
+        Header("Location:./editProfileDevPub.php?$idColuna=$idDevPub");
         die;
     }
-    $atualizarSenha = "UPDATE $tabela SET senha = '$senha' WHERE $nomeColuna = $idDevPub";
+    $atualizarSenha = "UPDATE $tabela SET senha = '$senha' WHERE $idColuna = $idDevPub";
     $resultado = mysqli_query($conexao, $atualizarSenha);
 }
 if(isset($_POST["youtube"])){
@@ -55,7 +70,7 @@ if(isset($_POST["youtube"])){
     }else {
         $youtube = $_POST["youtube"];
     }
-    $atualizarYoutube = "UPDATE $tabela SET youtube = '$youtube' WHERE $nomeColuna = $idDevPub";
+    $atualizarYoutube = "UPDATE $tabela SET youtube = '$youtube' WHERE $idColuna = $idDevPub";
     $resultado = mysqli_query($conexao, $atualizarYoutube);
 }
 if(isset($_POST["twitter"])){
@@ -64,7 +79,7 @@ if(isset($_POST["twitter"])){
     }else {
         $twitter = $_POST["twitter"];
     }
-    $atualizarTwitter = "UPDATE $tabela SET twitter = '$twitter' WHERE $nomeColuna = $idDevPub";
+    $atualizarTwitter = "UPDATE $tabela SET twitter = '$twitter' WHERE $idColuna = $idDevPub";
     $resultado = mysqli_query($conexao, $atualizarTwitter);
 }
 if(isset($_POST["twitch"])){
@@ -73,7 +88,7 @@ if(isset($_POST["twitch"])){
     }else {
         $twitch = $_POST["twitch"];
     }
-    $atualizarTwitch = "UPDATE $tabela SET twitch = '$twitch' WHERE $nomeColuna = $idDevPub";
+    $atualizarTwitch = "UPDATE $tabela SET twitch = '$twitch' WHERE $idColuna = $idDevPub";
     $resultado = mysqli_query($conexao, $atualizarTwitch);
 }
 if(isset($_POST["site"])){
@@ -82,18 +97,59 @@ if(isset($_POST["site"])){
     }else {
         $site = $_POST["site"];
     }
-    $atualizarSite = "UPDATE $tabela SET site = '$site' WHERE $nomeColuna = $idDevPub";
+    $atualizarSite = "UPDATE $tabela SET site = '$site' WHERE $idColuna = $idDevPub";
     $resultado = mysqli_query($conexao, $atualizarSite);
 }
 if(isset($_GET["delete"])){
-    $deleteJogoPublicado = "DELETE FROM jogosPublicados WHERE $nomeColuna = $idDevPub";
-    $deleteSeguindo = "DELETE FROM seguindo WHERE $nomeColuna = $idDevPub";
-    $deleteColecoes = "DELETE FROM colecoes WHERE $nomeColuna = $idDevPub";
-    $deleteTabela = "DELETE FROM $tabela WHERE $nomeColuna = $idDevPub";
+    //Comando Jogos da Mesma Dev ou Pub
+    $comandoJogosDevPub = "SELECT * FROM jogospublicados WHERE $idColuna = $idDevPub";
+    $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
+    //Apagando Todos os Seus Jogos
+    while($registroJogosDevPub = mysqli_fetch_assoc($resultadoJogosDevPub)){
+        $idJogo = $registroJogosDevPub["idJogo"];
+        $comandoFotos = "DELETE FROM fotosjogos WHERE idJogo = $idJogo";
+        $comandoPublicado = "DELETE FROM jogosPublicados WHERE idJogo = $idJogo";
+
+        $verificacaoFavorito = "SELECT * FROM favoritos WHERE idJogoPublicado = $idJogo";
+        $verificandoFavorito = mysqli_query($conexao, $verificacaoFavorito);
+        $verificadoFavorito = mysqli_fetch_assoc($verificandoFavorito);
+        if($verificadoFavorito){
+            $comandoFavorito = "DELETE FROM favoritos WHERE idJogoPublicado = $idJogo";
+            $resultadoFavorito = mysqli_query($conexao, $comandoFavorito);
+        }
+
+        $verificacaoCarrinho = "SELECT * FROM Carrinho WHERE idJogoPublicado = $idJogo";
+        $verificandoCarrinho = mysqli_query($conexao, $verificacaoCarrinho);
+        $verificadoCarrinho = mysqli_fetch_assoc($verificandoCarrinho);
+        if($verificadoCarrinho){
+            $comandoCarrinho = "DELETE FROM Carrinho WHERE idJogoPublicado = $idJogo";
+            $resultadoCarrinho = mysqli_query($conexao, $comandoCarrinho);
+        }
+
+        $verificacaoBiblioteca = "SELECT * FROM Biblioteca WHERE idJogoPublicado = $idJogo";
+        $verificandoBiblioteca = mysqli_query($conexao, $verificacaoBiblioteca);
+        $verificadoBiblioteca = mysqli_fetch_assoc($verificandoBiblioteca);
+        if($verificadoBiblioteca){
+            $comandoBiblioteca = "DELETE FROM Biblioteca WHERE idJogoPublicado = $idJogo";
+            $resultadoBiblioteca = mysqli_query($conexao, $comandoBiblioteca);
+        }
+        $comandoCategoria = "DELETE FROM categoriasJogos WHERE idJogo = $idJogo";
+        $comandoJogo = "DELETE FROM jogos WHERE idJogo = $idJogo";
+
+        $resultadoFotos = mysqli_query($conexao, $comandoFotos);
+        $resultadoPublicado = mysqli_query($conexao, $comandoPublicado);
+        $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
+        $resultadoJogo = mysqli_query($conexao, $comandoJogo);
+    }
+    $deleteJogoPublicado = "DELETE FROM jogosPublicados WHERE $idColuna = $idDevPub";
+    $deleteSeguindo = "DELETE FROM seguindo WHERE $idColuna = $idDevPub";
+    /* FAZER VERIFICAÇÂO COLEÇÕES 
+    $deleteColecoes = "DELETE FROM colecoes WHERE $idColuna = $idDevPub"; */
+    $deleteTabela = "DELETE FROM $tabela WHERE $idColuna = $idDevPub";
 
     $resultadoJogosPublicados = mysqli_query($conexao, $deleteJogoPublicado);
     $resultadoSeguindo = mysqli_query($conexao, $deleteSeguindo);
-    $resultadoColecoes = mysqli_query($conexao, $deleteColecoes);
+    /* $resultadoColecoes = mysqli_query($conexao, $deleteColecoes); */
     $resultadoTabela = mysqli_query($conexao, $deleteTabela);
     
     if($resultadoTabela){
@@ -102,7 +158,7 @@ if(isset($_GET["delete"])){
         die;
     } else {
         $_SESSION["mensagem"] = "Falha ao Apagar Perfil";
-        Header("Location:./editProfileDevPub.php?$nomeColuna=$idDevPub");
+        Header("Location:./editProfileDevPub.php?$idColuna=$idDevPub");
         die;
     }
 }
@@ -111,6 +167,6 @@ if($resultado){
 } else {
     $_SESSION["mensagem"] = "Falha ao Atualizar Perfil";
 }
-Header("Location:./editProfileDevPub.php?$nomeColuna=$idDevPub");
+Header("Location:./editProfileDevPub.php?$idColuna=$idDevPub");
 
 ?>

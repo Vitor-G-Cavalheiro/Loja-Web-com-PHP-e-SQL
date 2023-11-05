@@ -5,7 +5,7 @@ $conexao = require('../functions/connection.php');
 $message = require('../functions/message.php');
 
 $idUsuario = $_SESSION["profile"];
-$comando = "SELECT j.nome, j.preco, j.descricao, fj.foto, j.idJogo FROM favoritos f INNER JOIN jogos j ON f.idJogoPublicado = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo WHERE f.idUsuario = $idUsuario AND fj.ordem = 1";
+$comando = "SELECT j.nome, j.preco, j.descricao, fj.foto, j.idJogo FROM carrinho c INNER JOIN jogos j ON c.idJogoPublicado = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo WHERE c.idUsuario = $idUsuario AND fj.ordem = 1";
 $resultado = mysqli_query($conexao, $comando);
 
 ?>
@@ -21,7 +21,7 @@ $resultado = mysqli_query($conexao, $comando);
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" type="" href="./imgs/StreetPlayLogo.jpeg">
     <link rel="stylesheet" href="../../css/main.css">
-    <title>StreetPlay :: Lista de Desejos</title>
+    <title>StreetPlay :: Carrinho</title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
@@ -35,7 +35,7 @@ $resultado = mysqli_query($conexao, $comando);
                 <a href=""><?=$registro["preco"]?></a href="">
             </div>
         </a>
-        <a href="./editFavoriteGames.php?idJogo=<?=$registro["idJogo"]?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=nao&pagina=desejos">Remover Jogo</a>
+        <a href="./editCartGame.php?idJogo=<?=$registro["idJogo"]?>&idUsuario=<?=$_SESSION["profile"]?>&comprar=nao">Remover Jogo</a>
         <?php endwhile; ?>
     </session>
     <?php require('../components/footer.php') ?>

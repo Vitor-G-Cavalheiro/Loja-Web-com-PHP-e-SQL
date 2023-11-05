@@ -5,15 +5,15 @@ $conexao = require('../functions/connection.php');
 $messagem = require('../functions/message.php');
 
 //Jogos Aleatórios para os Slides
-$comandoJogosSlide = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo ORDER BY RAND() LIMIT 8";
+$comandoJogosSlide = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo WHERE fj.ordem = 1 ORDER BY RAND() LIMIT 8";
 $resultadoJogosSlide = mysqli_query($conexao, $comandoJogosSlide);
 
 //Jogos Recentes
-$comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo ORDER BY j.idJogo DESC LIMIT 16";
+$comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo WHERE fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 16";
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
 
 //Categorias
-$comandoCategorias = "SELECT * FROM categorias LIMIT 32";
+$comandoCategorias = "SELECT * FROM categorias ORDER BY nome LIMIT 32";
 $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
 
 ?>
@@ -66,7 +66,7 @@ $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
             <div class="body-category">
                 <span>Categorias</span>
                 <?php while($registroCategorias = mysqli_fetch_assoc($resultadoCategorias)):?>
-                    <a href="./listGames.php?idCategoria=<?=$registroCategorias["idCategoria"]?>"><?=$registroCategorias["nome"]?></a>
+                    <a href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategorias["idCategoria"]?>"><?=$registroCategorias["nome"]?></a>
                 <?php endwhile; ?>
             </div>
             <div class="body-games">
@@ -81,7 +81,8 @@ $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
                         </div>
                     </a>
                 <?php endif;
-                endwhile;?>    
+                endwhile;?>  
+                <a href="./listGames.php?inicio=0&acao=mais&modificador=nao">Ver Mais Jogos</a>  
             </div>
         </div>
     </session>

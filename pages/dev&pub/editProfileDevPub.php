@@ -3,19 +3,18 @@
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 $messagem = require('../functions/message.php');
-
-if($_SESSION["user"] != "dev/pub"){
-    Header("Location:../store/index.php");
-}
+$userVerification = require('../functions/userVerification.php');
 
 if(isset($_GET["idDesenvolvedora"])){
-    $idDevPub = $_SESSION["idDev"];
+    $idDevPub = $_GET["idDesenvolvedora"];
     $nomeColuna = "idDesenvolvedora";
     $tabela = "Desenvolvedoras";
+    $nome = "nomeDev";
 } elseif (isset($_GET["idPublicadora"])){
-    $idDevPub = $_SESSION["idPub"];
+    $idDevPub = $_GET["idPublicadora"];
     $nomeColuna = "idPublicadora";
     $tabela = "Publicadoras";
+    $nome = "nomePub";
 }
 
 $comando = "SELECT * FROM $tabela WHERE $nomeColuna = $idDevPub";
@@ -57,8 +56,9 @@ $registro = mysqli_fetch_assoc($resultado);
         <div class="div-edit-user">
             <span>Atualizar Perfil Público</span>
             <form action="./editProfileDevPubBD.php" method="post" enctype="multipart/form-data">
+                <input type="text" name="<?=$nomeColuna?>" value="<?=$idDevPub?>" hidden>
                 <label for="nome">Nome: </label>
-                <input name="nome" type="text" value="<?=$registro["nome"]?>">
+                <input name="nome" type="text" value="<?=$registro["$nome"]?>" required>
                 <label for="descricao">Descrição: </label>
                 <input name="descricao" type="text" value="<?=$registro["descricao"]?>">
                 <label< for="foto">Foto de Perfil: </label>
@@ -70,6 +70,7 @@ $registro = mysqli_fetch_assoc($resultado);
         <div class="div-edit-user invisible">
             <span>Atualizar Senha</span>
             <form action="./editProfileDevPubBD.php" method="post">
+                <input type="text" name="<?=$nomeColuna?>" value="<?=$idDevPub?>" hidden>
                 <label for="senha">Senha: </label>
                 <input name="senha" type="password" maxlength="8" required>
                 <label for="confSenha">Confirme sua Senha: </label>
@@ -84,6 +85,7 @@ $registro = mysqli_fetch_assoc($resultado);
         <!-- Redes Sociais -->
         <div class="div-edit-user invisible">
             <form action="./editProfileDevPubBD.php" method="post">
+            <input type="text" name="<?=$nomeColuna?>" value="<?=$idDevPub?>" hidden>
                 <label for="youtube">Youtube: </label>
                 <input name="youtube" type="text" value="<?=$registro["youtube"]?>">
                 <input type="checkbox" name="delYoutube" value="delYoutube">
@@ -104,7 +106,7 @@ $registro = mysqli_fetch_assoc($resultado);
             <button type="button" onclick="popUpGen('open')">Excluir Conta</button>
             <div class="pop-up">
                 <span>Tem Certeza Que Deseja Excluir Sua Conta?</span>
-                <a href="./editProfileDevPubBD.php?delete=sim&tabela=<?=$tabela?>&nomeColuna=<?=$nomeColuna?>&idDevPub=<?=$idDevPub?>">Sim</a>
+                <a href="./editProfileDevPubBD.php?delete=sim&<?=$nomeColuna?>=<?=$idDevPub?>">Sim</a>
                 <button type="button" onclick="popUpGen('close')">Não</button >
             </div>
         </div>

@@ -13,11 +13,13 @@ if(isset($_GET["idDesenvolvedora"])){
     $idDesenvolvedora = $_GET["idDesenvolvedora"];
     $nomeColuna = "idDesenvolvedora";
     $tabela = "Desenvolvedoras";
+    $nome = "nomeDev";
 } elseif (isset($_GET["idPublicadora"])){
     $idDevPub = $_GET["idPublicadora"];
     $idPublicadora = $_GET["idPublicadora"];
     $nomeColuna = "idPublicadora";
     $tabela = "Publicadoras";
+    $nome = "nomePub";
 }
 
 if(isset($_SESSION["profile"])){
@@ -32,13 +34,13 @@ $comandoSeguidores = "SELECT COUNT(idUsuario) AS NumeroSeguidores FROM Seguindo 
 $resultadoSeguidores = mysqli_query($conexao, $comandoSeguidores);
 $registroSeguidores = mysqli_fetch_assoc($resultadoSeguidores);
 
-//Comando Págiona Dev/Pub
+//Comando Página Dev/Pub
 $comando = "SELECT * FROM $tabela WHERE $nomeColuna = $idDevPub";
 $resultado = mysqli_query($conexao, $comando);
 $registro = mysqli_fetch_assoc($resultado);
 
 //Comando Jogos da Dev/Pub
-$comandoJogosDevPub = "SELECT fj.foto, fj.ordem, j.nome, j.preco, j.descricao, j.idJogo FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo WHERE $nomeColuna = $idDevPub LIMIT 8";
+$comandoJogosDevPub = "SELECT fj.foto, fj.ordem, j.nome, j.preco, j.descricao, j.idJogo FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo WHERE $nomeColuna = $idDevPub AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 8";
 $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
 
 ?>
@@ -54,14 +56,14 @@ $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" type="" href="./imgs/StreetPlayLogo.jpeg">
     <link rel="stylesheet" href="../../css/main.css">
-    <title>StreetPlay :: Página de <?=$registro["nome"]?></title>
+    <title>StreetPlay :: Página de <?=$registro["$nome"]?></title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
     <session>
         <div>
             <img src="<?=$registro["foto"]?>">
-            <span><?=$registro["nome"]?></span>
+            <span><?=$registro["$nome"]?></span>
             <span><?=$registro["descricao"]?></span>
             <span>Seguidores: <?=$registroSeguidores["NumeroSeguidores"]?></span>
             <!-- Verificação Seguidor -->
@@ -78,8 +80,10 @@ $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
             elseif(isset($_SESSION["idDev"]) && isset($idDesenvolvedora)):
             if($idDesenvolvedora == $_SESSION["idDev"]):?>
                 <a href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
-            <?php endif; 
-            endif; ?>
+            <?php endif;
+            elseif($_SESSION["user"] == "admin"):?>
+                <a href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
+            <?php endif; ?>
         </div>
         <!-- Redes Sociais -->
         <div>
@@ -104,7 +108,7 @@ $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
         if(isset($registro["Site"]) && $registro["site"] != NULL):?>
             <div>
                 <img src=''>
-                <a href='<?=$registro["Site"]?>'><?=$registro["nome"]?></a>
+                <a href='<?=$registro["Site"]?>'><?=$registro["$nome"]?></a>
             </div>
         <?php endif;?>
         </div>
@@ -123,7 +127,7 @@ $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
             <?php endif;
             endwhile;?>   
         </div>
-        <a href="../store/listGames.php?<?=$nomeColuna?>=<?=$idDevPub?>">Ver Mais Jogos de <?=$registro["nome"]?></a>
+        <a href="../store/listGames.php?inicio=0&acao=mais&<?=$nomeColuna?>=<?=$idDevPub?>">Ver Mais Jogos de <?=$registro["$nome"]?></a>
     </session>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>

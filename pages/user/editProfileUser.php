@@ -4,7 +4,7 @@ $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 $messagem = require('../functions/message.php');
 
-$idUsuario = $_SESSION["profile"];
+$idUsuario = $_GET["idUsuario"];
 $comando = "SELECT * FROM Usuarios WHERE idUsuario = $idUsuario";
 $resultado = mysqli_query($conexao, $comando);
 $registro = mysqli_fetch_assoc($resultado);
@@ -44,8 +44,9 @@ $registro = mysqli_fetch_assoc($resultado);
         <div class="div-edit-user">
             <span>Atualizar Perfil Público</span>
             <form action="./editProfileUserBD.php" method="post" enctype="multipart/form-data">
+                <input type="text" name="idUsuario" value="<?=$idUsuario?>" hidden>
                 <label for="nome">Nome: </label>
-                <input name="nome" type="text" value="<?=$registro["nome"]?>">
+                <input name="nome" type="text" value="<?=$registro["nome"]?>" required>
                 <label for="descricao">Descrição: </label>
                 <input name="descricao" type="text" value="<?=$registro["descricao"]?>">
                 <label< for="foto">Foto de Perfil: </label>
@@ -57,6 +58,7 @@ $registro = mysqli_fetch_assoc($resultado);
         <div class="div-edit-user invisible">
             <span>Atualizar Senha</span>
             <form action="./editProfileUserBD.php" method="post">
+                <input type="text" name="idUsuario" value="<?=$idUsuario?>" hidden>
                 <label for="senha">Senha: </label>
                 <input name="senha" type="password" maxlength="8" required>
                 <label for="confSenha">Confirme sua Senha: </label>
@@ -79,7 +81,7 @@ $registro = mysqli_fetch_assoc($resultado);
             <button type="button" onclick="popUpGen('open')">Excluir Conta</button>
             <div class="pop-up">
                 <span>Tem Certeza Que Deseja Excluir Sua Conta?</span>
-                <a href="./editProfileUserBD.php?delete=sim">Sim</a>
+                <a href="./editProfileUserBD.php?delete=sim&idUsuario=<?=$idUsuario?>">Sim</a>
                 <button type="button" onclick="popUpGen('close')">Não</button >
             </div>
         </div>

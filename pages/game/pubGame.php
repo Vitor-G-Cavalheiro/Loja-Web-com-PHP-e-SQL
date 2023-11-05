@@ -51,7 +51,7 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
         <select name="desenvolvedora">
             <?php
             while($registroDesenvolvedora = mysqli_fetch_assoc($resultadoDesenvolvedora)){
-                echo "<option value='".$registroDesenvolvedora["idDesenvolvedora"]."'>".$registroDesenvolvedora["nome"]."</option>";
+                echo "<option value='".$registroDesenvolvedora["idDesenvolvedora"]."'>".$registroDesenvolvedora["nomeDev"]."</option>";
             }
             ?>
         </select>
@@ -59,7 +59,7 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
         <select name="publicadora">
             <?php
             while($registroPublicadora = mysqli_fetch_assoc($resultadoPublicadora)){
-                echo "<option value='".$registroPublicadora["idPublicadora"]."'>".$registroPublicadora["nome"]."</option>";
+                echo "<option value='".$registroPublicadora["idPublicadora"]."'>".$registroPublicadora["nomePub"]."</option>";
             }
             ?>
         </select>

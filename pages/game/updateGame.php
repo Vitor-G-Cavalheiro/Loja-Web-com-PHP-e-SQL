@@ -14,7 +14,7 @@ $comandoJogoPublicado = "SELECT * FROM jogosPublicados WHERE idJogo = $idJogo";
 $resultadoJogoPublicado = mysqli_query($conexao, $comandoJogoPublicado);
 $registroJogoPublicado = mysqli_fetch_assoc($resultadoJogoPublicado);
 
-$comandoFotosJogo = "SELECT * FROM fotosjogos WHERE idJogo = $idJogo";
+$comandoFotosJogo = "SELECT * FROM fotosjogos WHERE idJogo = $idJogo ORDER BY ordem";
 $resultadoFotosJogo = mysqli_query($conexao, $comandoFotosJogo);
 
 $comandoDesenvolvedora = "SELECT * FROM Desenvolvedoras";
@@ -57,9 +57,9 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
             <?php
             while($registroDesenvolvedora = mysqli_fetch_assoc($resultadoDesenvolvedora)){
                 if($registroDesenvolvedora["idDesenvolvedora"] == $registroJogoPublicado["idDesenvolvedora"]){
-                    echo "<option value='".$registroDesenvolvedora["idDesenvolvedora"]."' selected>".$registroDesenvolvedora["nome"]."</option>";
+                    echo "<option value='".$registroDesenvolvedora["idDesenvolvedora"]."' selected>".$registroDesenvolvedora["nomeDev"]."</option>";
                 } else {
-                    echo "<option value='".$registroDesenvolvedora["idDesenvolvedora"]."'>".$registroDesenvolvedora["nome"]."</option>";
+                    echo "<option value='".$registroDesenvolvedora["idDesenvolvedora"]."'>".$registroDesenvolvedora["nomeDev"]."</option>";
                 }                
             }
             ?>
@@ -69,9 +69,9 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
             <?php
             while($registroPublicadora = mysqli_fetch_assoc($resultadoPublicadora)){
                 if($registroPublicadora["idPublicadora"] == $registroJogoPublicado["idPublicadora"]){
-                    echo "<option value='".$registroPublicadora["idPublicadora"]."' selected>".$registroPublicadora["nome"]."</option>";
+                    echo "<option value='".$registroPublicadora["idPublicadora"]."' selected>".$registroPublicadora["nomePub"]."</option>";
                 } else {
-                    echo "<option value='".$registroPublicadora["idPublicadora"]."'>".$registroPublicadora["nome"]."</option>";
+                    echo "<option value='".$registroPublicadora["idPublicadora"]."'>".$registroPublicadora["nomePub"]."</option>";
                 }
             }
             ?>
@@ -103,7 +103,8 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
             <?php while($registroFotosJogo = mysqli_fetch_assoc($resultadoFotosJogo)):?>
             <div>
                 <img src="<?=$registroFotosJogo["foto"]?>">
-                <a href="./managePhotosGame.php?idFotoJogo=<?=$registroFotosJogo["idFotoJogo"]?>&idJogo=<?=$idJogo?>">Remover Foto</a>
+                <a href="./managePhotosGame.php?idFotoJogo=<?=$registroFotosJogo["idFotoJogo"]?>&idJogo=<?=$idJogo?>&acao=capa">Transformar na Capa</a>
+                <a href="./managePhotosGame.php?idFotoJogo=<?=$registroFotosJogo["idFotoJogo"]?>&idJogo=<?=$idJogo?>&acao=rem">Remover Foto</a>
             </div>
             <?php endwhile;?>
             <div>

@@ -30,7 +30,7 @@ $registro = mysqli_fetch_assoc($resultado);
             <img src="<?=$registro["foto"]?>">
             <span><?=$registro["nome"]?></span>
             <span><?=$registro["descricao"]?></span>
-            <?php if($idUsuario == $_SESSION["profile"]):?>
+            <?php if($idUsuario == $_SESSION["profile"] || $_SESSION["user"] == "admin"):?>
                 <a href="./editProfileUser.php?idUsuario=<?=$idUsuario?>">Editar Perfil</a>
             <?php endif;?>
         </div>

@@ -40,7 +40,7 @@ $adicionarCategoriaJogo = "INSERT INTO categoriasjogos (idjogo, idCategoria) val
 $resultadoCategoriaJogo = mysqli_query($conexao, $adicionarCategoriaJogo);
 
 if(isset($foto)){
-    $destino = '../../imgs/' . $_FILES['foto']['name'];
+    $destino = '../../imgs/game/' . $_FILES['foto']['name'];
     $arquivo_tmp = $_FILES['foto']['tmp_name'];
     move_uploaded_file($arquivo_tmp, $destino);
     $comandoFoto = "INSERT INTO fotosJogos (idJogo, foto, ordem) values ('$idJogo', '$destino', '1')";

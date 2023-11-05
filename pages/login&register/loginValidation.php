@@ -12,7 +12,7 @@ $comandoPublicadora = "SELECT * FROM Publicadoras";
 
 $resultadoDesenvolvedora = mysqli_query($conexao, $comandoDesenvolvedora);
 while($registroDesenvolvedora = mysqli_fetch_assoc($resultadoDesenvolvedora)){
-    if($registroDesenvolvedora["nome"] == $nome && $registroDesenvolvedora["senha"] == $senha){
+    if($registroDesenvolvedora["nomeDev"] == $nome && $registroDesenvolvedora["senha"] == $senha){
         $_SESSION["mensagem"] = "Bem vindo $nome";
         $_SESSION["user"] = "dev/pub";
         $_SESSION["idDev"] = $registroDesenvolvedora["idDesenvolvedora"];
@@ -23,7 +23,7 @@ while($registroDesenvolvedora = mysqli_fetch_assoc($resultadoDesenvolvedora)){
 
 $resultadoPublicadora = mysqli_query($conexao, $comandoPublicadora);
 while($registroPublicadora = mysqli_fetch_assoc($resultadoPublicadora)){
-    if($registroPublicadora["nome"] == $nome && $registroPublicadora["senha"] == $senha){
+    if($registroPublicadora["nomePub"] == $nome && $registroPublicadora["senha"] == $senha){
         $_SESSION["mensagem"] = "Bem vindo $nome";
         $_SESSION["user"] = "dev/pub";
         $_SESSION["idPub"] = $registroPublicadora["idPublicadora"];

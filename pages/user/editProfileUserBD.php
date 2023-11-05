@@ -3,20 +3,29 @@
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 
-$idUsuario = $_SESSION["profile"];
+if(isset($_GET["idUsuario"])){
+    $idUsuario = $_GET["idUsuario"];
+} elseif(isset($_POST["idUsuario"])){
+    $idUsuario = $_POST["idUsuario"];
+}
+
+if(isset($_FILES["foto"])){
+    $foto = $_FILES["foto"];
+}
 
 if(isset($_POST["nome"]) && $_POST["nome"] != NULL){
     $nome = $_POST["nome"];
+
     $atualizarNome = "UPDATE usuarios SET nome = '$nome' WHERE idUsuario = $idUsuario";
     $resultado = mysqli_query($conexao, $atualizarNome);
 }
-if(isset($_POST["descricao"]) && $_POST["descricao"] != NULL){
+if(isset($_POST["descricao"])){
     $descricao = $_POST["descricao"];
     $atualizarDescricao = "UPDATE usuarios SET descricao = '$descricao' WHERE idUsuario = $idUsuario";
     $resultado = mysqli_query($conexao, $atualizarDescricao);
 }
-if(isset($_FILES['foto'])){
-    $destino = '../../imgs/' . $_FILES['foto']['name'];
+if(isset($foto) && $foto["error"] == NULL){
+    $destino = '../../imgs/user/' . $_FILES['foto']['name'];
     $arquivo_tmp = $_FILES['foto']['tmp_name'];
     move_uploaded_file($arquivo_tmp, $destino);
     $atualizarFoto = "UPDATE usuarios SET foto = '$destino' WHERE idUsuario = $idUsuario";
@@ -53,7 +62,7 @@ if(isset($_GET["delete"])){
     $resultadoCarrinho = mysqli_query($conexao, $deleteCarrinho);
     $resultadoColecoes = mysqli_query($conexao, $deleteColecoes);
     $resultadoFavoritos = mysqli_query($conexao, $deleteFavoritos);
-    $resultadoSeguindo = mysqli_query($conexoa, $deleteSeguindo);
+    $resultadoSeguindo = mysqli_query($conexao, $deleteSeguindo);
     $resultadoUsuario = mysqli_query($conexao, $deleteUsuario);
     
     if($resultadoUsuario){
