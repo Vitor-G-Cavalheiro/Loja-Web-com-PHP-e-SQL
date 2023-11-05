@@ -1,3 +1,34 @@
 .pop-up {
     display: none;
 }
+
+.pop-up-message {
+    position: absolute;
+    left: 50vw;
+    top: 5vh;
+    padding: 10px;
+    display: flex;
+    user-select: none;
+    z-index: 1;
+    background-color: var(--blue-dark);
+    flex-direction: row-reverse;
+    gap: 5px;
+}
+
+.close-pop {
+    
+    background-color: transparent;
+    border-style: none;
+}
+
+.pop-up-message,
+.close-pop {
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+}
+    
+.close-pop:hover {
+    cursor: pointer;
+    color: var(--blue-neon);
+}

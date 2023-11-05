@@ -5,7 +5,7 @@ $conexao = require('../functions/connection.php');
 
 if($_SESSION["user"] != "admin"){
     $_SESSION["mensagem"] = "Acesso negado";
-    Header("Location:../../index.php");
+    Header("Location:../store/index.php");
 }
 
 $messagem = require('../functions/message.php');

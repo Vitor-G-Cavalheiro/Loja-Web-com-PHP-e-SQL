@@ -2,12 +2,12 @@
 
 //Link Sublinhado
 if(empty($_GET["ativo"])){
-    $ativo = -1;
+    $ativo = 0;
 } else {
     $ativo = $_GET["ativo"];
 }
 
-for($i = 0; $i < 2; $i++){
+for($i = 1; $i < 4; $i++){
     $linkAtivo[$i] = "";
 }
 $linkAtivo[$ativo] = "active";
@@ -33,17 +33,19 @@ if(isset($comandoPerfil)){
 ?>
 <header>
     <div class="menu-bar">
-        <img class="menu-bar-logo" src="../../imgs/StreetPlayLogoExtend.png">
-        <a class="menu-bar-link" href="../../index.php">LOJA</a>
-        <a class="menu-bar-link <?=$linkAtivo[0]?>" href="?ativo=0">COMUNIDADE</a>
-        <a class="menu-bar-link <?=$linkAtivo[1]?>" href="?ativo=1">BIBLIOTECA</a>
+        <a href="../store/index.php?ativo=1"><img class="menu-bar-logo" src="../../imgs/StreetPlayLogoExtend.png"></a>
+        <a class="menu-bar-link <?=$linkAtivo[1]?>" href="../store/index.php?ativo=1">LOJA</a>
+        <a class="menu-bar-link <?=$linkAtivo[2]?>" href="?ativo=2">COMUNIDADE</a>
+        <a class="menu-bar-link <?=$linkAtivo[3]?>" href="?ativo=3">BIBLIOTECA</a>
         <!-- Sub Menu do Perfil -->
         <?php if($_SESSION["user"] == "anonimo"):?>
                 <a href="../login&register/login.php">Entrar na Conta</a>
-        <?php elseif ($_SESSION["user"] == "dev/pub" && isset($_SESSION["idDev"])):?>
+        <?php elseif($_SESSION["user"] != "anonimo"):?>
         <div>
             <span class="sub-menu-nome" onclick="subMenuBar()"><?=$registroPerfil["nome"]?></span>
             <div class="sub-menu-perfil">
+        <?php endif;
+        if ($_SESSION["user"] == "dev/pub" && isset($_SESSION["idDev"])):?>
                 <a class="sub-menu-link" href="../dev&pub/profileDevPub.php?idDesenvolvedora=<?=$_SESSION["idDev"]?>">Acessar Minha Página</a>
                 <?php elseif ($_SESSION["user"] == "dev/pub" && isset($_SESSION["idPub"])):?>
                 <a class="sub-menu-link" href="../dev&pub/profileDevPub.php?idPublicadora=<?=$_SESSION["idPub"]?>">Acessar Minha Página</a>
@@ -57,6 +59,16 @@ if(isset($comandoPerfil)){
                 <?php endif?>
             </div>
         </div>
-        <img src="<?=$fotoPerfil?>" alt="foto do perfil">
+        <img src="<?=$fotoPerfil?>" alt="foto do perfil" class="menu-foto-perfil">
     </div>
+    <!-- Menus de gerenciamento -->
+    <?php if($_SESSION["user"] == "dev/pub" || $_SESSION["user"] == "admin"):?>
+        <div class="menu-manager">
+            <a href="../game/pubGame.php">Publicar Jogo</a>
+            <a href="../game/manageGames.php">Lista de Jogos</a>
+            <?php if($_SESSION["user"] == "admin"):?>
+            <a href="../category/addCategory.php">Gerenciar Categorias</a>
+            <?php endif ?>
+        </div>
+        <?php endif;?>
 </header>

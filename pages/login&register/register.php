@@ -5,7 +5,7 @@ $conexao = require('../functions/connection.php');
 $messagem = require('../functions/message.php');
 
 if(isset($_SESSION["user"]) && $_SESSION["user"] != "anonimo"){
-    Header("Location:../../index.php");
+    Header("Location:../store/index.php");
 }
 
 ?>

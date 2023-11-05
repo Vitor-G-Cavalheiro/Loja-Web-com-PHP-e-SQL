@@ -2,7 +2,10 @@
 @import url("./pop-up.css");
 @import url("./profile.css");
 @import url("./menu-bar.css");
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap');
+@import url("./slider.css");
+@import url("./swiper.css");
+@import url("./store.css");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap");
 
 :root {
     --blue-dark: #4C5D73;

@@ -1,0 +1,65 @@
+/* Slider Página Inicial e Página de Jogo */
+.back-swiper {
+    width: 100%;
+    background-color: var(--blue-dark);
+}
+
+.swiper {
+    width: 80vw;
+    height: 30vh;
+}
+
+.swiper-game {
+    width: 60vw;
+    height: 45vh;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.swiper-img {
+    display: block;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-img-game {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+/* Slider Recomendações*/
+.swiper-game-recomedation {
+    width: 50vw;
+}
+
+.swiper-content-recomedation {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

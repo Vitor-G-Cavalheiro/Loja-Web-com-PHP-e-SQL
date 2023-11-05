@@ -36,5 +36,6 @@ $registro = mysqli_fetch_assoc($resultado);
         </div>
     </session>
     <?php require('../components/footer.php') ?>
+    <script src="../../js/index.js"></script>
 </body>
 </html>

@@ -9,6 +9,13 @@ function popUpGen (e) {
     }
 }
 
+//Pop Up Mensagem
+let popUpMessage = document.querySelector(".pop-up-message");
+
+function popUpMes (e) {
+    popUpMessage.style.display = "none";
+}
+
 //Separação Editar Perfil Usuário
 let divEditUser = document.querySelectorAll(".div-edit-user");
 

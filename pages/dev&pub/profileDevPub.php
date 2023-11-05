@@ -4,18 +4,20 @@ $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 $mensagem = require('../functions/message.php');
 
-$idUsuario = isset($_SESSION["profile"]);
+if(isset($_SESSION["profile"])){
+    $idUsuario = $_SESSION["profile"];
+}
 
 if(isset($_GET["idDesenvolvedora"])){
     $idDevPub = $_GET["idDesenvolvedora"];
+    $idDesenvolvedora = $_GET["idDesenvolvedora"];
     $nomeColuna = "idDesenvolvedora";
     $tabela = "Desenvolvedoras";
-    
 } elseif (isset($_GET["idPublicadora"])){
-    $idDevPub = $_GET["idPub"];
+    $idDevPub = $_GET["idPublicadora"];
+    $idPublicadora = $_GET["idPublicadora"];
     $nomeColuna = "idPublicadora";
     $tabela = "Publicadoras";
-    
 }
 
 if(isset($_SESSION["profile"])){
@@ -25,13 +27,19 @@ if(isset($_SESSION["profile"])){
     $seguir = "./followDevPub.php?$nomeColuna=$idDevPub&idUsuario=$idUsuario";
 }
 
+//Comando Seguidores
 $comandoSeguidores = "SELECT COUNT(idUsuario) AS NumeroSeguidores FROM Seguindo WHERE $nomeColuna = $idDevPub";
 $resultadoSeguidores = mysqli_query($conexao, $comandoSeguidores);
 $registroSeguidores = mysqli_fetch_assoc($resultadoSeguidores);
 
+//Comando Págiona Dev/Pub
 $comando = "SELECT * FROM $tabela WHERE $nomeColuna = $idDevPub";
 $resultado = mysqli_query($conexao, $comando);
 $registro = mysqli_fetch_assoc($resultado);
+
+//Comando Jogos da Dev/Pub
+$comandoJogosDevPub = "SELECT fj.foto, fj.ordem, j.nome, j.preco, j.descricao, j.idJogo FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo WHERE $nomeColuna = $idDevPub LIMIT 8";
+$resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
 
 ?>
 
@@ -57,40 +65,65 @@ $registro = mysqli_fetch_assoc($resultado);
             <span><?=$registro["descricao"]?></span>
             <span>Seguidores: <?=$registroSeguidores["NumeroSeguidores"]?></span>
             <!-- Verificação Seguidor -->
-            <?php if(isset($registroSeguindo)):?>
+            <?php if(isset($registroSeguindo) && $registroSeguindo["idUsuario"] == $idUsuario):?>
                 <a href="<?=$seguir?>&seguir=nao">Deixar de Seguir</a>
             <?php elseif(isset($_SESSION["profile"])):?>
                 <a href="<?=$seguir?>&seguir=sim">Seguir</a>
             <?php endif;?>
             <!-- Editar Página Dev ou Pub -->
-            <?php if($idDevPub == isset($_SESSION["idPub"]) || $idDevPub == isset($_SESSION["idDev"])):?>
+            <?php if(isset($_SESSION["idPub"]) && isset($idPublicadora)): 
+            if($idPublicadora == $_SESSION["idPub"]):?>
                 <a href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
-            <?php endif;?>
+            <?php endif;
+            elseif(isset($_SESSION["idDev"]) && isset($idDesenvolvedora)):
+            if($idDesenvolvedora == $_SESSION["idDev"]):?>
+                <a href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
+            <?php endif; 
+            endif; ?>
         </div>
         <!-- Redes Sociais -->
         <div>
-        <?php if(isset($registro["youtube"])):?>
+        <?php if(isset($registro["youtube"]) && $registro["youtube"] != NULL):?>
             <div>
                 <img src=''>
                 <a href='<?=$registro["youtube"]?>'>Youtube</a>
             </div>
-        <?php elseif(isset($registro["twitter"])):?>
+        <?php endif;
+        if(isset($registro["twitter"]) && $registro["twitter"] != NULL):?>
             <div>
                 <img src=''>
                 <a href='<?=$registro["twitter"]?>'>Twitter</a>
             </div>
-        <?php elseif(isset($registro["twitch"])):?>
+        <?php endif;
+        if(isset($registro["twitch"]) && $registro["twitch"] != NULL):?>
             <div>
                 <img src=''>
-                <a href='<?=$registro["twitch"]?>'>twitch</a>
+                <a href='<?=$registro["twitch"]?>'>Twitch</a>
             </div>
-        <?php elseif(isset($registro["Site"])):?>
+        <?php endif;
+        if(isset($registro["Site"]) && $registro["site"] != NULL):?>
             <div>
                 <img src=''>
                 <a href='<?=$registro["Site"]?>'><?=$registro["nome"]?></a>
             </div>
         <?php endif;?>
         </div>
+        <!-- Jogos da Dev/Pub -->
+        <div>
+        <?php while($registroJogosDevPub = mysqli_fetch_assoc($resultadoJogosDevPub)):
+            if($registroJogosDevPub["ordem"] == '1'):?>
+                <a class="card-game" href="../store/gamePage.php?idJogo=<?=$registroJogosDevPub["idJogo"]?>">
+                    <img class="card-game-img" src="<?=$registroJogosDevPub["foto"]?>">
+                    <div class="card-game-content">
+                        <span class="card-game-text"><?=$registroJogosDevPub["nome"]?></span>
+                        <span class="card-game-text"><?=$registroJogosDevPub["descricao"]?></span>
+                        <span class="card-game-price"><?=$registroJogosDevPub["preco"]?></span>
+                    </div>
+                </a>
+            <?php endif;
+            endwhile;?>   
+        </div>
+        <a href="../store/listGames.php?<?=$nomeColuna?>=<?=$idDevPub?>">Ver Mais Jogos de <?=$registro["nome"]?></a>
     </session>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>

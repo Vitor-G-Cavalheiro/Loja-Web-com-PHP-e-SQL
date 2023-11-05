@@ -24,6 +24,6 @@ if(!$publicadoJogo){
     $_SESSION["mensagem"] = "Algo deu errado, Tente Novamente";
 } else {
     $_SESSION["mensagem"] = "Jogo Atualizado com Sucesso";
-} Header("Location:../../index.php");
+} Header("Location:../store/index.php");
 
 ?>

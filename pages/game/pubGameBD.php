@@ -43,7 +43,7 @@ if(isset($foto)){
     $destino = '../../imgs/' . $_FILES['foto']['name'];
     $arquivo_tmp = $_FILES['foto']['tmp_name'];
     move_uploaded_file($arquivo_tmp, $destino);
-    $comandoFoto = "INSERT INTO fotosJogos (idJogo, foto) values ('$idJogo', '$destino')";
+    $comandoFoto = "INSERT INTO fotosJogos (idJogo, foto, ordem) values ('$idJogo', '$destino', '1')";
     $resultadoFoto = mysqli_query($conexao, $comandoFoto);
 }
 
@@ -54,6 +54,6 @@ if(!$publicadoJogo){
     $_SESSION["mensagem"] = "Algo deu errado, Tente Novamente";
 } else {
     $_SESSION["mensagem"] = "Jogo Publicado com Sucesso";
-} Header("Location:../../index.php");
+} Header("Location:../store/index.php");
 
 ?>

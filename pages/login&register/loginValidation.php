@@ -16,7 +16,7 @@ while($registroDesenvolvedora = mysqli_fetch_assoc($resultadoDesenvolvedora)){
         $_SESSION["mensagem"] = "Bem vindo $nome";
         $_SESSION["user"] = "dev/pub";
         $_SESSION["idDev"] = $registroDesenvolvedora["idDesenvolvedora"];
-        Header("Location:../../index.php");
+        Header("Location:../store/index.php");
         die;
     }
 }
@@ -27,7 +27,7 @@ while($registroPublicadora = mysqli_fetch_assoc($resultadoPublicadora)){
         $_SESSION["mensagem"] = "Bem vindo $nome";
         $_SESSION["user"] = "dev/pub";
         $_SESSION["idPub"] = $registroPublicadora["idPublicadora"];
-        Header("Location:../../index.php");
+        Header("Location:../store/index.php");
         die;
     }
 }
@@ -38,13 +38,13 @@ while($registro = mysqli_fetch_assoc($resultado)){
         $_SESSION["mensagem"] = "Bem vindo MESTRE $nome";
         $_SESSION["user"] = "admin";
         $_SESSION["profile"] = $registro["idUsuario"];
-        Header("Location:../../index.php");
+        Header("Location:../store/index.php");
         die;
     } elseif($registro["nome"] == $nome && $registro["senha"] == $senha){
         $_SESSION["mensagem"] = "Bem vindo $nome";
         $_SESSION["user"] = "usuario";
         $_SESSION["profile"] = $registro["idUsuario"];
-        Header("Location:../../index.php");
+        Header("Location:../store/index.php");
         die;
     } elseif($registro["nome"] == $nome){
         $_SESSION["mensagem"] = "Senha incorreta";

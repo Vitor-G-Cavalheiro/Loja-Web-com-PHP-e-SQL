@@ -130,6 +130,7 @@ CREATE TABLE StreetPlay.FotosJogos (
 idFotoJogo INT(11) NOT NULL AUTO_INCREMENT,
 idJogo INT(11) NOT NULL,
 foto BLOB NOT NULL,
+ordem INT(11) NOT NULL,
 PRIMARY KEY (idFotoJogo),
 CONSTRAINT fk_jogo_fotojogo
 FOREIGN KEY (idJogo)

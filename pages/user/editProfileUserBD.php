@@ -20,6 +20,7 @@ if(isset($_FILES['foto'])){
     $arquivo_tmp = $_FILES['foto']['tmp_name'];
     move_uploaded_file($arquivo_tmp, $destino);
     $atualizarFoto = "UPDATE usuarios SET foto = '$destino' WHERE idUsuario = $idUsuario";
+    $resultado = mysqli_query($conexao, $atualizarFoto);
 }
 if(isset($_POST["senha"])){
     $senha = $_POST["senha"];
@@ -45,12 +46,14 @@ if(isset($_GET["delete"])){
     $deleteCarrinho = "DELETE FROM carrinho WHERE idUsuario = $idUsuario";
     $deleteColecoes = "DELETE FROM colecoes WHERE idUsuario = $idUsuario";
     $deleteFavoritos = "DELETE FROM favoritos WHERE idUsuario = $idUsuario";
+    $deleteSeguindo = "DELETE FROM seguindo WHERE idUsuario = $idUsuario";
     $deleteUsuario = "DELETE FROM usuarios WHERE idUsuario = $idUsuario";
 
     $resultadoBiblioteca = mysqli_query($conexao, $deleteBiblioteca);
     $resultadoCarrinho = mysqli_query($conexao, $deleteCarrinho);
     $resultadoColecoes = mysqli_query($conexao, $deleteColecoes);
     $resultadoFavoritos = mysqli_query($conexao, $deleteFavoritos);
+    $resultadoSeguindo = mysqli_query($conexoa, $deleteSeguindo);
     $resultadoUsuario = mysqli_query($conexao, $deleteUsuario);
     
     if($resultadoUsuario){

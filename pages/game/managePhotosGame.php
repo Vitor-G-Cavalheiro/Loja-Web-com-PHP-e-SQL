@@ -17,7 +17,11 @@ if(isset($_GET["idFotoJogo"])){
     $destino = '../../imgs/' . $_FILES['foto']['name'];
     $arquivo_tmp = $_FILES['foto']['tmp_name'];
     move_uploaded_file($arquivo_tmp, $destino);
-    $comandoFoto = "INSERT INTO fotosJogos (idJogo, foto) values ('$idJogo', '$destino')";
+    $verificacao = "SELECT * FROM fotosjogos WHERE idJogo = $idJogo";
+    $resultadoVerificacao = mysqli_query($conexao, $verificacao);
+    $registroVerificacao = mysqli_fetch_assoc($resultadoVerificacao);
+    $ordem = $registroVerificacao["ordem"] + 1;
+    $comandoFoto = "INSERT INTO fotosJogos (idJogo, foto, ordem) values ('$idJogo', '$destino', '$ordem')";
     if($resultadoFoto = mysqli_query($conexao, $comandoFoto)){
         $_SESSION["mensagem"] = "Foto Adicionada com Sucesso";
     } else {

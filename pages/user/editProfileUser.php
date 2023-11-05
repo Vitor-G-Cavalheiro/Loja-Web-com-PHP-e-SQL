@@ -50,7 +50,7 @@ $registro = mysqli_fetch_assoc($resultado);
                 <input name="descricao" type="text" value="<?=$registro["descricao"]?>">
                 <label< for="foto">Foto de Perfil: </label>
                 <input type="file" name="foto">
-                <button>Salvar Alterações</button>
+                <button type="submit">Salvar Alterações</button>
             </form>
         </div>
         <!-- Atualizar Senha -->
@@ -61,7 +61,7 @@ $registro = mysqli_fetch_assoc($resultado);
                 <input name="senha" type="password" maxlength="8" required>
                 <label for="confSenha">Confirme sua Senha: </label>
                 <input name="confSenha" type="password" maxlength="8" required>
-                <button>Salvar Alterações</button>
+                <button type="submit">Salvar Alterações</button>
             </form>
         </div>
         <!-- Verificar Email -->
