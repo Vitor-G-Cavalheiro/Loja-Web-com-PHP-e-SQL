@@ -15,7 +15,7 @@ $comandoCategoria = "SELECT * FROM Categorias WHERE idCategoria = $idCategoria";
 $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
 $registroCategoria = mysqli_fetch_assoc($resultadoCategoria);
 
-$comandoLista = "SELECT * FROM CategoriasJogos cj INNER JOIN Jogos j ON cj.idJogo = j.idJogo INNER JOIN fotosjogos fj ON j.idJogo = fj.idJogo WHERE idCategoria = $idCategoria";
+$comandoLista = "SELECT * FROM CategoriasJogos cj INNER JOIN Jogos j ON cj.idJogo = j.idJogo INNER JOIN FotosJogos fj ON j.idJogo = fj.idJogo WHERE idCategoria = $idCategoria";
 $resultadoLista = mysqli_query($conexao, $comandoLista);
 
 ?>

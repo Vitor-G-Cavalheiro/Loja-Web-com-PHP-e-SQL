@@ -5,9 +5,9 @@ $conexao = require('../functions/connection.php');
 
 if(isset($_GET["idCategoria"])){
     $idCategoria = $_GET["idCategoria"];
-    $updateColecoes = "UPDATE colecoes SET idCategoria = NULL WHERE idCategoria = $idCategoria";
-    $updateJogosPublicados = "UPDATE jogospublicados SET idCategoria = NULL WHERE idCategoria = $idCategoria";
-    $deleteCategoria = "DELETE FROM categorias WHERE idCategoria = $idCategoria";
+    $updateColecoes = "UPDATE Colecoes SET idCategoria = NULL WHERE idCategoria = $idCategoria";
+    $updateJogosPublicados = "UPDATE JogosPublicados SET idCategoria = NULL WHERE idCategoria = $idCategoria";
+    $deleteCategoria = "DELETE FROM Categorias WHERE idCategoria = $idCategoria";
     $resultadoColecoes = mysqli_query($conexao, $updateColecoes);
     $resultadoJogosPublicados = mysqli_query($conexao, $updateJogosPublicados);
     $resultadoCategoria = mysqli_query($conexao, $deleteCategoria);
@@ -19,7 +19,7 @@ if(isset($_GET["idCategoria"])){
 } elseif (isset($_POST["idCategoria"])){
     $idCategoria = $_POST["idCategoria"];
     $nome = $_POST["nome"];
-    $updateCategoria = "UPDATE categorias SET nome = '$nome' WHERE idCategoria = $idCategoria";
+    $updateCategoria = "UPDATE Categorias SET nome = '$nome' WHERE idCategoria = $idCategoria";
     $resultadoCategoria = mysqli_query($conexao, $updateCategoria);
     if($resultadoCategoria){
         $_SESSION["mensagem"] = "Categoria Atualizada com Sucesso";

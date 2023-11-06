@@ -45,7 +45,7 @@ $resultadoPublicadoras = mysqli_query($conexao, $comandoPublicadoras);
                     </div>
                 </a>
             <?php endwhile;?>
-            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=usuarios">Ver Mais Usuários</a>
+            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=Usuarios">Ver Mais Usuários</a>
         </div>
         <!-- Lista Desenvolvedoras -->
         <div>
@@ -62,7 +62,7 @@ $resultadoPublicadoras = mysqli_query($conexao, $comandoPublicadoras);
                     </div>
                 </a>
             <?php endwhile;?>
-            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=desenvolvedoras">Ver Mais Desenvolvedoras</a>
+            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=Desenvolvedoras">Ver Mais Desenvolvedoras</a>
         </div>
         <!-- Lista Publicadoras -->
         <div>
@@ -79,7 +79,7 @@ $resultadoPublicadoras = mysqli_query($conexao, $comandoPublicadoras);
                     </div>
                 </a>
             <?php endwhile;?>
-            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=publicadoras">Ver Mais Publicadoras</a>
+            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=Publicadoras">Ver Mais Publicadoras</a>
         </div>
     </session>
     <!-- Rodapé -->

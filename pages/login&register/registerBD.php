@@ -10,11 +10,11 @@ $tipoUsuario = $_POST["tipoUsuario"];
 $destino = '../../imgs/user/profile.png';
 
 $confirmacao = "SELECT * FROM $tipoUsuario";
-if($tipoUsuario == "usuarios"){
+if($tipoUsuario == "Usuarios"){
     $comando = "INSERT INTO $tipoUsuario (nome, senha, email, foto, administrador) VALUES('$nome', '$senha', '$email', '$destino', FALSE)";
-} elseif($tipoUsuario == "desenvolvedoras") {
+} elseif($tipoUsuario == "Desenvolvedoras") {
     $comando = "INSERT INTO $tipoUsuario (nomeDev, senha, email, foto) VALUES('$nome', '$senha', '$email', '$destino')";
-} elseif($tipoUsuario == "publicadoras") {
+} elseif($tipoUsuario == "Publicadoras") {
     $comando = "INSERT INTO $tipoUsuario (nomePub, senha, email, foto) VALUES('$nome', '$senha', '$email', '$destino')";
 }
 

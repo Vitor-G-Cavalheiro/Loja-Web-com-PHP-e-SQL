@@ -5,11 +5,11 @@ $conexao = require('../functions/connection.php');
 $messagem = require('../functions/message.php');
 
 //Jogos Aleatórios para os Slides
-$comandoJogosSlide = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo WHERE fj.ordem = 1 ORDER BY RAND() LIMIT 8";
+$comandoJogosSlide = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = jp.idJogo WHERE fj.ordem = 1 ORDER BY RAND() LIMIT 8";
 $resultadoJogosSlide = mysqli_query($conexao, $comandoJogosSlide);
 
 //Jogos Recentes
-$comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo WHERE fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 16";
+$comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = jp.idJogo WHERE fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 16";
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
 
 //Categorias

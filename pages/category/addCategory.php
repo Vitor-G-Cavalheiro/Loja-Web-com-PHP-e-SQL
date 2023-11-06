@@ -10,7 +10,7 @@ if($_SESSION["user"] != "admin"){
 
 $messagem = require('../functions/message.php');
 
-$comandoCategoria = "SELECT * FROM categorias";
+$comandoCategoria = "SELECT * FROM Categorias";
 $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
 
 if(isset($_POST["categoria"])){
@@ -22,7 +22,7 @@ if(isset($_POST["categoria"])){
             die;
         }
     }
-    $comando = "INSERT INTO categorias (nome) VALUES('".$_POST["categoria"]."')";
+    $comando = "INSERT INTO Categorias (nome) VALUES('".$_POST["categoria"]."')";
     $resultado= mysqli_query($conexao, $comando);
     if(!$resultado){
         $_SESSION["mensagem"] = "Falha ao Adicionar Categoria";

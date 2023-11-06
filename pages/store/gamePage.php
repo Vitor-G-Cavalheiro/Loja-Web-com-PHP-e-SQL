@@ -7,7 +7,7 @@ $messagem = require('../functions/message.php');
 $idJogo = $_GET["idJogo"];
 
 //Comando Jogo
-$comandoJogo = "SELECT * FROM jogos j INNER JOIN jogospublicados jp ON j.idJogo = jp.idJogo INNER JOIN desenvolvedoras d ON jp.idDesenvolvedora = d.idDesenvolvedora INNER JOIN publicadoras p ON jp.idPublicadora = p.idPublicadora WHERE j.idJogo = $idJogo";
+$comandoJogo = "SELECT * FROM jogos j INNER JOIN JogosPublicados jp ON j.idJogo = jp.idJogo INNER JOIN Desenvolvedoras d ON jp.idDesenvolvedora = d.idDesenvolvedora INNER JOIN Publicadoras p ON jp.idPublicadora = p.idPublicadora WHERE j.idJogo = $idJogo";
 $resultadoJogo = mysqli_query($conexao, $comandoJogo);
 $registroJogo = mysqli_fetch_assoc($resultadoJogo);
 
@@ -16,29 +16,28 @@ $comandoFotos = "SELECT * FROM fotosjogos WHERE idJogo = $idJogo";
 $resultadoFotos = mysqli_query($conexao, $comandoFotos);
 
 //Comando Categorias do jogo
-$comandoCategoriasJogo = "SELECT * FROM categoriasjogos cj INNER JOIN categorias c ON cj.idCategoria = c.idCategoria WHERE idJogo = $idJogo ORDER BY c.nome";
+$comandoCategoriasJogo = "SELECT * FROM categoriasjogos cj INNER JOIN Categorias c ON cj.idCategoria = c.idCategoria WHERE idJogo = $idJogo ORDER BY c.nome";
 $resultadoCategoriasJogo = mysqli_query($conexao, $comandoCategoriasJogo);
 
 //Comando Jogos da Mesma Dev
 $idDesenvolvedora = $registroJogo["idDesenvolvedora"];
-$comandoJogosDesenvolvedora = "SELECT j.nome, fj.foto, j.preco, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON j.idJogo = fj.idJogo WHERE idDesenvolvedora = $idDesenvolvedora AND fj.ordem = 1 ORDER BY RAND() LIMIT 12";
+$comandoJogosDesenvolvedora = "SELECT j.nome, fj.foto, j.preco, j.idJogo, fj.ordem FROM JogosPublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON j.idJogo = fj.idJogo WHERE idDesenvolvedora = $idDesenvolvedora AND fj.ordem = 1 ORDER BY RAND() LIMIT 12";
 $resultadoJogosDesenvolvedora = mysqli_query($conexao, $comandoJogosDesenvolvedora);
 
 //Jogos Recentes
-$comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = jp.idJogo AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 12";
+$comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM JogosPublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = jp.idJogo AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 12";
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
 
 //Comando Lista de Desejos
 if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
-    $comandoFavoritos = "SELECT * FROM favoritos WHERE idJogoPublicado = $idJogo AND idUsuario = ".$_SESSION["profile"];
+    $comandoFavoritos = "SELECT * FROM Favoritos WHERE idJogoPublicado = $idJogo AND idUsuario = ".$_SESSION["profile"];
     $resultadoFavoritos = mysqli_query($conexao, $comandoFavoritos);
     $registroFavoritos = mysqli_fetch_assoc($resultadoFavoritos);
 
-    $comandoCarrinho = "SELECT * FROM carrinho WHERE idJogoPublicado = $idJogo AND idUsuario = ".$_SESSION["profile"];
+    $comandoCarrinho = "SELECT * FROM Carrinho WHERE idJogoPublicado = $idJogo AND idUsuario = ".$_SESSION["profile"];
     $resultadoCarrinho = mysqli_query($conexao, $comandoCarrinho);
     $registroCarrinho = mysqli_fetch_assoc($resultadoCarrinho);
 }
-
 
 ?>
 

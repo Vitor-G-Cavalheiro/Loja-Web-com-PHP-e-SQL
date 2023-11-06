@@ -10,14 +10,14 @@ $descricao = $_POST["descricao"];
 $desenvolvedora = $_POST["desenvolvedora"];
 $publicadora = $_POST["publicadora"];
 
-$atualizarJogo = "UPDATE jogos SET nome = '$nome', preco = '$preco', descricao = '$descricao' WHERE idJogo = '$idJogo'";
+$atualizarJogo = "UPDATE Jogos SET nome = '$nome', preco = '$preco', descricao = '$descricao' WHERE idJogo = '$idJogo'";
 if(!$resultadoJogo = mysqli_query($conexao, $atualizarJogo)){
     $_SESSION["mensagem"] = "Falha ao Atualizar Jogo";
     Header("Location:./updateGame.php");
     die;
 }
 
-$publicarJogo = "UPDATE jogosPublicados SET idDesenvolvedora = '$desenvolvedora', idPublicadora = '$publicadora', idJogo = '$idJogo' WHERE idJogo = '$idJogo'";
+$publicarJogo = "UPDATE JogosPublicados SET idDesenvolvedora = '$desenvolvedora', idPublicadora = '$publicadora', idJogo = '$idJogo' WHERE idJogo = '$idJogo'";
 $publicadoJogo = mysqli_query($conexao, $publicarJogo);
 
 if(!$publicadoJogo){

@@ -11,17 +11,17 @@ if($_GET["acao"] == "mais"){
     $inicio = $inicio - 16;
 }
 
-if ($_GET["tipo"] == "usuarios"){
-    $tipo = "usuarios";
-    $comando = "SELECT * FROM usuarios ORDER BY nome DESC LIMIT $inicio, $final";
+if ($_GET["tipo"] == "Usuarios"){
+    $tipo = "Usuarios";
+    $comando = "SELECT * FROM Usuarios ORDER BY nome DESC LIMIT $inicio, $final";
     $link = "../user/profileUser.php";
-}elseif ($_GET["tipo"] == "desenvolvedoras"){
-    $tipo = "desenvolvedoras";
-    $comando = "SELECT * FROM desenvolvedoras ORDER BY nomeDev DESC LIMIT $inicio, $final";
+}elseif ($_GET["tipo"] == "Desenvolvedoras"){
+    $tipo = "Desenvolvedoras";
+    $comando = "SELECT * FROM Desenvolvedoras ORDER BY nomeDev DESC LIMIT $inicio, $final";
     $link = "../dev&pub/profileDevPub.php";
-}elseif ($_GET["tipo"] == "publicadoras"){
-    $tipo = "publicadoras";
-    $comando = "SELECT * FROM publicadoras ORDER BY nomePub DESC LIMIT $inicio, $final";
+}elseif ($_GET["tipo"] == "Publicadoras"){
+    $tipo = "Publicadoras";
+    $comando = "SELECT * FROM Publicadoras ORDER BY nomePub DESC LIMIT $inicio, $final";
     $link = "../dev&pub/profileDevPub.php";
 }
 
@@ -50,7 +50,7 @@ $resultadoProfiles = mysqli_query($conexao, $comando);
         <div>
             <div>
                 <?php while($registroProfiles = mysqli_fetch_assoc($resultadoProfiles)):
-                    if($tipo == "usuarios"){
+                    if($tipo == "Usuarios"){
                         $id = "?idUsuario=".$registroProfiles["idUsuario"];
                         $nome = "nome";
                     } elseif($tipo == "desenvolvedoras"){

@@ -33,12 +33,12 @@ if(isset($_SESSION["user"]) && $_SESSION["user"] != "anonimo"){
         <label for="email">Email: </label>
         <input type="email" name="email" required>
         <label for="tipoUsuario">Qual seu tipo de conta: </label>
-        <input type="radio" name="tipoUsuario" value="usuarios" checked>
-        <label for="usuarios">Usuário</label>
-        <input type="radio" name="tipoUsuario" value="desenvolvedoras">
-        <label for="desenvolvedoras">Desenvolvedora</label>
-        <input type="radio" name="tipoUsuario" value="publicadoras">
-        <label for="publicadoras">Publicadora</label>
+        <input type="radio" name="tipoUsuario" value="Usuarios" checked>
+        <label for="Usuarios">Usuário</label>
+        <input type="radio" name="tipoUsuario" value="Desenvolvedoras">
+        <label for="Desenvolvedoras">Desenvolvedora</label>
+        <input type="radio" name="tipoUsuario" value="Publicadoras">
+        <label for="Publicadoras">Publicadora</label>
         <button type="submit">Registrar-se</button>
     </form>
     <a href="./login.php">Logar-se</a>

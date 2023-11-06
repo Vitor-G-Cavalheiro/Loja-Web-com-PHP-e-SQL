@@ -107,14 +107,14 @@ if(isset($_GET["delete"])){
     //Apagando Todos os Seus Jogos
     while($registroJogosDevPub = mysqli_fetch_assoc($resultadoJogosDevPub)){
         $idJogo = $registroJogosDevPub["idJogo"];
-        $comandoFotos = "DELETE FROM fotosjogos WHERE idJogo = $idJogo";
-        $comandoPublicado = "DELETE FROM jogosPublicados WHERE idJogo = $idJogo";
+        $comandoFotos = "DELETE FROM FotosJogos WHERE idJogo = $idJogo";
+        $comandoPublicado = "DELETE FROM JogosPublicados WHERE idJogo = $idJogo";
 
-        $verificacaoFavorito = "SELECT * FROM favoritos WHERE idJogoPublicado = $idJogo";
+        $verificacaoFavorito = "SELECT * FROM Favoritos WHERE idJogoPublicado = $idJogo";
         $verificandoFavorito = mysqli_query($conexao, $verificacaoFavorito);
         $verificadoFavorito = mysqli_fetch_assoc($verificandoFavorito);
         if($verificadoFavorito){
-            $comandoFavorito = "DELETE FROM favoritos WHERE idJogoPublicado = $idJogo";
+            $comandoFavorito = "DELETE FROM Favoritos WHERE idJogoPublicado = $idJogo";
             $resultadoFavorito = mysqli_query($conexao, $comandoFavorito);
         }
 
@@ -133,16 +133,16 @@ if(isset($_GET["delete"])){
             $comandoBiblioteca = "DELETE FROM Biblioteca WHERE idJogoPublicado = $idJogo";
             $resultadoBiblioteca = mysqli_query($conexao, $comandoBiblioteca);
         }
-        $comandoCategoria = "DELETE FROM categoriasJogos WHERE idJogo = $idJogo";
-        $comandoJogo = "DELETE FROM jogos WHERE idJogo = $idJogo";
+        $comandoCategoria = "DELETE FROM CategoriasJogos WHERE idJogo = $idJogo";
+        $comandoJogo = "DELETE FROM Jogos WHERE idJogo = $idJogo";
 
         $resultadoFotos = mysqli_query($conexao, $comandoFotos);
         $resultadoPublicado = mysqli_query($conexao, $comandoPublicado);
         $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
         $resultadoJogo = mysqli_query($conexao, $comandoJogo);
     }
-    $deleteJogoPublicado = "DELETE FROM jogosPublicados WHERE $idColuna = $idDevPub";
-    $deleteSeguindo = "DELETE FROM seguindo WHERE $idColuna = $idDevPub";
+    $deleteJogoPublicado = "DELETE FROM JogosPublicados WHERE $idColuna = $idDevPub";
+    $deleteSeguindo = "DELETE FROM Seguindo WHERE $idColuna = $idDevPub";
     /* FAZER VERIFICAÇÂO COLEÇÕES 
     $deleteColecoes = "DELETE FROM colecoes WHERE $idColuna = $idDevPub"; */
     $deleteTabela = "DELETE FROM $tabela WHERE $idColuna = $idDevPub";

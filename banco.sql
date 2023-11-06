@@ -1,6 +1,6 @@
 CREATE SCHEMA StreetPlay;
 USE StreetPlay;
-CREATE TABLE StreetPlay.usuarios (
+CREATE TABLE StreetPlay.Usuarios (
 idUsuario INT(11) NOT NULL AUTO_INCREMENT,
 nome VARCHAR(150) NOT NULL,
 senha VARCHAR(8) NOT NULL,

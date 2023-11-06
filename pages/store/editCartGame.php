@@ -8,10 +8,10 @@ $idUsuario = $_GET["idUsuario"];
 $comprar = $_GET["comprar"];
 
 if($comprar == "sim"){
-    $comando = "INSERT INTO carrinho (idUsuario, idJogoPublicado) VALUES ('$idUsuario','$idJogo')";
+    $comando = "INSERT INTO Carrinho (idUsuario, idJogoPublicado) VALUES ('$idUsuario','$idJogo')";
     $_SESSION["mensagem"] = "Jogo Adicionado ao Carrinho";
 } elseif($comprar == "nao"){
-    $comando = "DELETE FROM carrinho WHERE idUsuario = $idUsuario AND idJogoPublicado = $idJogo";
+    $comando = "DELETE FROM Carrinho WHERE idUsuario = $idUsuario AND idJogoPublicado = $idJogo";
     $_SESSION["mensagem"] = "Jogo Removido do seu Carrinho";
 }
 $resultado = mysqli_query($conexao, $comando);

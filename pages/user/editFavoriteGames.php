@@ -8,11 +8,11 @@ $idUsuario = $_GET["idUsuario"];
 $seguir = $_GET["seguir"];
 
 if($seguir == "sim"){
-    $comando = "INSERT INTO favoritos (idUsuario, idJogoPublicado) VALUES ('$idUsuario','$idJogo')";
+    $comando = "INSERT INTO Favoritos (idUsuario, idJogoPublicado) VALUES ('$idUsuario','$idJogo')";
     $_SESSION["mensagem"] = "Jogo Adicionado a Lista de Desejos";
     $link = "../store/gamePage.php?idJogo=$idJogo";
 } elseif($seguir == "nao"){
-    $comando = "DELETE FROM favoritos WHERE idUsuario = $idUsuario AND idJogoPublicado = $idJogo";
+    $comando = "DELETE FROM Favoritos WHERE idUsuario = $idUsuario AND idJogoPublicado = $idJogo";
     $_SESSION["mensagem"] = "Jogo Removido da sua Lista de Desejos";
     if($_GET["pagina"] == "desejos"){
         $link = "./favoritesGames.php?idJogo=$idJogo&idUsuario=$idUsuario";

@@ -5,7 +5,7 @@ $conexao = require('../functions/connection.php');
 $message = require('../functions/message.php');
 
 $idUsuario = $_SESSION["profile"];
-$comando = "SELECT j.nome, j.preco, j.descricao, fj.foto, j.idJogo FROM favoritos f INNER JOIN jogos j ON f.idJogoPublicado = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo WHERE f.idUsuario = $idUsuario AND fj.ordem = 1";
+$comando = "SELECT j.nome, j.preco, j.descricao, fj.foto, j.idJogo FROM Favoritos f INNER JOIN Jogos j ON f.idJogoPublicado = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo WHERE f.idUsuario = $idUsuario AND fj.ordem = 1";
 $resultado = mysqli_query($conexao, $comando);
 
 ?>

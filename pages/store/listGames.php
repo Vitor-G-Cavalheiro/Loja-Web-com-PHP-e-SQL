@@ -14,17 +14,17 @@ if($_GET["acao"] == "mais"){
 if (isset($_GET["idCategoria"])){
     $idModificador = $_GET["idCategoria"];
     $modificador = "idCategoria";
-    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogos j INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo INNER JOIN categoriasjogos cj ON j.idJogo = cj.idJogo WHERE cj.idCategoria = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
+    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM Jogos j INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo INNER JOIN CategoriasJogos cj ON j.idJogo = cj.idJogo WHERE cj.idCategoria = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
 }elseif (isset($_GET["idDesenvolvedora"])){
     $idModificador = $_GET["idDesenvolvedora"];
     $modificador = "idDesenvolvedora";
-    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo INNER JOIN desenvolvedoras d ON jp.idDesenvolvedora = d.idDesenvolvedora WHERE jp.idDesenvolvedora = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
+    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo INNER JOIN Desenvolvedoras d ON jp.idDesenvolvedora = d.idDesenvolvedora WHERE jp.idDesenvolvedora = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
 }elseif (isset($_GET["idPublicadora"])){
     $idModificador = $_GET["idPublicadora"];
     $modificador = "idPublicadora";
-    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo INNER JOIN publicadoras p ON jp.idPublicadora = p.idPublicadora WHERE jp.idPublicadora = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
+    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo INNER JOIN Publicadoras p ON jp.idPublicadora = p.idPublicadora WHERE jp.idPublicadora = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
 }elseif (isset($_GET["modificador"])) {
-    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM jogos j INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
+    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM Jogos j INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
     $idModificador = "nao";
     $modificador = "modificador";
 }

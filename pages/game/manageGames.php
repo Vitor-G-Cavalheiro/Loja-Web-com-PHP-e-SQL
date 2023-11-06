@@ -12,11 +12,11 @@ $comandoFotosJogos = "SELECT * FROM fotosJogos";
 $resultadoFotosJogos = mysqli_query($conexao, $comandoFotosJogos);
 
 if(isset($_SESSION["idDev"])){
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo WHERE idDesenvolvedora = '.$_SESSION["idDev"]; 
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM JogosPublicados jf INNER JOIN Jogos j ON jf.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jf.idjogo = fj.idjogo WHERE idDesenvolvedora = '.$_SESSION["idDev"]; 
 } elseif (isset($_SESSION["idPub"])){
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo WHERE idPublicadora = '.$_SESSION["idPub"];
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM JogosPublicados jf INNER JOIN Jogos j ON jf.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jf.idjogo = fj.idjogo WHERE idPublicadora = '.$_SESSION["idPub"];
 } else{
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM jogosPublicados jf INNER JOIN jogos j ON jf.idJogo = j.idJogo INNER JOIN fotosjogos fj ON jf.idjogo = fj.idjogo';
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM JogosPublicados jf INNER JOIN Jogos j ON jf.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jf.idjogo = fj.idjogo';
 }
 
 $resultadoPublicado = mysqli_query($conexao, $comandoPublicado);

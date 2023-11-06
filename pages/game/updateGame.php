@@ -6,15 +6,15 @@ $verificacao = require('../functions/userVerification.php');
 $messagem = require('../functions/message.php');
 
 $idJogo = $_GET["idJogo"];
-$comandoJogo = "SELECT * FROM jogos WHERE idJogo = $idJogo";
+$comandoJogo = "SELECT * FROM Jogos WHERE idJogo = $idJogo";
 $resultadoJogo = mysqli_query($conexao, $comandoJogo);
 $registroJogo = mysqli_fetch_assoc($resultadoJogo);
 
-$comandoJogoPublicado = "SELECT * FROM jogosPublicados WHERE idJogo = $idJogo";
+$comandoJogoPublicado = "SELECT * FROM JogosPublicados WHERE idJogo = $idJogo";
 $resultadoJogoPublicado = mysqli_query($conexao, $comandoJogoPublicado);
 $registroJogoPublicado = mysqli_fetch_assoc($resultadoJogoPublicado);
 
-$comandoFotosJogo = "SELECT * FROM fotosjogos WHERE idJogo = $idJogo ORDER BY ordem";
+$comandoFotosJogo = "SELECT * FROM FotosJogos WHERE idJogo = $idJogo ORDER BY ordem";
 $resultadoFotosJogo = mysqli_query($conexao, $comandoFotosJogo);
 
 $comandoDesenvolvedora = "SELECT * FROM Desenvolvedoras";

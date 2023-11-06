@@ -7,11 +7,11 @@ $idCategoria = $_GET["idCategoria"];
 $idJogo = $_GET["idJogo"];
 $acao = $_GET["acao"];
 
-$comandoVerificacao = "SELECT * FROM categoriasjogos WHERE idCategoria = $idCategoria AND idJogo = $idJogo";
+$comandoVerificacao = "SELECT * FROM CategoriasJogos WHERE idCategoria = $idCategoria AND idJogo = $idJogo";
 $resultadoVerificacao = mysqli_query($conexao, $comandoVerificacao);
 
 if($acao == "rem"){
-    $comandoDelete = "DELETE FROM categoriasjogos WHERE idJogo = $idJogo AND idCategoria = $idCategoria";
+    $comandoDelete = "DELETE FROM CategoriasJogos WHERE idJogo = $idJogo AND idCategoria = $idCategoria";
     $resultadoDelete = mysqli_query($conexao, $comandoDelete);
     $_SESSION["mensagem"] = "Categoria Removida com Sucesso";
     Header("Location:../game/updateGame.php?idJogo=$idJogo");
@@ -22,7 +22,7 @@ if($acao == "rem"){
         die;
     }
 
-    $comandoInsercao = "INSERT INTO categoriasjogos (idCategoria, idJogo) VALUES ($idCategoria, $idJogo)";
+    $comandoInsercao = "INSERT INTO CategoriasJogos (idCategoria, idJogo) VALUES ($idCategoria, $idJogo)";
     if($resultadoInsercao = mysqli_query($conexao, $comandoInsercao)){
         $_SESSION["mensagem"] = "Categoria Adicionada com Sucesso";
     } else {

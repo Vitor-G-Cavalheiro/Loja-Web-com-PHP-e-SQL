@@ -40,7 +40,7 @@ $resultado = mysqli_query($conexao, $comando);
 $registro = mysqli_fetch_assoc($resultado);
 
 //Comando Jogos da Dev/Pub
-$comandoJogosDevPub = "SELECT fj.foto, fj.ordem, j.nome, j.preco, j.descricao, j.idJogo FROM jogospublicados jp INNER JOIN jogos j ON jp.idJogo = j.idJogo INNER JOIN fotosjogos fj ON fj.idJogo = j.idJogo WHERE $nomeColuna = $idDevPub AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 8";
+$comandoJogosDevPub = "SELECT fj.foto, fj.ordem, j.nome, j.preco, j.descricao, j.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo WHERE $nomeColuna = $idDevPub AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT 8";
 $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
 
 ?>
