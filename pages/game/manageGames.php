@@ -5,23 +5,21 @@ $conexao = require('../functions/connection.php');
 $verificacao = require('../functions/userVerification.php');
 $message = require('../functions/message.php');
 
-$comandoJogos = "SELECT * FROM jogos";
+$comandoJogos = "SELECT * FROM Jogos";
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
 
 $comandoFotosJogos = "SELECT * FROM fotosJogos";
 $resultadoFotosJogos = mysqli_query($conexao, $comandoFotosJogos);
 
 if(isset($_SESSION["idDev"])){
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM JogosPublicados jf INNER JOIN Jogos j ON jf.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jf.idjogo = fj.idjogo WHERE idDesenvolvedora = '.$_SESSION["idDev"]; 
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND idDesenvolvedora = '.$_SESSION["idDev"]; 
 } elseif (isset($_SESSION["idPub"])){
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM JogosPublicados jf INNER JOIN Jogos j ON jf.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jf.idjogo = fj.idjogo WHERE idPublicadora = '.$_SESSION["idPub"];
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND idPublicadora = '.$_SESSION["idPub"];
 } else{
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jf.idJogo FROM JogosPublicados jf INNER JOIN Jogos j ON jf.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jf.idjogo = fj.idjogo';
+    $comandoPublicado = 'SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1';
 }
 
 $resultadoPublicado = mysqli_query($conexao, $comandoPublicado);
-
-$jogoDuplicado = 0;
 
 ?>
 
@@ -34,24 +32,20 @@ $jogoDuplicado = 0;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="" href="./imgs/StreetPlayLogo.jpeg">
+    <link rel="icon" type="" href="../../imgs/StreetPlayLogo.jpeg">
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Gerenciar jogos</title>
 </head>
 <body>
     <?php require('../components/header.php') ?>
-    <?php
-    while($registro = mysqli_fetch_assoc($resultadoPublicado)):
-        if($jogoDuplicado != $registro["idJogo"]):?>
+    <?php while($registro = mysqli_fetch_assoc($resultadoPublicado)):?>
             <div>
                 <img src="<?=$registro["foto"]?>">
                 <h2><?=$registro["nome"]?></h2>
             </div>
             <a href="./updateGame.php?idJogo=<?=$registro["idJogo"]?>">Atualizar Jogo</a>
             <a href="./deleteGame.php?idJogo=<?=$registro["idJogo"]?>">Deletar Jogo</a>
-    <?php $jogoDuplicado = $registro["idJogo"];
-    endif;
-    endwhile;?>
+    <?php endwhile;?>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>
 </body>

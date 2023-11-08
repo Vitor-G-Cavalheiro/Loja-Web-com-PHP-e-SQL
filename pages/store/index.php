@@ -13,7 +13,7 @@ $comandoJogos = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.orde
 $resultadoJogos = mysqli_query($conexao, $comandoJogos);
 
 //Categorias
-$comandoCategorias = "SELECT * FROM categorias ORDER BY nome LIMIT 32";
+$comandoCategorias = "SELECT * FROM Categorias ORDER BY nome LIMIT 32";
 $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
 
 ?>

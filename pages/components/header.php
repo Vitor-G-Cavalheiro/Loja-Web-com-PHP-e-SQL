@@ -31,6 +31,8 @@ if(isset($comandoPerfil)){
     $resultadoPerfil = mysqli_query($conexao, $comandoPerfil);
     $registroPerfil = mysqli_fetch_assoc($resultadoPerfil);
     $fotoPerfil = $registroPerfil["foto"];
+} else {
+    $fotoPerfil = "../../imgs/user/profile.png";
 }
 
 ?>
@@ -42,26 +44,26 @@ if(isset($comandoPerfil)){
         <a class="menu-bar-link <?=$linkAtivo[3]?>" href="?ativo=3">BIBLIOTECA</a>
         <!-- Sub Menu do Perfil -->
         <?php if($_SESSION["user"] == "anonimo"):?>
-                <a href="../login&register/login.php">Entrar na Conta</a>
+                <a href="../loginRegister/login.php">Entrar na Conta</a>
         <?php elseif($_SESSION["user"] != "anonimo"):?>
         <div>
             <span class="sub-menu-nome" onclick="subMenuBar()"><?=$registroPerfil["$nomePerfil"]?></span>
             <div class="sub-menu-perfil">
         <?php endif;
         if ($_SESSION["user"] == "dev/pub" && isset($_SESSION["idDev"])):?>
-                <a class="sub-menu-link" href="../dev&pub/profileDevPub.php?idDesenvolvedora=<?=$_SESSION["idDev"]?>">Acessar Minha Página</a>
+                <a class="sub-menu-link" href="../devPub/profileDevPub.php?idDesenvolvedora=<?=$_SESSION["idDev"]?>">Acessar Minha Página</a>
                 <?php elseif ($_SESSION["user"] == "dev/pub" && isset($_SESSION["idPub"])):?>
-                <a class="sub-menu-link" href="../dev&pub/profileDevPub.php?idPublicadora=<?=$_SESSION["idPub"]?>">Acessar Minha Página</a>
+                <a class="sub-menu-link" href="../devPub/profileDevPub.php?idPublicadora=<?=$_SESSION["idPub"]?>">Acessar Minha Página</a>
                 <?php elseif ($_SESSION["user"] == "usuario" || $_SESSION["user"] == "admin"):?>
                 <a class="sub-menu-link" href="../user/profileUser.php?idUsuario=<?=$_SESSION["profile"]?>">Acessar Minha Conta</a>
                 <?php endif;
                 if($_SESSION["user"] != "anonimo"):?>
                 <a class="sub-menu-link" href="../user/favoritesGames.php">Lista de Desejos</a>
                 <a class="sub-menu-link" href="../store/cartGames.php">Carrinho</a>
-                <a class="sub-menu-link" href="../login&register/logOut.php">Sair da Conta</a>
-                <?php endif?>
-            </div>
+                <a class="sub-menu-link" href="../loginRegister/logOut.php">Sair da Conta</a>
+                </div>
         </div>
+                <?php endif?>
         <img src="<?=$fotoPerfil?>" alt="foto do perfil" class="menu-foto-perfil">
     </div>
     <!-- Menus de gerenciamento -->

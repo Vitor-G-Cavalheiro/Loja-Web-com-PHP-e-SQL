@@ -102,11 +102,18 @@ if(isset($_POST["site"])){
 }
 if(isset($_GET["delete"])){
     //Comando Jogos da Mesma Dev ou Pub
-    $comandoJogosDevPub = "SELECT * FROM jogospublicados WHERE $idColuna = $idDevPub";
+    $comandoJogosDevPub = "SELECT * FROM JogosPublicados WHERE $idColuna = $idDevPub";
     $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
     //Apagando Todos os Seus Jogos
     while($registroJogosDevPub = mysqli_fetch_assoc($resultadoJogosDevPub)){
         $idJogo = $registroJogosDevPub["idJogo"];
+
+        $selecionarFotoJogo = "SELECT * FROM FotosJogos WHERE idFotoJogo = $idJogo";
+        $selecionadoFotoJogo = mysqli_query($conexao, $selecionarFotoJogo);
+        while($resultadoSelecionadoFotoJogo = mysqli_fetch_assoc($selecionadoFotoJogo)){
+            unlink($resultadoSelecionadoFotoJogo["foto"]);
+        }
+        
         $comandoFotos = "DELETE FROM FotosJogos WHERE idJogo = $idJogo";
         $comandoPublicado = "DELETE FROM JogosPublicados WHERE idJogo = $idJogo";
 
@@ -141,6 +148,11 @@ if(isset($_GET["delete"])){
         $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
         $resultadoJogo = mysqli_query($conexao, $comandoJogo);
     }
+    $selecionarDevPub = "SELECT * FROM $tabela WHERE $idColuna = $idDevPub";
+    $selecionadoDevPub = mysqli_query($conexao, $selecionarDevPub);
+    $resultadoSelecionadoDevPub = mysqli_fetch_assoc($selecionadoDevPub);
+    unlink($resultadoSelecionadoDevPub["foto"]);
+
     $deleteJogoPublicado = "DELETE FROM JogosPublicados WHERE $idColuna = $idDevPub";
     $deleteSeguindo = "DELETE FROM Seguindo WHERE $idColuna = $idDevPub";
     /* FAZER VERIFICAÇÂO COLEÇÕES 
@@ -154,7 +166,7 @@ if(isset($_GET["delete"])){
     
     if($resultadoTabela){
         $_SESSION["mensagem"] = "Perfil Apagado com Sucesso";
-        Header("Location:../login&register/logOut.php");
+        Header("Location:../loginRegister/logOut.php");
         die;
     } else {
         $_SESSION["mensagem"] = "Falha ao Apagar Perfil";

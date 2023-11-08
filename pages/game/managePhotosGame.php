@@ -22,6 +22,10 @@ if(isset($_POST["idJogo"])){
     $idFotoJogo = $_GET["idFotoJogo"];
     $idJogo = $_GET["idJogo"];
     if($_GET["acao"] == "rem"){
+        $selecionarFotoJogo = "SELECT * FROM FotosJogos WHERE idFotoJogo = $idFotoJogo";
+        $selecionadoFotoJogo = mysqli_query($conexao, $selecionarFotoJogo);
+        $resultadoSelecionado = mysqli_fetch_assoc($selecionadoFotoJogo);
+        unlink($resultadoSelecionado["foto"]);
         $deleteFotoJogo = "DELETE FROM FotosJogos WHERE idFotoJogo = $idFotoJogo";
         if($resultadoDelete = mysqli_query($conexao, $deleteFotoJogo)){
             $_SESSION["mensagem"] = "Foto Apagada com Sucesso";

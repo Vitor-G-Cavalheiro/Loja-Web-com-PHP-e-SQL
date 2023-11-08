@@ -12,11 +12,11 @@ $resultadoJogo = mysqli_query($conexao, $comandoJogo);
 $registroJogo = mysqli_fetch_assoc($resultadoJogo);
 
 //Comando Fotos Slide
-$comandoFotos = "SELECT * FROM fotosjogos WHERE idJogo = $idJogo";
+$comandoFotos = "SELECT * FROM FotosJogos WHERE idJogo = $idJogo";
 $resultadoFotos = mysqli_query($conexao, $comandoFotos);
 
 //Comando Categorias do jogo
-$comandoCategoriasJogo = "SELECT * FROM categoriasjogos cj INNER JOIN Categorias c ON cj.idCategoria = c.idCategoria WHERE idJogo = $idJogo ORDER BY c.nome";
+$comandoCategoriasJogo = "SELECT * FROM CategoriasJogos cj INNER JOIN Categorias c ON cj.idCategoria = c.idCategoria WHERE idJogo = $idJogo ORDER BY c.nome";
 $resultadoCategoriasJogo = mysqli_query($conexao, $comandoCategoriasJogo);
 
 //Comando Jogos da Mesma Dev
@@ -114,8 +114,8 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
             <span><?=$registroJogo["descricao"]?></span>
             <!-- Desenvolvedora e Publicadora -->
             <div>
-                <a href="../dev&pub/profileDevPub.php?idDesenvolvedora=<?=$registroJogo["idDesenvolvedora"]?>"><?=$registroJogo["nomeDev"]?></a >
-                <a href="../dev&pub/profileDevPub.php?idPublicadora=<?=$registroJogo["idPublicadora"]?>"><?=$registroJogo["nomePub"]?></a >
+                <a href="../devPub/profileDevPub.php?idDesenvolvedora=<?=$registroJogo["idDesenvolvedora"]?>"><?=$registroJogo["nomeDev"]?></a >
+                <a href="../devPub/profileDevPub.php?idPublicadora=<?=$registroJogo["idPublicadora"]?>"><?=$registroJogo["nomePub"]?></a >
             </div>
         </div>
         <!-- Categorias -->

@@ -9,6 +9,10 @@ if($_GET["acao"] == "mais"){
 } elseif($_GET["acao"] == "menos"){
     $final = $inicio;
     $inicio = $inicio - 16;
+    if($inicio < 0){
+        $inicio = 0;
+        $final = $inicio + 16;
+    }
 }
 
 if ($_GET["tipo"] == "Usuarios"){
@@ -68,8 +72,8 @@ $resultadoProfiles = mysqli_query($conexao, $comando);
                         </div>
                     </a>
                 <?php endwhile;?>
-                <a href="./listGames.php?inicio=<?=$inicio?>&acao=menos&tipo=<?=$tipo?>">Voltar Página</a> 
-                <a href="./listGames.php?inicio=<?=$final?>&acao=mais&tipo=<?=$tipo?>">Próxima Página</a>
+                <a href="./listProfiles.php?inicio=<?=$inicio?>&acao=menos&tipo=<?=$tipo?>">Voltar Página</a> 
+                <a href="./listProfiles.php?inicio=<?=$final?>&acao=mais&tipo=<?=$tipo?>">Próxima Página</a>
             </div>
         </div>
     </session>

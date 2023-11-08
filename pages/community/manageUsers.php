@@ -51,12 +51,12 @@ $resultadoPublicadoras = mysqli_query($conexao, $comandoPublicadoras);
         <div>
             <span>Desenvolvedoras: </span>
             <?php while($registroDesenvolvedoras = mysqli_fetch_assoc($resultadoDesenvolvedoras)):?>
-                <a href="../dev&pub/profileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">
+                <a href="../devPub/profileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">
                     <div>
                         <img src="<?=$registroDesenvolvedoras["foto"]?>">
                         <span><?=$registroDesenvolvedoras["nomeDev"]?></span>
                         <?php if($_SESSION["user"] == "admin"):?>
-                        <a href="../dev&pub/editProfileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">Editar Página</a>
+                        <a href="../devPub/editProfileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">Editar Página</a>
                         <a href="./editProfileDevPubBD.php?delete=sim&idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">Deletar Página</a>
                         <?php endif;?>
                     </div>
@@ -68,12 +68,12 @@ $resultadoPublicadoras = mysqli_query($conexao, $comandoPublicadoras);
         <div>
             <span>Publicadoras: </span>
             <?php while($registroPublicadoras = mysqli_fetch_assoc($resultadoPublicadoras)):?>
-                <a href="../dev&pub/profileDevPub.php?idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">
+                <a href="../devPub/profileDevPub.php?idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">
                     <div>
                         <img src="<?=$registroPublicadoras["foto"]?>">
                         <span><?=$registroPublicadoras["nomePub"]?></span>
                         <?php if($_SESSION["user"] == "admin"):?>
-                        <a href="../dev&pub/editProfileDevPub.php?idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">Editar Página</a>
+                        <a href="../devPub/editProfileDevPub.php?idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">Editar Página</a>
                         <a href="./editProfileDevPubBD.php?delete=sim&idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">Deletar Página</a>
                         <?php endif;?>
                     </div>

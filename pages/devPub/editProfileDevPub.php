@@ -32,7 +32,7 @@ $registro = mysqli_fetch_assoc($resultado);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="" href="./imgs/StreetPlayLogo.jpeg">
+    <link rel="icon" type="" href="../../imgs/StreetPlayLogo.jpeg">
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Editar Página de <?=$tabela?></title>
 </head>

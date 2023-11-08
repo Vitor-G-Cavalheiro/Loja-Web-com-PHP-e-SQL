@@ -32,7 +32,7 @@ if (isset($_GET["idCategoria"])){
 $resultadoJogos = mysqli_query($conexao, $comando);
 
 //Categorias
-$comandoCategorias = "SELECT * FROM categorias ORDER BY nome LIMIT 32";
+$comandoCategorias = "SELECT * FROM Categorias ORDER BY nome LIMIT 32";
 $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
 
 ?>

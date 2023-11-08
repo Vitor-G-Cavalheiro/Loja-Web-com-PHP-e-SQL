@@ -5,6 +5,13 @@ $conexao = require('../functions/connection.php');
 
 $idJogo = $_GET["idJogo"];
 
+$selecionarFotoJogo = "SELECT * FROM FotosJogos WHERE idJogo = $idJogo";
+$selecionadoFotoJogo = mysqli_query($conexao, $selecionarFotoJogo);
+while($resultadoSelecionadoFotoJogo = mysqli_fetch_assoc($selecionadoFotoJogo)){
+    unlink($resultadoSelecionadoFotoJogo["foto"]);
+}
+
+
 $comandoFotos = "DELETE FROM FotosJogos WHERE idJogo = $idJogo";
 $comandoPublicado = "DELETE FROM JogosPublicados WHERE idJogo = $idJogo";
 

@@ -1,0 +1,4 @@
+host: localhost
+username: hqybqdje_Streetplay
+database: hqybqdje_Streetplay
+password: Ro0Ni2005*

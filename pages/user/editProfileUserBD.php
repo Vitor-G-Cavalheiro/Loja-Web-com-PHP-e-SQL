@@ -51,6 +51,11 @@ if(isset($_POST["senha"])){
     $resultado = mysqli_query($conexao, $atualizarSenha);
 }
 if(isset($_GET["delete"])){
+    $selecionarUsuario = "SELECT * FROM Usuarios WHERE idUsuario = $idUsuario";
+    $selecionadoUsuario = mysqli_query($conexao, $selecionarUsuario);
+    $resultadoSelecionadoUsuario = mysqli_fetch_assoc($selecionadoUsuario);
+    unlink($resultadoSelecionadoUsuario["foto"]);
+
     $deleteBiblioteca = "DELETE FROM Biblioteca WHERE idUsuario = $idUsuario";
     $deleteCarrinho = "DELETE FROM Carrinho WHERE idUsuario = $idUsuario";
     $deleteColecoes = "DELETE FROM Colecoes WHERE idUsuario = $idUsuario";
@@ -67,7 +72,7 @@ if(isset($_GET["delete"])){
     
     if($resultadoUsuario){
         $_SESSION["mensagem"] = "Perfil Apagado com Sucesso";
-        Header("Location:../login&register/logOut.php");
+        Header("Location:../loginRegister/logOut.php");
         die;
     } else {
         $_SESSION["mensagem"] = "Falha ao Apagar Perfil";
