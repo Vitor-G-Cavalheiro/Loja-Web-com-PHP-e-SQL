@@ -31,15 +31,24 @@ function divEditActive (e) {
 let subMenuPerfil = document.querySelector(".sub-menu-perfil");
 let subMenuNome = document.querySelector(".sub-menu-nome");
 let opened = 0;
+let ativo = "cor";
+let desativo = "cor";
 
-function subMenuBar () {
+function subMenuBar (tema) {
+    if(tema == "light"){
+        ativo = "var(--black)";
+        desativo = "var(--black-gray)";
+    } else {
+        ativo = "var(--white)";
+        desativo = "var(--white-gray)";
+    }
     if (opened == 0){
         subMenuPerfil.style.display = "flex";
-        subMenuNome.style.color = "var(--white)";
+        subMenuNome.style.color = ativo;
         opened = 1;
     } else if (opened == 1){
         subMenuPerfil.style.display = "none";
-        subMenuNome.style.color = "var(--white-gray)";
+        subMenuNome.style.color = desativo;
         opened = 0;
     }
 }

@@ -2,6 +2,27 @@
     display: flex;
 }
 
+/* Menu Loja */
+.menu-store {
+    display: flex;
+    width: 50vw;
+    margin: 7px auto;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    background-color: red;
+}
+
+.menu-store-link {
+    font-family: 'IBM Plex Sans', sans-serif;
+    padding: 5px;
+}
+
+.search-logo {
+    height: 1rem;
+}
+
+/* Corpo da Página Loja*/
 .body-category {
     width: 15%;
     display: flex;

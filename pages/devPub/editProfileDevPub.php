@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 $messagem = require('../functions/message.php');
 $userVerification = require('../functions/userVerification.php');
 

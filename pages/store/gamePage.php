@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 $messagem = require('../functions/message.php');
 
 $idJogo = $_GET["idJogo"];
@@ -57,6 +58,8 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
 <body>
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
+    <!-- Sub Menu da Loja -->
+    <?php require('../components/headerStore.php')?>
     <!-- Menus de gerenciamento -->
     <session>
         <!-- Título -->

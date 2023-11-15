@@ -2,32 +2,73 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$contadorLimite = require('../functions/count.php');
+$tema = require('../functions/themeVerification.php');
 
-$inicio = $_GET["inicio"];
-if($_GET["acao"] == "mais"){
-    $final = $inicio + 16;
-} elseif($_GET["acao"] == "menos"){
-    $final = $inicio;
-    $inicio = $inicio - 16;
+if(isset($_GET["inicio"])){
+    $inicio = $_GET["inicio"];
+} else {
+    $inicio = 0;
 }
 
-if (isset($_GET["idCategoria"])){
+if(isset($_GET["acao"])){
+    $acao = $_GET["acao"];
+} else {
+    $acao = "mais";
+}
+if($acao == "mais"){
+    $finalPagina = $inicio + 16;
+} elseif($acao == "menos"){
+    $finalPagina = $inicio;
+    $inicio = $inicio - 16;
+    if($inicio < 0){
+        $inicio = 0;
+        $finalPagina = $inicio + 16;
+    }
+}
+
+if (isset($_POST["pesquisa"]) || isset($_GET["pesquisa"])){
+    if(isset($_POST["pesquisa"])){
+        $idModificador = $_POST["pesquisa"];
+    } elseif (isset($_GET["pesquisa"])){
+        $idModificador = $_GET["pesquisa"];
+    }
+    $modificador = "pesquisa";
+    $limite = contarLimite($modificador, $idModificador);
+    $final = verificarLimiteInicio($inicio, $limite, "final");
+    $inicio = verificarLimiteInicio($inicio, $limite, "inicio");
+    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM Jogos j INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo WHERE j.nome LIKE '%$idModificador%' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final ";
+}   elseif (isset($_GET["idCategoria"])){
     $idModificador = $_GET["idCategoria"];
     $modificador = "idCategoria";
+    $limite = contarLimite($modificador, $idModificador);
+    $final = verificarLimiteInicio($inicio, $limite, "final");
+    $inicio = verificarLimiteInicio($inicio, $limite, "inicio");
     $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM Jogos j INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo INNER JOIN CategoriasJogos cj ON j.idJogo = cj.idJogo WHERE cj.idCategoria = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
 }elseif (isset($_GET["idDesenvolvedora"])){
     $idModificador = $_GET["idDesenvolvedora"];
     $modificador = "idDesenvolvedora";
+    $limite = contarLimite($modificador, $idModificador);
+    $final = verificarLimiteInicio($inicio, $limite, "final");
+    $inicio = verificarLimiteInicio($inicio, $limite, "inicio");
     $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo INNER JOIN Desenvolvedoras d ON jp.idDesenvolvedora = d.idDesenvolvedora WHERE jp.idDesenvolvedora = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
 }elseif (isset($_GET["idPublicadora"])){
     $idModificador = $_GET["idPublicadora"];
     $modificador = "idPublicadora";
+    $limite = contarLimite($modificador, $idModificador);
+    $final = verificarLimiteInicio($inicio, $limite, "final");
+    $inicio = verificarLimiteInicio($inicio, $limite, "inicio");
     $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo INNER JOIN Publicadoras p ON jp.idPublicadora = p.idPublicadora WHERE jp.idPublicadora = '$idModificador' AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
 }elseif (isset($_GET["modificador"])) {
-    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM Jogos j INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
     $idModificador = "nao";
     $modificador = "modificador";
+    $limite = contarLimite($modificador, $idModificador);
+    $final = verificarLimiteInicio($inicio, $limite, "final");
+    $inicio = verificarLimiteInicio($inicio, $limite, "inicio");
+    $comando = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo, fj.ordem FROM Jogos j INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo AND fj.ordem = 1 ORDER BY j.idJogo DESC LIMIT $inicio, $final";
 }
+
+$finalPagina = correcaoFinalPagina($finalPagina, $inicio);
 
 $resultadoJogos = mysqli_query($conexao, $comando);
 
@@ -53,11 +94,14 @@ $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
 <body>
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
+    <!-- Sub Menu da Loja -->
+    <?php require('../components/headerStore.php')?>
     <session>
         <!-- Corpo da Página -->
         <div class="body-page">
             <div class="body-category">
                 <span>Categorias</span>
+                <a href="./listGames.php?inicio=0&acao=mais&modificador=nao">Todas as Categorias</a>
                 <?php while($registroCategorias = mysqli_fetch_assoc($resultadoCategorias)):?>
                     <a href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategorias["idCategoria"]?>"><?=$registroCategorias["nome"]?></a>
                 <?php endwhile; ?>
@@ -74,7 +118,7 @@ $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
                     </a>
                 <?php endwhile;?>
                 <a href="./listGames.php?inicio=<?=$inicio?>&acao=menos&<?=$modificador?>=<?=$idModificador?>">Voltar Página</a> 
-                <a href="./listGames.php?inicio=<?=$final?>&acao=mais&<?=$modificador?>=<?=$idModificador?>">Próxima Página</a>
+                <a href="./listGames.php?inicio=<?=$finalPagina?>&acao=mais&<?=$modificador?>=<?=$idModificador?>">Próxima Página</a>
             </div>
         </div>
     </session>

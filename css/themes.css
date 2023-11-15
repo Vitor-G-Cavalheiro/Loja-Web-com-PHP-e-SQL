@@ -1,0 +1,173 @@
+/* Bodys */
+body,
+body.classic {
+    background: var(--blue-dark);
+    background: linear-gradient(0deg, var(--blue-dark) 0%, var(--blue-light) 110%);
+}
+
+body.dark {
+    background-color: var(--black);
+    background: linear-gradient(0deg, var(--black) 0%, var(--black-gray) 110%);
+}
+
+body.light {
+    background-color: var(--white);
+    background: linear-gradient(0deg, var(--white-back) 0%, var(--white-gray) 110%);
+}
+
+/* Backgrounds */
+.background-classic {
+    background-color: var(--blue-light);
+}
+
+.background-dark {
+    background-color: var(--black-back);
+}
+
+.background-light {
+    background-color: var(--white-back);
+}
+
+/* Logo */
+.menu-bar-logo.dark {
+    filter: brightness(1.2);
+}
+
+/* Menu Bar Link */
+.link-menu-classic,
+.link-menu-dark {
+    color: var(--white-gray);
+}
+
+.link-menu-light {
+    color: var(--black-gray);
+}
+
+.link-menu-classic::after,
+.link-menu-dark::after {
+    background-color: var(--white);
+}
+
+.link-menu-light::after {
+    background-color: var(--black);
+}
+
+.link-menu-classic:hover,
+.link-menu-dark:hover {
+    color: var(--white);
+}
+
+.link-menu-light:hover {
+    color: var(--black);
+}
+
+.link-menu-classic:hover::after,
+.link-menu-dark:hover::after {
+    color: var(--white);
+}
+
+.link-menu-light:hover::after {
+    color: var(--black);
+}
+
+.link-menu-classic.active {
+    color: var(--green-dark);
+    text-decoration: underline var(--green-dark);
+}
+
+.link-menu-dark.active {
+    color: var(--yellow-dark);
+    text-decoration: underline var(--yellow-dark);
+}
+
+.link-menu-light.active {
+    color: var(--blue-neon);
+    text-decoration: underline var(--blue-neon);
+}
+
+/* Bordar Menu Foto Perfil */
+.menu-foto-perfil.classic {
+    border: 2px var(--blue-dark) solid;
+}
+
+.menu-foto-perfil.dark {
+    border: 2px var(--black) solid;
+}
+
+.menu-foto-perfil.light {
+    border: 2px var(--white) solid;
+}
+
+/* Sub Menu Perfil*/
+.sub-menu-perfil.classic {
+    background-color: var(--blue-dark);
+    box-shadow: 0px 2px 5px var(--black);
+}
+
+.sub-menu-perfil.dark {
+    background-color: var(--black);
+    box-shadow: 0px 2px 5px var(--white);
+}
+
+.sub-menu-perfil.light {
+    background-color: var(--white-gray);
+    box-shadow: 0px 2px 5px var(--black);
+}
+
+.sub-menu-link.classic {
+    color: var(--white)
+}
+
+.sub-menu-link.dark {
+    color: var(--white-gray);
+}
+
+.sub-menu-link.light {
+    color: var(--black);
+}
+
+.sub-menu-nome.classic,
+.sub-menu-nome.dark {
+    color: var(--white-gray);
+}
+
+.sub-menu-nome.light {
+    color: var(--black-gray);
+}
+
+.sub-menu-nome:hover.classic,
+.sub-menu-nome:hover.dark {
+    color: var(--white);
+}
+
+.sub-menu-nome:hover.light {
+    color: var(--black);
+}
+
+.sub-menu-link:hover.classic {
+    color: var(--black);
+    background-color: var(--blue-neon);
+}
+
+.sub-menu-link:hover.dark {
+    color: var(--white);
+    background-color: var(--black-gray);
+}
+
+.sub-menu-link:hover.light {
+    color: var(--black);
+    background-color: var(--white);
+}
+
+/* Menu Gerenciamento */
+.menu-manager.classic {
+    background-color: var(--yellow-dark);
+}
+
+.menu-manager.dark {
+    background-color: var(--orange-dark);
+}
+
+.menu-manager.light {
+    background-color: var(--blue-light);
+}

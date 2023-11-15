@@ -7,6 +7,7 @@ senha VARCHAR(8) NOT NULL,
 email VARCHAR(255) NOT NULL,
 foto BLOB NULL,
 descricao VARCHAR(255) NULL,
+tema VARCHAR(100) NULL,
 administrador BOOLEAN NOT NULL,
 PRIMARY KEY (idUsuario)
 );
@@ -25,6 +26,7 @@ foto BLOB NULL,
 youtube VARCHAR(255) NULL,
 twitter VARCHAR(255) NULL,
 twitch VARCHAR(255) NULL,
+tema VARCHAR(100) NULL,
 site VARCHAR(255) NULL,
 PRIMARY KEY (idDesenvolvedora)
 );
@@ -38,6 +40,7 @@ foto BLOB NULL,
 youtube VARCHAR(255) NULL,
 twitter VARCHAR(255) NULL,
 twitch VARCHAR(255) NULL,
+tema VARCHAR(100) NULL,
 site VARCHAR(255) NULL,
 PRIMARY KEY (idPublicadora)
 );
@@ -76,43 +79,46 @@ CONSTRAINT fk_usuario_carrinho
 FOREIGN KEY (idUsuario)
 REFERENCES StreetPlay.Usuarios (idUsuario)
 );
-CREATE TABLE StreetPlay.Colecoes (
+CREATE TABLE Colecoes (
 idColecao INT(11) NOT NULL AUTO_INCREMENT,
-nome VARCHAR(150) NOT NULL,
+nome VARCHAR(255) NOT NULL,
+descricao VARCHAR(500) NULL,
+preco INT(5.2) NULL,
+desconto INT(3) NULL,
 privada BOOLEAN NOT NULL,
-idUsuario INT(11) NULL,
+PRIMARY KEY (idColecao)
+);
+CREATE TABLE ColecoesJogos (
+idColecaoJogo INT(11) NOT NULL AUTO_INCREMENT,
 idDesenvolvedora INT(11) NULL,
 idPublicadora INT(11) NULL,
-idJogoPublicado INT(11) NULL,
-PRIMARY KEY (idColecao),
-CONSTRAINT fk_usuario_colecao
-FOREIGN KEY (idUsuario)
-REFERENCES StreetPlay.Usuarios (idUsuario),
-CONSTRAINT fk_desenvolvedora_colecao
+idJogo INT(11) NOT NULL,
+idUsuario INT(11) NULL,
+PRIMARY KEY (idColecaoJogo),
+CONSTRAINT fk_desenvolvedora_colecaojogo
 FOREIGN KEY (idDesenvolvedora)
 REFERENCES StreetPlay.Desenvolvedoras (idDesenvolvedora),
-CONSTRAINT fk_publicadora_colecao
+CONSTRAINT fk_publicadora_colecaojogo
 FOREIGN KEY (idPublicadora)
 REFERENCES StreetPlay.Publicadoras (idPublicadora),
-CONSTRAINT fk_jogopublicado_colecao
-FOREIGN KEY (idJogoPublicado)
-REFERENCES StreetPlay.JogosPublicados (idJogoPublicado)
+CONSTRAINT fk_jogo_colecaojogo
+FOREIGN KEY (idJogo)
+REFERENCES StreetPlay.Jogos (idJogo),
+CONSTRAINT fk_usuario_colecaojogo
+FOREIGN KEY (idUsuario)
+REFERENCES StreetPlay.Usuarios (idUsuario)
 );
 CREATE TABLE StreetPlay.Biblioteca (
 idBiblioteca INT(11) NOT NULL AUTO_INCREMENT,
 idUsuario INT(11) NOT NULL,
 idJogoPublicado INT(11) NULL,
-idColecao INT(11) NULL,
 PRIMARY KEY (idBiblioteca),
 CONSTRAINT fk_usuario_biblioteca
 FOREIGN KEY (idUsuario)
 REFERENCES StreetPlay.Usuarios (idUsuario),
 CONSTRAINT fk_jogopublicado_biblioteca
 FOREIGN KEY (idJogoPublicado)
-REFERENCES StreetPlay.JogosPublicados (idJogoPublicado),
-CONSTRAINT fk_colecao_biblioteca
-FOREIGN KEY (idColecao)
-REFERENCES StreetPlay.Colecoes (idColecao)
+REFERENCES StreetPlay.JogosPublicados (idJogoPublicado)
 );
 CREATE TABLE StreetPlay.CategoriasJogos (
 idCategoriaJogo INT(11) NOT NULL AUTO_INCREMENT,

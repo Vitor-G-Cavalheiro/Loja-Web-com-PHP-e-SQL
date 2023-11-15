@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 $message = require('../functions/message.php');
 
 $comandoUsuarios = "SELECT * FROM Usuarios LIMIT 12";

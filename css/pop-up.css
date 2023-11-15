@@ -15,8 +15,19 @@
     gap: 5px;
 }
 
+.pop-up-message.classic {
+    background-color: var(--blue-dark);
+}
+
+.pop-up-message.dark {
+    background-color: var(--black);
+}
+
+.pop-up-message.light {
+    background-color: var(--blue-dark);
+}
+
 .close-pop {
-    
     background-color: transparent;
     border-style: none;
 }

@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 $mensagem = require('../functions/message.php');
 
 if(isset($_SESSION["profile"])){

@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 $messagem = require('../functions/message.php');
 
 //Jogos Aleatórios para os Slides
@@ -31,9 +32,11 @@ $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
     <link rel="stylesheet" href="../../css/main.css">
     <title>Bem-vindo(a) ao StreetPlay</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
+    <!-- Sub Menu da Loja -->
+    <?php require('../components/headerStore.php')?>
     <session>
         <!-- Slide com Swiper JS -->
         <div class="back-swiper">

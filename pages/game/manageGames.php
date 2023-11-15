@@ -3,6 +3,7 @@
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
 $verificacao = require('../functions/userVerification.php');
+$tema = require('../functions/themeVerification.php');
 $message = require('../functions/message.php');
 
 $comandoJogos = "SELECT * FROM Jogos";

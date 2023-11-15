@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 
 $inicio = $_GET["inicio"];
 if($_GET["acao"] == "mais"){

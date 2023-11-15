@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 
 if($_SESSION["user"] != "admin"){
     $_SESSION["mensagem"] = "Acesso negado";

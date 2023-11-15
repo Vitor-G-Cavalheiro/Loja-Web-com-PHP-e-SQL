@@ -1,6 +1,5 @@
 /* Menu Bar */
 .menu-bar {
-    background-color: var(--blue-light);
     padding: 2rem;
     display: flex;
     gap: 1rem;
@@ -8,8 +7,7 @@
     align-items: center;   
 }
 
-.menu-bar-link {
-    color: var(--white-gray);
+.menu-bar-link {  
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 23px;
     font-weight: 600;
@@ -25,23 +23,12 @@
     height: 2px;
     bottom: -2px;
     left: 0;
-    background-color: var(--white);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
 
-.menu-bar-link:hover {
-    color: var(--white);
-}
-
 .menu-bar-link:hover::after {
     transform: scaleX(1);
-    color: var(--white);
-}
-
-.menu-bar-link.active {
-    color: var(--green-dark);
-    text-decoration: underline var(--green-dark);
 }
 
 .menu-bar-link.active::after {
@@ -56,7 +43,6 @@
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    border: 2px var(--blue-dark) solid;
 }
 
 /* Sub Menu Perfil*/
@@ -65,40 +51,26 @@
     flex-direction: column;
     position: absolute;
     width: 11vw;
-    height: 12vh;
-    background-color: var(--blue-dark);
+    height: 9vh;
     justify-content: space-between;
-    box-shadow: 0px 2px 5px var(--black);
     z-index: 2;
 }
 
 .sub-menu-nome {
     font-size: 20px;
-    color: var(--white-gray);
     cursor: pointer;
     user-select: none;
 }
 
-.sub-menu-nome:hover {
-    color: var(--white);
-}
-
 .sub-menu-link {
     height: 100%;
-    color: var(--white);
     display: flex;
     align-items: center;
     padding: 5px;
 }
 
-.sub-menu-link:hover {
-    color: var(--black);
-    background-color: var(--blue-neon);
-}
-
 /* Menu de Gerenciamento */
 .menu-manager {
-    background-color: var(--yellow-dark);
     height: 30px;
     display: flex;
     justify-content: center;
@@ -107,12 +79,7 @@
 }
 
 .menu-manager > a {
-    color: var(--white-gray);
     font-size: 18px;
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 600;
-}
-
-.menu-manager > a:hover {
-    color: var(--white);
 }

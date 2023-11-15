@@ -5,16 +5,25 @@
 @import url("./slider.css");
 @import url("./swiper.css");
 @import url("./store.css");
+@import url("./themes.css");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap");
 
 :root {
+    /* Classic */
     --blue-dark: #4C5D73;
     --blue-light: #8AABBF;
     --blue-neon: #009fff;
     --green-dark: #3D4026;
+    --green-neon: #2ebb1d;
     --yellow-dark: #BF9E3B;
     --orange-dark: #BF9039;
+    /* Dark */
+    --black-back: #292929;
+    /* Light */
+    --white-back: #f1f1f1;
+    /* All */
     --white: #fff;
     --white-gray: #e1e1e1;
     --black: #000;
+    --black-gray: #3b3b3b;
 }

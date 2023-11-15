@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 $message = require('../functions/message.php');
 
 $idUsuario = $_SESSION["profile"];
@@ -24,7 +25,10 @@ $resultado = mysqli_query($conexao, $comando);
     <title>StreetPlay :: Carrinho</title>
 </head>
 <body>
+    <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
+    <!-- Sub Menu da Loja -->
+    <?php require('../components/headerStore.php')?>
     <session>
         <?php while($registro = mysqli_fetch_assoc($resultado)):?>
         <a href="../store/gamePage.php?idJogo=<?=$registro["idJogo"]?>">

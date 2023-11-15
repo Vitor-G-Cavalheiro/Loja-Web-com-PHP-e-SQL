@@ -50,6 +50,11 @@ if(isset($_POST["senha"])){
     $atualizarSenha = "UPDATE Usuarios SET senha = '$senha' WHERE idUsuario = $idUsuario";
     $resultado = mysqli_query($conexao, $atualizarSenha);
 }
+if(isset($_POST["tema"])){
+    $tema = $_POST["tema"];
+    $comandoTema = "UPDATE Usuarios SET tema = '$tema'";
+    $resultado = mysqli_query($conexao, $comandoTema);
+}
 if(isset($_GET["delete"])){
     $selecionarUsuario = "SELECT * FROM Usuarios WHERE idUsuario = $idUsuario";
     $selecionadoUsuario = mysqli_query($conexao, $selecionarUsuario);

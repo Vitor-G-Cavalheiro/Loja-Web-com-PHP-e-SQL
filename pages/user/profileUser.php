@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 
 $idUsuario = $_GET["idUsuario"];
 $comando = "SELECT * FROM Usuarios WHERE idUsuario = $idUsuario";

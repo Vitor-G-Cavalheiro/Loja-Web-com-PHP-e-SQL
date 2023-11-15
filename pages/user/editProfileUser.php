@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = require('../functions/themeVerification.php');
 $messagem = require('../functions/message.php');
 
 $idUsuario = $_GET["idUsuario"];
@@ -74,6 +75,16 @@ $registro = mysqli_fetch_assoc($resultado);
         <div class="div-edit-user invisible">
             <div>
                 <span>Cor Tema:</span>
+                <form action="./editProfileUserBD.php" method="post">
+                    <input type="text" name="idUsuario" value="<?=$idUsuario?>" hidden>
+                    <label for="classic">Clássico: </label>
+                    <input type="radio" name="tema" value="classic">
+                    <label for="dark">Escuro: </label>
+                    <input type="radio" name="tema" value="dark">
+                    <label for="light">Claro: </label>
+                    <input type="radio" name="tema" value="light">
+                    <button type="submit">Salvar Alterações</button>
+                </form>
             </div>
         </div>
         <!-- Excluir Conta -->
