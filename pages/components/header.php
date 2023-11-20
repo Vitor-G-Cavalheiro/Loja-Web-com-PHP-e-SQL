@@ -44,7 +44,7 @@ if(isset($comandoPerfil)){
         <a class="menu-bar-link link-menu-<?=$tema?> <?=$linkAtivo[3]?>" href="?ativo=3">BIBLIOTECA</a>
         <!-- Sub Menu do Perfil -->
         <?php if($_SESSION["user"] == "anonimo"):?>
-                <a href="../loginRegister/login.php">Entrar na Conta</a>
+                <a class="sub-menu-nome <?=$tema?>"href="../loginRegister/login.php">Entrar na Conta</a>
         <?php elseif($_SESSION["user"] != "anonimo"):?>
         <div>
             <span class="sub-menu-nome <?=$tema?>" onclick="subMenuBar('<?=$tema?>')"><?=$registroPerfil["$nomePerfil"]?></span>

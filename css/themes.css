@@ -2,17 +2,95 @@
 body,
 body.classic {
     background: var(--blue-dark);
-    background: linear-gradient(0deg, var(--blue-dark) 0%, var(--blue-light) 110%);
+    background: linear-gradient(0deg, var(--blue-dark) 0%, var(--blue-light) 105%);
 }
 
 body.dark {
     background-color: var(--black);
-    background: linear-gradient(0deg, var(--black) 0%, var(--black-gray) 110%);
+    background: linear-gradient(0deg, var(--black) 0%, var(--black-gray) 105%);
 }
 
 body.light {
     background-color: var(--white);
-    background: linear-gradient(0deg, var(--white-back) 0%, var(--white-gray) 110%);
+    background: linear-gradient(0deg, var(--white-back) 0%, var(--white-gray) 105%);
+}
+
+/* Cores Separadas Por Urgência */
+.text-color-classic,
+.text-color-dark {
+    color: var(--white);
+}
+
+.text-color-light {
+    color: var(--black)
+}
+
+.text-emphasys-classic {
+    color: var(--yellow-dark);
+}
+
+.text-emphasys-dark {
+    color: var(--orange-dark);
+}
+
+.text-emphasys-light {
+    color: var(--blue-light);
+}
+
+.back-emphasys-classic {
+    background-color: var(--blue-light);
+}
+
+.back-emphasys-dark {
+    background-color: var(--black-back);
+}
+
+.back-emphasys-light {
+    background-color: var(--white);
+}
+
+.back-classic {
+    background-color: var(--blue-dark);
+}
+
+.back-dark {
+    background-color: var(--black);
+}
+
+.back-light {
+    background-color: var(--white);
+}
+
+.gradient-classic {
+    background: linear-gradient(0deg, var(--blue-dark) 0%, var(--blue-light) 105%);
+}
+
+.gradient-dark {
+    background: linear-gradient(0deg, var(--black) 0%, var(--black-gray) 105%);
+}
+
+.gradient-light {
+    background: linear-gradient(0deg, var(--white-back) 0%, var(--white-gray) 105%);
+}
+
+.hover-text-classic,
+.hover-text-dark {
+    color: var(--white);
+    filter: opacity(0.6);
+}
+
+.hover-text-classic:hover,
+.hover-text-dark:hover {
+   filter: opacity(1);
+}
+
+.hover-text-light {
+    color: var(--black);
+    filter: opacity(0.6);
+}
+
+.hover-text-light:hover {
+    filter: opacity(1);
 }
 
 /* Backgrounds */
@@ -26,7 +104,7 @@ body.light {
 
 .background-light {
     background-color: var(--white-back);
-}
+} 
 
 /* Logo */
 .menu-bar-logo.dark {
@@ -170,4 +248,28 @@ body.light {
 
 .menu-manager.light {
     background-color: var(--blue-light);
+}
+
+/* Fundo Pesquisa */
+.back-search-classic {
+    background-color: var(--blue-neon);
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.back-search-light {
+    cursor: pointer;
+    outline: 1rem;
+}
+
+/* Página do jogo*/
+.favorite-game > a.text-color-classic:hover,
+.favorite-game > a.text-color-light:hover {
+    background-color: var(--blue-neon);
+    color: var(--black);
+}
+
+.favorite-game > a.text-color-dark:hover {
+    background-color: var(--orange-dark);
+    color: var(--black);
 }

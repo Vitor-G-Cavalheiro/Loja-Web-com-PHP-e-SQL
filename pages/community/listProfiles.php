@@ -47,7 +47,7 @@ $resultadoProfiles = mysqli_query($conexao, $comando);
     <link rel="stylesheet" href="../../css/main.css">
     <title>Bem-vindo(a) ao StreetPlay</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
     <session>

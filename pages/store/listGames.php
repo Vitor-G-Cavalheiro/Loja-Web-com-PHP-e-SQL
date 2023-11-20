@@ -91,7 +91,7 @@ $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
     <link rel="stylesheet" href="../../css/main.css">
     <title>Bem-vindo(a) ao StreetPlay</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
     <!-- Sub Menu da Loja -->
@@ -100,25 +100,25 @@ $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
         <!-- Corpo da Página -->
         <div class="body-page">
             <div class="body-category">
-                <span>Categorias</span>
-                <a href="./listGames.php?inicio=0&acao=mais&modificador=nao">Todas as Categorias</a>
+                <span class="text-color-<?=$tema?>">CATEGORIAS</span>
+                <a class="hover-text-<?=$tema?>" href="./listGames.php?inicio=0&acao=mais&modificador=nao">Todas as Categorias</a>
                 <?php while($registroCategorias = mysqli_fetch_assoc($resultadoCategorias)):?>
-                    <a href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategorias["idCategoria"]?>"><?=$registroCategorias["nome"]?></a>
+                    <a class="hover-text-<?=$tema?>" href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategorias["idCategoria"]?>"><?=$registroCategorias["nome"]?></a>
                 <?php endwhile; ?>
             </div>
             <div class="body-games">
                 <?php while($registroJogos = mysqli_fetch_assoc($resultadoJogos)):?>
-                    <a class="card-game" href="./gamePage.php?idJogo=<?=$registroJogos["idJogo"]?>">
+                    <a class="card-game back-emphasys-<?=$tema?>" href="./gamePage.php?idJogo=<?=$registroJogos["idJogo"]?>">
                         <img class="card-game-img" src="<?=$registroJogos["foto"]?>">
                         <div class="card-game-content">
-                            <span class="card-game-text"><?=$registroJogos["nome"]?></span>
-                            <span class="card-game-text"><?=$registroJogos["descricao"]?></span>
-                            <span class="card-game-price"><?=$registroJogos["preco"]?></span>
+                            <span class="card-game-text text-color-<?=$tema?>"><?=$registroJogos["nome"]?></span>
+                            <span class="card-game-text text-color-<?=$tema?>"><?=$registroJogos["descricao"]?></span>
+                            <span class="card-game-price text-color-<?=$tema?>"><?=$registroJogos["preco"]?></span>
                         </div>
                     </a>
                 <?php endwhile;?>
-                <a href="./listGames.php?inicio=<?=$inicio?>&acao=menos&<?=$modificador?>=<?=$idModificador?>">Voltar Página</a> 
-                <a href="./listGames.php?inicio=<?=$finalPagina?>&acao=mais&<?=$modificador?>=<?=$idModificador?>">Próxima Página</a>
+                <a class="link-pages back-emphasys-<?=$tema?> text-color-<?=$tema?>" href="./listGames.php?inicio=<?=$inicio?>&acao=menos&<?=$modificador?>=<?=$idModificador?>">Voltar Página</a> 
+                <a class="link-pages back-emphasys-<?=$tema?> text-color-<?=$tema?>" href="./listGames.php?inicio=<?=$finalPagina?>&acao=mais&<?=$modificador?>=<?=$idModificador?>">Próxima Página</a>
             </div>
         </div>
     </session>

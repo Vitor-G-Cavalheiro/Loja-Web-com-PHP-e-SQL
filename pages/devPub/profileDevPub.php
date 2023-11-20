@@ -59,7 +59,7 @@ $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Página de <?=$registro["$nome"]?></title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
     <session>
         <div>

@@ -24,7 +24,7 @@ $resultado = mysqli_query($conexao, $comando);
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Carrinho</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
     <!-- Sub Menu da Loja -->

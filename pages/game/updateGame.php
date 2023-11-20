@@ -43,7 +43,7 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
     <link rel="stylesheet" href="../../css/main.css" type="text/css">
     <title>StreetPlay :: Atualizar Jogo</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
     <form action="./updateGameBD.php" method="post">
         <input name="idJogo" type="text" value="<?=$registroJogo["idJogo"]?>" hidden>

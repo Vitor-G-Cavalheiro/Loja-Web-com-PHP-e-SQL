@@ -1,0 +1,234 @@
+.login-header {
+    background-color: var(--blue-light);
+    padding: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: -5px -5px 15px var(--black);
+}
+
+.login-form,
+.register-form {
+    background-image: url('../imgs/backLogin.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 70vh;
+}
+
+.login-form > form,
+.register-form > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--blue-dark);
+    margin-right: 6rem;
+    width: 25vw;
+}
+
+.login-form > form {
+    height: 80%;
+}
+
+.register-form > form {
+    height: 90%;
+}
+
+.login-form > form > span,
+.register-form > form > span {
+    color: var(--yellow-dark);
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.login-form > form > div,
+.register-form > form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-form > form > div > a,
+.login-form-text {
+    font-size: 1.3rem;
+}
+
+.login-form-text {
+    color: var(--white);
+}
+
+.login-form-input {
+    font-size: 1.3rem;
+    background-color: var(--blue-light);
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--white);
+}
+
+.login-form-input,
+.login-form-input:active,
+.login-form-input:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.login-form > form > div > a {
+    color: var(--yellow-dark);
+    text-decoration: underline;
+    font-size: 1rem;
+}
+
+.login-form > form > button,
+.register-form > form > button {
+    color: var(--white);
+    background-color: var(--yellow-dark);
+    border: none;
+    padding: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.login-form > form > button {
+    width: 40%;
+}
+
+.register-form > form > button {
+    width: 60%;
+}
+
+.register-form > form > .login-form-options {
+    flex-direction: row;
+    gap: 7px;
+}
+
+.login-form-options > .login-form-input {
+    cursor: pointer;
+}
+
+.login-form-option {
+    color: var(--white);
+}
+
+.register-footer {
+    background-color: var(--blue-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    gap: 10px;
+}
+
+.register-footer > div > span {
+    color: var(--white);
+    user-select: none;
+    margin: 10px;
+    text-align: center;
+}
+
+.register-footer > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20vw;
+}
+
+.register-footer > div:first-child >  a {
+    background-color: var(--yellow-dark);
+    color: var(--white);
+    padding: 10px;
+    transition: 0.2s;
+}
+
+.register-footer > div:first-child > a:hover,
+.login-form > form > button:hover,
+.register-form > form > button:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.register-footer > div:last-child > a {
+    color: var(--white);
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+@media (max-width: 900px) {
+    .login-header {
+        padding: 1rem;
+    }
+
+    .menu-bar-logo {
+        width: 10vh;
+    }
+    
+    .login-form,
+    .register-form {
+        justify-content: center;
+        background-position: center;
+    }
+    
+    .login-form > form,
+    .register-form > form {
+        margin-right: 0;
+        width: 80%;
+    }
+    
+    .login-form > form > span,
+    .register-form > form > span {
+        font-size: 35px;
+    }
+    
+    .login-form > form > div,
+    .register-form > form > div {
+        gap: 10px;
+    }
+    
+    .login-form > form > div > a,
+    .login-form-text {
+        font-size: 1.3rem;
+    }
+    
+    .login-form-input {
+        font-size: 1.2rem;
+        padding: 5px;
+    }
+    
+    .login-form > form > div > a {
+        font-size: 1.1rem;
+    }
+    
+    .register-form > form > .login-form-options {
+        gap: 5px;
+    }
+
+    .login-form-option {
+        font-size: 15px;
+    }
+    
+    .register-footer {
+        padding: 25px;
+        gap: 25px;
+    }
+    
+    .register-footer > div > span {
+        margin: 10px;
+    }
+
+    .register-footer > div:last-child > span {
+        text-align: justify;
+    }
+    
+    .register-footer > div {
+        width: 40vw;
+    }
+    
+    .register-footer > div:last-child > a {
+        text-align: center;
+    }
+}

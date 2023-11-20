@@ -27,7 +27,7 @@ $resultadoPublicadoras = mysqli_query($conexao, $comandoPublicadoras);
     <link rel="stylesheet" href="../../css/main.css">
     <title>Comunidade StreetPlay</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
     <session>

@@ -4,11 +4,11 @@
     display: flex;
     gap: 1rem;
     justify-content: center;
-    align-items: center;   
+    align-items: center;
+    box-shadow: -5px -5px 15px var(--black); 
 }
 
 .menu-bar-link {  
-    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 23px;
     font-weight: 600;
     position: relative;
@@ -80,6 +80,54 @@
 
 .menu-manager > a {
     font-size: 18px;
-    font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    /* Menu Bar */
+    .menu-bar {
+        padding: 0.3rem;
+        gap: 0.4rem;
+        box-shadow: -5px -5px 15px var(--black); 
+    }
+
+    .menu-bar-link {  
+        font-size: 13px;
+    }
+
+    .menu-bar-logo {
+        width: 5vw;
+    }
+
+    .menu-foto-perfil {
+        height: 25px;
+        width: 25px;
+    }
+
+    /* Sub Menu Perfil*/
+    .sub-menu-perfil {
+        width: 25vw;
+        height: 8vh;
+        right: 0;
+        justify-content: space-between;
+        z-index: 2;
+    }
+
+    .sub-menu-nome {
+        font-size: 12px;
+    }
+
+    .sub-menu-link {
+        font-size: 10px;
+    }
+
+    /* Menu de Gerenciamento */
+    .menu-manager {
+        height: 20px;
+        gap: 0.5rem;
+    }
+
+    .menu-manager > a {
+        font-size: 10px;
+    }
 }

@@ -39,7 +39,7 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Publicar Jogo</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
     <form action="./pubGameBD.php" method="post" enctype="multipart/form-data">
         <label for="nome">Nome: </label>

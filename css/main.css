@@ -5,8 +5,19 @@
 @import url("./slider.css");
 @import url("./swiper.css");
 @import url("./store.css");
+@import url("./login-register.css");
 @import url("./themes.css");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap");
+
+*,
+*::after,
+*::before,
+span,
+a,
+input,
+label {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
 
 :root {
     /* Classic */

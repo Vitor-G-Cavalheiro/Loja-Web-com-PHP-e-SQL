@@ -34,7 +34,7 @@ $resultadoLista = mysqli_query($conexao, $comandoLista);
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Editar Categoria</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
     <!-- Atualizar ou Apagar Categoria -->
     <div>

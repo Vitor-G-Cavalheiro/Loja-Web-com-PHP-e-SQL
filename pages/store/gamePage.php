@@ -55,15 +55,15 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
     <link rel="stylesheet" href="../../css/main.css">
     <title><?=$registroJogo["nome"]?> no StreetPlay</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
     <!-- Sub Menu da Loja -->
     <?php require('../components/headerStore.php')?>
     <!-- Menus de gerenciamento -->
-    <session>
+    <session class="game-page">
         <!-- Título -->
-        <span><?=$registroJogo["nome"]?></span>
+        <span class="text-color-<?=$tema?>"><?=$registroJogo["nome"]?></span>
         <?php if($_SESSION["user"] == "admin"):?>
             <a href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
         <?php endif;
@@ -77,7 +77,7 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
         <?php endif;
         endif; ?>
         <!-- Slide Sobre o Jogo -->
-        <div class="back-swiper">
+        <div class="back-swiper back-swiper-recomedation">
             <div class="swiper swiper-game mySwiper">
                 <div class="swiper-wrapper">
                     <?php while($registroFotos = mysqli_fetch_assoc($resultadoFotos)):?>
@@ -88,22 +88,24 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
                     </div>
                     <?php endwhile; ?>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next text-color-<?=$tema?>"></div>
+                <div class="swiper-button-prev text-color-<?=$tema?>"></div>
                 <div class="swiper-pagination"></div>
             </div>
+        </div>
+        <div class="favorite-game">
+            <!-- Verificação se já tem na lista de desejos ou não -->
+            <?php if(isset($registroFavoritos) && $registroFavoritos["idUsuario"] == $_SESSION["profile"]):?>
+                <a class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" href="../user/editFavoriteGames.php?idJogo=<?=$idJogo?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=nao&pagina=jogo">Remover da Lista de Desejos</a>
+            <?php else: ?>
+                <a class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" href="../user/editFavoriteGames.php?idJogo=<?=$idJogo?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=sim">Adicionar a Lista de Desejos</a>
+            <?php endif; ?>
         </div>
         <!-- Preço -->
         <div>
             <span>Comprar <?=$registroJogo["nome"]?></span>
             <div>
                 <span><?=$registroJogo["preco"]?></span>
-                <!-- Verificação se já tem na lista de desejos ou não -->
-                <?php if(isset($registroFavoritos) && $registroFavoritos["idUsuario"] == $_SESSION["profile"]):?>
-                    <a href="../user/editFavoriteGames.php?idJogo=<?=$idJogo?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=nao&pagina=jogo">Remover da Lista de Desejos</a>
-                <?php else: ?>
-                    <a href="../user/editFavoriteGames.php?idJogo=<?=$idJogo?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=sim">Adicionar a Lista de Desejos</a>
-                <?php endif; ?>
                 <!-- Verificação se já ta no carrinho ou não FALTA VERSÃO COMPRADO -->
                 <?php if(isset($registroCarrinho) && $registroCarrinho["idUsuario"] == $_SESSION["profile"]):?>
                     <a href="./cartGames.php?idUsuario=<?=$_SESSION["profile"]?>">Comprar</a>
@@ -134,22 +136,20 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
                 <div class="swiper-wrapper">
                 <?php while($registroJogosDesenvolvedora = mysqli_fetch_assoc($resultadoJogosDesenvolvedora)):
                     if($registroJogosDesenvolvedora["idJogo"] != $idJogo):?>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide back-emphasys-<?=$tema?>">
                         <a class="swiper-content-recomedation" href="./gamePage.php?idJogo=<?=$registroJogosDesenvolvedora["idJogo"]?>">
-                            <div class="swiper-content-recomedation">
-                                <img class="swiper-img" src="<?=$registroJogosDesenvolvedora["foto"]?>">
-                                <div class="swiper-text">
-                                    <span><?=$registroJogosDesenvolvedora["nome"]?></span>
-                                    <span><?=$registroJogosDesenvolvedora["preco"]?></span>
-                                </div>
+                            <img class="swiper-img" src="<?=$registroJogosDesenvolvedora["foto"]?>">
+                            <div class="swiper-text">
+                                <span class="text-color-<?=$tema?>"><?=$registroJogosDesenvolvedora["nome"]?></span>
+                                <span class="text-color-<?=$tema?>"><?=$registroJogosDesenvolvedora["preco"]?></span>
                             </div>
                         </a>
                     </div>
                 <?php endif; 
                 endwhile; ?>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next text-color-<?=$tema?>"></div>
+                <div class="swiper-button-prev text-color-<?=$tema?>"></div>
             </div>
         </div>
         <!-- Jogos Novos -->
@@ -159,22 +159,20 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
                 <div class="swiper-wrapper">
                 <?php while($registroJogos = mysqli_fetch_assoc($resultadoJogos)):
                     if($registroJogos["idJogo"] != $idJogo):?>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide back-emphasys-<?=$tema?>">
                         <a class="swiper-content-recomedation" href="./gamePage.php?idJogo=<?=$registroJogos["idJogo"]?>">
-                            <div class="swiper-content-recomedation">
-                                <img class="swiper-img" src="<?=$registroJogos["foto"]?>">
-                                <div class="swiper-text">
-                                    <span><?=$registroJogos["nome"]?></span>
-                                    <span><?=$registroJogos["preco"]?></span>
-                                </div>
+                            <img class="swiper-img" src="<?=$registroJogos["foto"]?>">
+                            <div class="swiper-text">
+                                <span class="text-color-<?=$tema?>"><?=$registroJogos["nome"]?></span>
+                                <span class="text-color-<?=$tema?>"><?=$registroJogos["preco"]?></span>
                             </div>
                         </a>
                     </div>
                 <?php endif; 
                 endwhile; ?>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next text-color-<?=$tema?>"></div>
+                <div class="swiper-button-prev text-color-<?=$tema?>"></div>
             </div>
         </div>
     </session>

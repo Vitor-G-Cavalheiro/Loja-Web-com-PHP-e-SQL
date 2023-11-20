@@ -49,7 +49,7 @@ if(isset($_POST["categoria"])){
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Adicionar Categoria</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
     <!-- Adionar Categoria Nova -->
     <form action="addCategory.php" method="post">

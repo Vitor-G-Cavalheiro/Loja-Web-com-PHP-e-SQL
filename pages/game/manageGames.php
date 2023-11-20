@@ -37,7 +37,7 @@ $resultadoPublicado = mysqli_query($conexao, $comandoPublicado);
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Gerenciar jogos</title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
     <?php while($registro = mysqli_fetch_assoc($resultadoPublicado)):?>
             <div>

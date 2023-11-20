@@ -37,7 +37,7 @@ $registro = mysqli_fetch_assoc($resultado);
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Editar Página de <?=$tabela?></title>
 </head>
-<body>
+<body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
     <session>
         <!-- Menu Lateral -->

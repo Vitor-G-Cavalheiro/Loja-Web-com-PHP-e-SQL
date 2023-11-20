@@ -40,52 +40,54 @@ $resultadoCategorias = mysqli_query($conexao, $comandoCategorias);
     <session>
         <!-- Slide com Swiper JS -->
         <div class="back-swiper">
-            <div class="swiper mySwiper">
+            <div class="swiper mySwiper back-<?=$tema?>">
                 <div class="swiper-wrapper">
-                    <?php while($registroJogosSlide = mysqli_fetch_assoc($resultadoJogosSlide)):
-                    if($registroJogosSlide["ordem"] == '1'):?>
+                    <?php while($registroJogosSlide = mysqli_fetch_assoc($resultadoJogosSlide)):?>
                     <div class="swiper-slide">
                         <a class="swiper-content" href="./gamePage.php?idJogo=<?=$registroJogosSlide["idJogo"]?>">
-                            <div class="swiper-content">
+                            <div class="swiper-content back-<?=$tema?>">
                                 <img class="swiper-img" src="<?=$registroJogosSlide["foto"]?>">
                                 <div class="swiper-text">
-                                    <span><?=$registroJogosSlide["nome"]?></span>
-                                    <span><?=$registroJogosSlide["descricao"]?></span>
-                                    <span><?=$registroJogosSlide["preco"]?></span>
+                                    <span class="text-color-<?=$tema?>"><?=$registroJogosSlide["nome"]?></span>
+                                    <div class="slide-imgs-div">
+                                        <?php $comandoFotosJogos = "SELECT * FROM FotosJogos WHERE idJogo = ".$registroJogosSlide["idJogo"]." AND ordem <> 1 LIMIT 4";                               
+                                        $resultadoFotosSlides = mysqli_query($conexao, $comandoFotosJogos);
+                                        while($fotosJogosSlides = mysqli_fetch_assoc($resultadoFotosSlides)):?>
+                                            <img class="slide-imgs-in" src="<?=$fotosJogosSlides["foto"]?>">
+                                        <?php endwhile; ?>
+                                    </div>
+                                    <span class="text-color-<?=$tema?>"><?=$registroJogosSlide["preco"]?></span>
                                 </div>
                             </div>
                         </a>
                     </div>
-                <?php endif; 
-                endwhile; ?>
+                <?php endwhile; ?>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="text-color-<?=$tema?> swiper-button-next"></div>
+                <div class="text-color-<?=$tema?> swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
         </div>
         <!-- Corpo da Página -->
         <div class="body-page">
             <div class="body-category">
-                <span>Categorias</span>
+                <span class="text-color-<?=$tema?>">CATEGORIAS</span>
                 <?php while($registroCategorias = mysqli_fetch_assoc($resultadoCategorias)):?>
-                    <a href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategorias["idCategoria"]?>"><?=$registroCategorias["nome"]?></a>
+                    <a class="hover-text-<?=$tema?>" href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategorias["idCategoria"]?>"><?=$registroCategorias["nome"]?></a>
                 <?php endwhile; ?>
             </div>
             <div class="body-games">
-                <?php while($registroJogos = mysqli_fetch_assoc($resultadoJogos)):
-                if($registroJogos["ordem"] == '1'):?>
-                    <a class="card-game" href="./gamePage.php?idJogo=<?=$registroJogos["idJogo"]?>">
+                <?php while($registroJogos = mysqli_fetch_assoc($resultadoJogos)):?>
+                    <a class="card-game back-emphasys-<?=$tema?>" href="./gamePage.php?idJogo=<?=$registroJogos["idJogo"]?>">
                         <img class="card-game-img" src="<?=$registroJogos["foto"]?>">
                         <div class="card-game-content">
-                            <span class="card-game-text"><?=$registroJogos["nome"]?></span>
-                            <span class="card-game-text"><?=$registroJogos["descricao"]?></span>
-                            <span class="card-game-price"><?=$registroJogos["preco"]?></span>
+                            <span class="card-game-text text-color-<?=$tema?>"><?=$registroJogos["nome"]?></span>
+                            <span class="card-game-text text-color-<?=$tema?>"><?=$registroJogos["descricao"]?></span>
+                            <span class="card-game-price text-color-<?=$tema?>"><?=$registroJogos["preco"]?></span>
                         </div>
                     </a>
-                <?php endif;
-                endwhile;?>  
-                <a href="./listGames.php?inicio=0&acao=mais&modificador=nao">Ver Mais Jogos</a>  
+                <?php endwhile;?>  
+                <a class="link-pages back-emphasys-<?=$tema?> text-color-<?=$tema?>" href="./listGames.php?inicio=0&acao=mais&modificador=nao">Ver Mais Jogos</a>  
             </div>
         </div>
     </session>
