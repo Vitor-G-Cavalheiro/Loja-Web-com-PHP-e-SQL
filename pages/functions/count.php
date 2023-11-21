@@ -15,6 +15,10 @@ function contarLimite ($modificador, $idModificador) {
     }
     $resultado = mysqli_query($conexao, $comando);
     $registro = mysqli_fetch_assoc($resultado);
+    if($registro["numeroJogos"] == 0){
+        $registro["numeroJogos"] = 1;
+        $_SESSION["mensagem"] = "Nenhum Jogo Foi Encontrado";
+    }
     return $registro["numeroJogos"];
 }
 

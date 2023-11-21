@@ -71,6 +71,7 @@ if (isset($_POST["pesquisa"]) || isset($_GET["pesquisa"])){
 $finalPagina = correcaoFinalPagina($finalPagina, $inicio);
 
 $resultadoJogos = mysqli_query($conexao, $comando);
+$message = require('../functions/message.php');
 
 //Categorias
 $comandoCategorias = "SELECT * FROM Categorias ORDER BY nome LIMIT 32";

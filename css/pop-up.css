@@ -24,7 +24,7 @@
 }
 
 .pop-up-message.light {
-    background-color: var(--blue-dark);
+    background-color: var(--blue-light);
 }
 
 .close-pop {
@@ -42,4 +42,15 @@
 .close-pop:hover {
     cursor: pointer;
     color: var(--blue-neon);
+}
+
+@media (max-width: 900px) {
+    .pop-up-message {
+        left: 22vw;
+    }
+    
+    .pop-up-message,
+    .close-pop {
+        font-size: 15px;
+    }
 }

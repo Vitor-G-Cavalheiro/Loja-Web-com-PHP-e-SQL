@@ -65,15 +65,15 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
         <!-- Título -->
         <span class="text-color-<?=$tema?>"><?=$registroJogo["nome"]?></span>
         <?php if($_SESSION["user"] == "admin"):?>
-            <a href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
+            <a class="hover-text-<?=$tema?>" href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
         <?php endif;
         if(isset($_SESSION["idDev"])):
             if($_SESSION["idDev"] == $registroJogo["idDesenvolvedora"]):?> 
-            <a href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
+            <a class="hover-text-<?=$tema?>" href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
         <?php endif;
         elseif(isset($_SESSION["idPub"])):
             if($_SESSION["idPub"] == $registroJogo["idPublicadora"]):?>
-            <a href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
+            <a class="hover-text-<?=$tema?>" href="../game/updateGame.php?idJogo=<?=$idJogo?>">Editar Jogo</a>
         <?php endif;
         endif; ?>
         <!-- Slide Sobre o Jogo -->
@@ -102,10 +102,10 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
             <?php endif; ?>
         </div>
         <!-- Preço -->
-        <div>
-            <span>Comprar <?=$registroJogo["nome"]?></span>
+        <div class="buy-div back-<?=$tema?>">
+            <span class="text-color-<?=$tema?>">Comprar <?=$registroJogo["nome"]?></span>
             <div>
-                <span><?=$registroJogo["preco"]?></span>
+                <span class="standard-<?=$tema?> text-color-<?=$tema?>"><?=$registroJogo["preco"]?></span>
                 <!-- Verificação se já ta no carrinho ou não FALTA VERSÃO COMPRADO -->
                 <?php if(isset($registroCarrinho) && $registroCarrinho["idUsuario"] == $_SESSION["profile"]):?>
                     <a href="./cartGames.php?idUsuario=<?=$_SESSION["profile"]?>">Comprar</a>

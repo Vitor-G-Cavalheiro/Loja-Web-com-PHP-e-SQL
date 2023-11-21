@@ -5,7 +5,7 @@
     <a class="text-color-<?=$tema?> menu-store-link <?=$tema?>" href="../store/cartGames.php">Carrinho</a>
     <?php endif;?>
     <form action="../store/listGames.php" method="post">
-        <input class="back-emphasys-<?=$tema?> text-color-<?=$tema?>" type="text" name="pesquisa" placeholder="Buscar Jogo" required>
+        <input class="back-emphasys-<?=$tema?> text-color-<?=$tema?>" type="text" name="pesquisa" placeholder="Buscar Jogo">
         <button class="back-search-<?=$tema?>"type="submit"><img class="text-color-<?=$tema?> search-logo" src="../../imgs/search.png"></button>
     </form>
 </div>

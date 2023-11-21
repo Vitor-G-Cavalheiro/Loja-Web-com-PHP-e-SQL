@@ -2,6 +2,7 @@
 
 $sessao = require('../functions/session.php');
 $conexao = require('../functions/connection.php');
+$tema = "classic";
 $messagem = require('../functions/message.php');
 
 if(isset($_SESSION["user"]) && $_SESSION["user"] != "anonimo"){

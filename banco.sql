@@ -171,4 +171,4 @@ FOREIGN KEY (idPublicadora)
 REFERENCES StreetPlay.Publicadoras (idPublicadora)
 );
 
-INSERT INTO Usuarios (nome, senha, email, foto, administrador) values ('Admin', '2005', 'vitor.cavalheiro@aluno.ifsp.edu.br', '../../imgs/profile.png', TRUE);
+INSERT INTO Usuarios (nome, senha, email, foto, administrador) values ('Admin', '2005', 'vitor.cavalheiro@aluno.ifsp.edu.br', '../../imgs/user/profile.png', TRUE);

@@ -61,6 +61,26 @@ body.light {
     background-color: var(--white);
 }
 
+.standard-classic {
+    background-color: var(--black-back);
+}
+
+.standard-dark {
+    background-color: var(--white-gray);
+}
+
+.standard-dark.text-color-dark {
+    color: var(--black);
+}
+
+.standard-light {
+    background-color: var(--black-gray);
+}
+
+.standard-light.text-color-light {
+    color: var(--white);
+}
+
 .gradient-classic {
     background: linear-gradient(0deg, var(--blue-dark) 0%, var(--blue-light) 105%);
 }
