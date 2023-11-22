@@ -1,0 +1,7 @@
+text-color
+text-emphasys
+back-emphasys
+back
+background
+gradient
+hover
