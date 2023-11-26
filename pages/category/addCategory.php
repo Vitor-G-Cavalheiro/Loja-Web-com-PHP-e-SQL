@@ -11,7 +11,7 @@ if($_SESSION["user"] != "admin"){
 
 $messagem = require('../functions/message.php');
 
-$comandoCategoria = "SELECT * FROM Categorias";
+$comandoCategoria = "SELECT * FROM Categorias ORDER BY nome";
 $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
 
 if(isset($_POST["categoria"])){
@@ -51,19 +51,23 @@ if(isset($_POST["categoria"])){
 </head>
 <body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
+    <session class="category-session">
     <!-- Adionar Categoria Nova -->
-    <form action="addCategory.php" method="post">
-        <label for="categoria">Nome Categoria: </label>
-        <input type="text" name="categoria" required>
-        <button type="submit">Adicionar Categoria Nova</button>
-    </form>
+        <form action="addCategory.php" method="post">
+            <label class="text-color-<?=$tema?>" for="categoria">Nome Categoria: </label>
+            <input class="back-emphasys-<?=$tema?> text-color-<?=$tema?>" type="text" name="categoria" required>
+            <button class="standard-<?=$tema?> text-color-<?=$tema?>" type="submit">Adicionar Categoria</button>
+        </form>
     <!-- Lista das Categorias -->
-    <?php while($registroCategoria = mysqli_fetch_assoc($resultadoCategoria)):?>
         <div>
-            <span><?=$registroCategoria["nome"]?></span>
-            <a href="editCategory.php?idCategoria=<?=$registroCategoria["idCategoria"]?>">Editar Categoria</a>
+        <?php while($registroCategoria = mysqli_fetch_assoc($resultadoCategoria)):?>
+            <div>
+                <span class="text-color-<?=$tema?> back-<?=$tema?>"><?=$registroCategoria["nome"]?></span>
+                <a class="hover-text-<?=$tema?>" href="editCategory.php?idCategoria=<?=$registroCategoria["idCategoria"]?>">Editar Categoria</a>
+            </div>
+        <?php endwhile; ?>
         </div>
-    <?php endwhile; ?>
+    </session>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>
 </body>

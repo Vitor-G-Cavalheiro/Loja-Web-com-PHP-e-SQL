@@ -8,7 +8,7 @@ $messagem = require('../functions/message.php');
 $idJogo = $_GET["idJogo"];
 
 //Comando Jogo
-$comandoJogo = "SELECT * FROM jogos j INNER JOIN JogosPublicados jp ON j.idJogo = jp.idJogo INNER JOIN Desenvolvedoras d ON jp.idDesenvolvedora = d.idDesenvolvedora INNER JOIN Publicadoras p ON jp.idPublicadora = p.idPublicadora WHERE j.idJogo = $idJogo";
+$comandoJogo = "SELECT *, j.descricao FROM jogos j INNER JOIN JogosPublicados jp ON j.idJogo = jp.idJogo INNER JOIN Desenvolvedoras d ON jp.idDesenvolvedora = d.idDesenvolvedora INNER JOIN Publicadoras p ON jp.idPublicadora = p.idPublicadora WHERE j.idJogo = $idJogo";
 $resultadoJogo = mysqli_query($conexao, $comandoJogo);
 $registroJogo = mysqli_fetch_assoc($resultadoJogo);
 
@@ -115,29 +115,30 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
             </div>
         </div>
         <!-- Descrição -->
-        <div>
-            <span><?=$registroJogo["descricao"]?></span>
+        <div class="game-desc">
+            <span class="text-color-<?=$tema?>"><?=$registroJogo["descricao"]?></span>
             <!-- Desenvolvedora e Publicadora -->
-            <div>
-                <a href="../devPub/profileDevPub.php?idDesenvolvedora=<?=$registroJogo["idDesenvolvedora"]?>"><?=$registroJogo["nomeDev"]?></a >
-                <a href="../devPub/profileDevPub.php?idPublicadora=<?=$registroJogo["idPublicadora"]?>"><?=$registroJogo["nomePub"]?></a >
+            <div class="game-dev-pub">
+                <span class="text-color-<?=$tema?>">DESENVOLVEDORA: <a class="hover-text-<?=$tema?>" href="../devPub/profileDevPub.php?idDesenvolvedora=<?=$registroJogo["idDesenvolvedora"]?>"><?=$registroJogo["nomeDev"]?></a></span>
+                <span class="text-color-<?=$tema?>">PUBLICADORA: <a class="hover-text-<?=$tema?>" href="../devPub/profileDevPub.php?idPublicadora=<?=$registroJogo["idPublicadora"]?>"><?=$registroJogo["nomePub"]?></a></span>
             </div>
         </div>
         <!-- Categorias -->
-        <div>
+        <div class="game-category">
+            <span class="text-color-<?=$tema?>">Categorias que esse jogo pertence: </span>
             <?php while($registroCategoriasJogo = mysqli_fetch_assoc($resultadoCategoriasJogo)):?>
-            <a href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategoriasJogo["idCategoria"]?>"><?=$registroCategoriasJogo["nome"]?></a>
+            <a class="back-emphasys-<?=$tema?> hover-text-<?=$tema?>" href="./listGames.php?inicio=0&acao=mais&idCategoria=<?=$registroCategoriasJogo["idCategoria"]?>"><?=$registroCategoriasJogo["nome"]?></a>
             <?php endwhile; ?>
         </div>
         <!-- Jogos da Mesma Dev -->
         <div class="back-swiper">
-            <span>Jogos de <?=$registroJogo["nomeDev"]?></span>
+            <span class="text-color-<?=$tema?>">Jogos de <?=$registroJogo["nomeDev"]?></span>
             <div class="swiper swiper-game-recomedation mySwiper-recomedation">
                 <div class="swiper-wrapper">
                 <?php while($registroJogosDesenvolvedora = mysqli_fetch_assoc($resultadoJogosDesenvolvedora)):
                     if($registroJogosDesenvolvedora["idJogo"] != $idJogo):?>
                     <div class="swiper-slide back-emphasys-<?=$tema?>">
-                        <a class="swiper-content-recomedation" href="./gamePage.php?idJogo=<?=$registroJogosDesenvolvedora["idJogo"]?>">
+                        <a class="swiper-content-recomedation <?=$tema?>" href="./gamePage.php?idJogo=<?=$registroJogosDesenvolvedora["idJogo"]?>">
                             <img class="swiper-img" src="<?=$registroJogosDesenvolvedora["foto"]?>">
                             <div class="swiper-text">
                                 <span class="text-color-<?=$tema?>"><?=$registroJogosDesenvolvedora["nome"]?></span>
@@ -154,7 +155,7 @@ if($_SESSION["user"] == "admin" || $_SESSION["user"] == "usuario"){
         </div>
         <!-- Jogos Novos -->
         <div class="back-swiper">
-            <span>Lançamentos</span>
+            <span class="text-color-<?=$tema?>">Lançamentos</span>
             <div class="swiper swiper-game-recomedation mySwiper-recomedation">
                 <div class="swiper-wrapper">
                 <?php while($registroJogos = mysqli_fetch_assoc($resultadoJogos)):

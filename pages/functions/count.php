@@ -22,6 +22,18 @@ function contarLimite ($modificador, $idModificador) {
     return $registro["numeroJogos"];
 }
 
+function contarLimiteComunidade ($tipo) {
+    $conexao = require('../functions/connection.php');
+    $comando = "SELECT COUNT(*) AS numeroPerfis FROM $tipo";
+    $resultado = mysqli_query($conexao, $comando);
+    $registro = mysqli_fetch_assoc($resultado);
+    if($registro["numeroPerfis"] == 0){
+        $registro["numeroPerfis"] = 1;
+        $_SESSION["mensagem"] = "Nenhum Perfil Foi Encontrado";
+    }
+    return $registro["numeroPerfis"];
+}
+
 function verificarLimiteInicio ($inicio, $limite, $valor) {
     $final = $inicio + 16;
     if($inicio >= $limite){

@@ -13,11 +13,26 @@ $comandoFotosJogos = "SELECT * FROM fotosJogos";
 $resultadoFotosJogos = mysqli_query($conexao, $comandoFotosJogos);
 
 if(isset($_SESSION["idDev"])){
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND idDesenvolvedora = '.$_SESSION["idDev"]; 
+    if (isset($_POST["pesquisa"])){
+        $idModificador = $_POST["pesquisa"];
+        $comandoPublicado = "SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND idDesenvolvedora = ".$_SESSION["idDev"]."AND j.nome LIKE '%$idModificador%'";
+    } else {
+        $comandoPublicado = "SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND idDesenvolvedora = ".$_SESSION["idDev"];
+    }
 } elseif (isset($_SESSION["idPub"])){
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND idPublicadora = '.$_SESSION["idPub"];
+    if (isset($_POST["pesquisa"])){
+        $idModificador = $_POST["pesquisa"];
+        $comandoPublicado = "SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND idPublicadora = ".$_SESSION["idPub"]." AND j.nome LIKE '%$idModificador%'";
+    } else {
+        $comandoPublicado = "SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND idPublicadora = ".$_SESSION["idPub"];
+    }
 } else{
-    $comandoPublicado = 'SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1';
+    if (isset($_POST["pesquisa"])){
+        $idModificador = $_POST["pesquisa"];
+        $comandoPublicado = "SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1 AND j.nome LIKE '%$idModificador%'";
+    } else {
+        $comandoPublicado = "SELECT j.nome, fj.foto, jp.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON jp.idjogo = fj.idjogo WHERE fj.ordem = 1";
+    }
 }
 
 $resultadoPublicado = mysqli_query($conexao, $comandoPublicado);
@@ -37,16 +52,24 @@ $resultadoPublicado = mysqli_query($conexao, $comandoPublicado);
     <link rel="stylesheet" href="../../css/main.css">
     <title>StreetPlay :: Gerenciar jogos</title>
 </head>
-<body class="<?=$tema?>">
+<body class="<?=$tema?> game-edit">
     <?php require('../components/header.php') ?>
-    <?php while($registro = mysqli_fetch_assoc($resultadoPublicado)):?>
-            <div>
+    <session class="manage-games-session">
+        <form action="./manageGames.php" method="post">
+            <input class="back-emphasys-<?=$tema?> text-color-<?=$tema?>" type="text" name="pesquisa" placeholder="Buscar Jogo">
+            <button class="back-search-<?=$tema?>"type="submit"><img class="text-color-<?=$tema?> search-logo" src="../../imgs/search.png"></button>
+        </form>
+        <div>
+            <?php while($registro = mysqli_fetch_assoc($resultadoPublicado)):?>
+            <div class="back-emphasys-<?=$tema?>">
                 <img src="<?=$registro["foto"]?>">
-                <h2><?=$registro["nome"]?></h2>
+                <span class="text-color-<?=$tema?>"><?=$registro["nome"]?></span>
+                <a class="hover-text-<?=$tema?>" href="./updateGame.php?idJogo=<?=$registro["idJogo"]?>">Atualizar Jogo</a>
+                <a class="hover-text-<?=$tema?>" href="./deleteGame.php?idJogo=<?=$registro["idJogo"]?>">Deletar Jogo</a>
             </div>
-            <a href="./updateGame.php?idJogo=<?=$registro["idJogo"]?>">Atualizar Jogo</a>
-            <a href="./deleteGame.php?idJogo=<?=$registro["idJogo"]?>">Deletar Jogo</a>
-    <?php endwhile;?>
+            <?php endwhile;?>
+        </div>
+    </session>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>
 </body>

@@ -134,9 +134,14 @@
     /* border-radius: 5px; */
 }
 
+.div-link-pages {
+    margin: 10px 0px;
+}
+
 .link-pages {
     padding: 10px;
     max-height: 35px;
+    margin-right: 5px;
 }
 
 .link-pages:hover {
@@ -146,7 +151,7 @@
 /* Página do Jogo */
 .game-page {
     display: block;
-    margin: auto;
+    margin: auto auto 25px auto;
     width: 60vw;
 }
 
@@ -193,6 +198,38 @@
 .buy-div > div > a:hover {
     filter: brightness(1.2);
     color: var(--green-dark);
+}
+
+.game-desc {
+    margin: 20px 0px;
+}
+
+.game-desc > span {
+    font-size: 20px;
+}
+
+.game-dev-pub {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+}
+
+.game-dev-pub > span {
+    user-select: none;
+}
+
+.game-category {
+    margin: 15px 0px;
+}
+
+.game-category > a {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.game-page > .back-swiper > span {
+    font-size: 20px;
+    font-weight: 600;
 }
 
 @media (max-width: 900px) {
@@ -267,11 +304,16 @@
     .card-game-img {
         height: 6vh;
     }
+
+    .div-link-pages {
+        margin: 5px 0px;
+    }
     
     .link-pages {
         font-size: 11px;
         padding: 5px;
         max-height: 35px;
+        margin-right: 3px;
     }
     
     /* Página do Jogo */
@@ -309,5 +351,36 @@
         margin-top: 12px;
         padding: 3px;
         font-size: 12px;
+    }
+
+    .game-desc {
+        width: 80vw;
+        margin: 10px auto;
+    }
+    
+    .game-desc > span,
+    .game-dev-pub > span,
+    .game-category > span {
+        font-size: 14px;
+    }
+
+    .game-dev-pub {
+        margin: 5px 0px;
+    }
+    
+    .game-category {
+        margin: 10px auto;
+        width: 80vw;
+    }
+    
+    .game-category > a {
+        padding: 3px;
+        border-radius: 3px;
+        font-size: 11px;
+    }
+    
+    .game-page > .back-swiper > span {
+        font-size: 15px;
+        margin-left: 10px;
     }
 }

@@ -1,0 +1,234 @@
+/* Categoria */
+.category-session,
+.category-session-edit {
+    display: flex;
+    flex-direction: column;
+    margin: 25px auto;
+    width: 80vw;
+    min-height: 70vh;
+}
+
+.category-session > form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.category-session > form > input {
+    border: none;
+    outline: none;
+    height: 100%;
+    padding: 5px;
+}
+
+.category-session > form > button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.category-session > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 25px 0px;
+}
+
+.category-session > div > div > span {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.category-session > div > div > a {
+    border-bottom: 0px solid;
+    transition: 0.2s;
+}
+
+.category-session > div > div > a:hover {
+    border-bottom: 1px solid;
+}
+
+/* Editar Categoria */
+.category-session-edit {
+    gap: 5rem;
+}
+
+.category-session-edit > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-session-edit > div > span:first-child {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.category-form-edit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-form-edit > label {
+    font-size: 18px;
+}
+
+.category-form-edit > input {
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 5px;
+    height: 1.8rem;
+}
+
+.category-form-edit > button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    height: 1.8rem;
+}
+
+.category-session-edit > div:first-child > a:last-child {
+    font-size: 18px;
+}
+
+.category-card-game {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-card-game > div {
+    display: flex;
+    align-items: center;
+    width: 49%;
+    height: 16vh;
+    gap: 10px;
+}
+
+.category-card-game > div > img {
+    height: 100%;
+}
+
+.category-card-game > div > span {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.category-card-game > div > span:last-child {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+@media (max-width: 900px) {
+    /* Categoria */
+    .category-session,
+    .category-session-edit {
+        margin: 10px auto;
+        width: 90vw;
+        min-height: 80vh;
+    }
+
+    .category-session > form {
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .category-session > form > label {
+        font-size: 13px;
+    }
+
+    .category-session > form > input {
+        height: 100%;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .category-session > form > button {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .category-session > div {
+        margin: 10px 0px;
+    }
+
+    .category-session > div > div > span {
+        font-size: 14px;
+        border-radius: 4px;
+        padding: 4px;
+    }
+
+    .category-session > div > div > a {
+        font-size: 14px;
+    }
+
+    .category-session > div > div > a:hover {
+        border-bottom: 0px solid;
+    }
+
+    /* Editar Categoria */
+    .category-session-edit {
+        gap: 2rem;
+    }
+
+    .category-session-edit > div {
+        gap: 8px;
+    }
+
+    .category-session-edit > div > span:first-child {
+        font-size: 23px;
+    }
+
+    .category-session-edit > div:last-child > span:first-child {
+        font-size: 18px;
+    }
+
+    .category-form-edit {
+        gap: 10px;
+    }
+
+    .category-form-edit > label {
+        font-size: 15px;
+    }
+
+    .category-form-edit > input {
+        font-size: 13px;
+        height: 1.5rem;
+    }
+
+    .category-form-edit > button {
+        font-size: 13px;
+        height: 1.5rem;
+    }
+
+    .category-session-edit > div:first-child > a:last-child {
+        font-size: 12px;
+    }
+
+    .category-card-game > div {
+        width: 100%;
+        height: 7vh;
+    }
+
+    .category-card-game > div > img {
+        height: 100%;
+    }
+
+    .category-card-game > div > span {
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .category-card-game > div > span:last-child {
+        font-size: 11px;
+        font-weight: 400;
+        text-align: center;
+        overflow: hidden;
+    }
+}

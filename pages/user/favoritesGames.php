@@ -5,8 +5,15 @@ $conexao = require('../functions/connection.php');
 $tema = require('../functions/themeVerification.php');
 $message = require('../functions/message.php');
 
-$idUsuario = $_SESSION["profile"];
-$comando = "SELECT j.nome, j.preco, j.descricao, fj.foto, j.idJogo FROM Favoritos f INNER JOIN Jogos j ON f.idJogoPublicado = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo WHERE f.idUsuario = $idUsuario AND fj.ordem = 1";
+$idUsuario = $_SESSION["profile"]; 
+
+if (isset($_POST["pesquisa"])){
+    $idModificador = $_POST["pesquisa"];
+    $comando = "SELECT j.nome, fj.foto, j.preco, j.idJogo FROM Favoritos f INNER JOIN Jogos j ON f.idJogoPublicado = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo WHERE j.nome LIKE '%$idModificador%' AND fj.ordem = 1 AND f.idUsuario = $idUsuario";
+} else {
+    $comando = "SELECT j.nome, j.preco, fj.foto, j.idJogo FROM Favoritos f INNER JOIN Jogos j ON f.idJogoPublicado = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = j.idJogo WHERE f.idUsuario = $idUsuario AND fj.ordem = 1";
+}
+
 $resultado = mysqli_query($conexao, $comando);
 
 ?>
@@ -26,17 +33,22 @@ $resultado = mysqli_query($conexao, $comando);
 </head>
 <body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
-    <session>
+    <session class="fav-session">
+        <form action="./favoritesGames.php" method="post">
+            <input class="back-emphasys-<?=$tema?> text-color-<?=$tema?>" type="text" name="pesquisa" placeholder="Buscar Jogo">
+            <button class="back-search-<?=$tema?>"type="submit"><img class="text-color-<?=$tema?> search-logo" src="../../imgs/search.png"></button>
+        </form>
         <?php while($registro = mysqli_fetch_assoc($resultado)):?>
-        <a href="../store/gamePage.php?idJogo=<?=$registro["idJogo"]?>">
-            <div>
+        <div class="fav-game back-<?=$tema?>">
+            <a href="../store/gamePage.php?idJogo=<?=$registro["idJogo"]?>">
                 <img src="<?=$registro["foto"]?>">
-                <span><?=$registro["nome"]?></span>
-                <span><?=$registro["descricao"]?></span>
-                <a href=""><?=$registro["preco"]?></a href="">
+                <span class="text-color-<?=$tema?>"><?=$registro["nome"]?></span>
+            </a>
+            <div>
+                <a href="../store/editCartGame.php?idJogo=<?=$registro["idJogo"]?>&idUsuario=<?=$_SESSION["profile"]?>&comprar=sim"><?=$registro["preco"]?></a>
+                <a class="hover-text-<?=$tema?>" href="./editFavoriteGames.php?idJogo=<?=$registro["idJogo"]?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=nao&pagina=desejos">Remover Jogo</a>
             </div>
-        </a>
-        <a href="./editFavoriteGames.php?idJogo=<?=$registro["idJogo"]?>&idUsuario=<?=$_SESSION["profile"]?>&seguir=nao&pagina=desejos">Remover Jogo</a>
+        </div>
         <?php endwhile; ?>
     </session>
     <?php require('../components/footer.php') ?>

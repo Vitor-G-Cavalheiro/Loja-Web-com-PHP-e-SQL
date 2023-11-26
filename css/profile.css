@@ -1,7 +1,383 @@
+/* Perfis de Usuários e DevsPubs*/
+.profile-session {
+    display: flex;
+    min-height: 70vh;
+    margin: 25px auto;
+    width: 90vw;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.profile-session > div {
+    gap: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 20px;
+}
+
+.profile-session > div > img {
+    height: 20vh;
+}
+
+.profile-session > div > a.hover-text-classic,
+.profile-session > div > a.hover-text-dark,
+.profile-session > div > a.hover-text-ligth {
+    padding: 10px;
+}
+
+.profile-session > div > a:last-child {
+    text-align: center;
+    width: 11%;
+}
+
+.profile-session > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.profile-session > .social-page {
+    justify-content: flex-start;
+    margin: 10px auto;
+}
+
+.social-page > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.social-page > div > img {
+    height: 20px;
+}
+
+.profile-session > .game-dev-pub-profile {
+    justify-content: flex-start;
+}
+
+.game-dev-pub-profile {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.game-dev-pub-profile > .card-game,
+.game-dev-pub-profile > .card-game:last-child {
+    width: 20vw;
+}
+
+.profile-session > a:last-child {
+    margin: 15px;
+    padding: 10px;
+}
+
+.profile-games {
+    margin: 10px 0;
+    height: 15vh;
+}
+
+.profile-session > .profile-games > img {
+    height: 100%;
+}
+
+.profile-games > span:last-child {
+    margin-right: 10px;
+}
+
+.profile-session > span {
+    font-size: 23px;
+    margin: 10px 0px 0px 0px;
+    align-self: flex-start;
+}
+
+/* Editar Perfil */
+.profile-edit-session {
+    min-height: 80vh;
+    display: flex;
+    width: 90vw;
+    margin: 25px auto;
+    flex-direction: column;
+    align-items: center;
+}
+
 .div-edit-user {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    margin: 25px auto;
+    width: 50vw;
+    min-height: 50vh;
+    padding: 25px;
+    box-shadow: 0px 0px 10px var(--black);
+}
+
+.div-edit-user > span {
+    font-weight: 600;
+    font-size: 30px
+}
+
+.div-edit-user > form {
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+    gap: 25px;
+    height: 40vh;
+    justify-content: center;
+}
+
+.div-edit-user > form > * {
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+
+.div-edit-user > form > input {
+    height: 2.3rem;
+    width: 23rem;
+    padding: 5px;
+}
+
+.div-edit-user > form > button {
+    padding: 10px;
+    font-size: 25px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-themes > input,
+.edit-themes > label {
+    font-size: 28px;
+}
+
+.edit-themes > input {
+    width: 20px;
+    height: 20px;
+}
+
+.delete-profile {
+    width: 25vw;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin: auto;
+    padding: 15px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.delete-pop-up {
+    position: absolute;
+    left: 37vw;
+    flex-direction: column;
+    width: 26vw;
+    top: 45vh;
+    height: 10vh;
+    margin: auto;
+    font-size: 23px;
+    font-weight: 600;
+    gap: 10px;
+    padding: 10px;
+}
+
+.delete-pop-up > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.delete-pop-up > div > button {
+    outline: none;
+    border: none;
+    font-size: 23px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .invisible {
     display: none;
+}
+
+.edit-social-media > form > div > input,
+.edit-social-media > form > div > label {
+    outline: none;
+    border: none;
+    font-size: 23px;
+}
+
+.edit-social-media > form > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+@media (max-width: 900px) {
+    /* Perfis de Usuários e DevsPubs*/
+    .profile-session {
+        min-height: 70vh;
+        margin: 15px auto;
+        width: 80vw;
+        padding: 10px;
+    }
+
+    .profile-session > div {
+        gap: 10px;
+        font-size: 8px;
+        overflow: hidden;
+    }
+
+    .profile-session > div > img {
+        height: 6vh;
+    }
+
+    .profile-session > div > a.hover-text-classic,
+    .profile-session > div > a.hover-text-dark,
+    .profile-session > div > a.hover-text-ligth {
+        padding: 5px;
+    }
+
+    .profile-session > div > a:last-child {
+        width: 11%;
+    }
+
+    .profile-session > div:last-child {
+        margin: 10px auto;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .profile-session > .game-dev-pub-profile {
+        justify-content: center;
+    }
+
+    .profile-session > .social-page {
+        justify-content: flex-start;
+        margin: 10px auto;
+    }
+
+    .social-page > div {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .social-page > div > img {
+        height: 13px;
+    }
+
+    .game-dev-pub-profile > .card-game,
+    .game-dev-pub-profile > .card-game:last-child {
+        width: 30vw;
+    }
+
+    .profile-session > a:last-child {
+        margin: 10px;
+        padding: 5px;
+    }
+
+    .profile-games {
+        margin: 5px 0;
+        height: 5vh;
+    }
+    
+    .profile-session > .profile-games > img {
+        height: 100%;
+    }
+    
+    .profile-games > span:last-child {
+        margin-right: 10px;
+    }
+    
+    .profile-session > span {
+        font-size: 10px;
+        margin: 5px 0px 0px 0px;
+        align-self: flex-start;
+    }
+
+    /* Editar Perfil */
+    .profile-menu {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+    .profile-edit-session {
+        min-height: 85vh;
+    }
+
+    .div-edit-user {
+        margin: 25px auto;
+        width: 80vw;
+        min-height: 50vh;
+        padding: 15px;
+        box-shadow: 0px 0px 10px var(--black);
+    }
+
+    .div-edit-user > span {
+        font-size: 25px
+    }
+
+    .div-edit-user > form {
+        margin: 5px auto;
+        gap: 10px;
+        height: 35vh;
+    }
+
+    .div-edit-user > form > * {
+        font-size: 18px;
+    }
+
+    .div-edit-user > form > input {
+        height: 1.8rem;
+        width: 18rem;
+        padding: 3px;
+    }
+
+    .div-edit-user > form > button {
+        padding: 8px;
+        font-size: 23px;
+    }
+
+    .edit-themes > input,
+    .edit-themes > label {
+        font-size: 25px;
+    }
+
+    .edit-themes > input {
+        width: 20px;
+        height: 20px;
+    }
+
+    .delete-profile {
+        width: 50vw;
+        padding: 10px;
+        font-size: 23px;
+    }
+
+    .delete-pop-up {
+        left: 20vw;
+        width: 60vw;
+        top: 39vh;
+        height: 10vh;
+        font-size: 20px;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .delete-pop-up > div > button {
+        font-size: 20px;
+    }
+
+    .edit-social-media > form > div > input,
+    .edit-social-media > form > div > label {
+        font-size: 18px;
+    }
+
+    .edit-social-media > form > div {
+        gap: 5px;
+    }
+
 }

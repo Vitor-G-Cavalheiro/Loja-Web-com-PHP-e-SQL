@@ -1,0 +1,114 @@
+/* Comunidade */
+.community-session {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    min-height: 115vh;
+    margin: 25px auto;
+}
+
+.community-session > div {
+    margin: 10px 0px;
+}
+
+.community-session > div > span {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.community-list {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10vh;
+    margin: 10px 0px;
+}
+
+.community-list > a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    font-size: 23px;
+}
+
+.community-list > a > img {
+    height: 100%;
+    width: 5vw;
+}
+
+.community-list > a > span {
+    font-weight: 600;
+}
+
+.community-list > a > span:last-child {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.community-list > div > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 25px;
+}
+
+.community-list:hover {
+    filter: brightness(1.2);
+}
+
+.list-profiles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80vw;
+    margin: 25px auto;
+    gap: 10px;
+    min-height: 70vh;
+}
+
+.list-profiles > .card-game {
+    width: 18%;
+    height: 30vh;
+}
+
+@media (max-width: 900px) {
+    /* Comunidade */
+    .community-session {
+        width: 90vw;
+        min-height: 85vh;
+        margin: 15px auto;
+    }
+    
+    .community-session > div > span {
+        font-size: 20px;
+    }
+    
+    .community-list {
+        height: 7vh;
+    }
+    
+    .community-list > a {
+        width: 70%;
+        gap: 5px;
+        font-size: 18px;
+    }
+    
+    .community-list > a > img {
+        width: 15vw;
+    }
+    
+    .community-list > a > span:last-child {
+        font-size: 13px;
+        overflow: hidden;
+    }
+
+    .community-list > div {
+        width: 30%;
+    }
+
+    .community-list > div > a {
+        font-size: 12px;
+        margin: 5px 12px;
+    }
+}

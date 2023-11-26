@@ -61,63 +61,63 @@ $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
 </head>
 <body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
-    <session>
+    <session class="profile-session back-<?=$tema?>">
         <div>
             <img src="<?=$registro["foto"]?>">
-            <span><?=$registro["$nome"]?></span>
-            <span><?=$registro["descricao"]?></span>
-            <span>Seguidores: <?=$registroSeguidores["NumeroSeguidores"]?></span>
+            <span class="text-color-<?=$tema?>"><?=$registro["$nome"]?></span>
+            <span class="text-color-<?=$tema?>"><?=$registro["descricao"]?></span>
+            <span class="text-color-<?=$tema?>">Seguidores: <?=$registroSeguidores["NumeroSeguidores"]?></span>
             <!-- Verificação Seguidor -->
             <?php if(isset($registroSeguindo) && $registroSeguindo["idUsuario"] == $idUsuario):?>
-                <a href="<?=$seguir?>&seguir=nao">Deixar de Seguir</a>
+                <a class="hover-text-<?=$tema?> back-emphasys-<?=$tema?>" href="<?=$seguir?>&seguir=nao">Deixar de Seguir</a>
             <?php elseif(isset($_SESSION["profile"])):?>
-                <a href="<?=$seguir?>&seguir=sim">Seguir</a>
+                <a class="hover-text-<?=$tema?> back-emphasys-<?=$tema?>" href="<?=$seguir?>&seguir=sim">Seguir</a>
             <?php endif;?>
             <!-- Editar Página Dev ou Pub -->
             <?php if(isset($_SESSION["idPub"]) && isset($idPublicadora)): 
             if($idPublicadora == $_SESSION["idPub"]):?>
-                <a href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
+                <a class="hover-text-<?=$tema?> back-emphasys-<?=$tema?>" href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
             <?php endif;
             elseif(isset($_SESSION["idDev"]) && isset($idDesenvolvedora)):
             if($idDesenvolvedora == $_SESSION["idDev"]):?>
-                <a href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
+                <a class="hover-text-<?=$tema?> back-emphasys-<?=$tema?>" href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
             <?php endif;
             elseif($_SESSION["user"] == "admin"):?>
-                <a href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
+                <a class="hover-text-<?=$tema?> back-emphasys-<?=$tema?>" href="./editProfileDevPub.php?<?=$nomeColuna?>=<?=$idDevPub?>">Editar Página</a>
             <?php endif; ?>
         </div>
         <!-- Redes Sociais -->
-        <div>
+        <div class="social-page">
         <?php if(isset($registro["youtube"]) && $registro["youtube"] != NULL):?>
             <div>
-                <img src=''>
-                <a href='<?=$registro["youtube"]?>'>Youtube</a>
+                <img src='../../imgs/youtubeLogo.png'>
+                <a class="hover-text-<?=$tema?>" href='<?=$registro["youtube"]?>'>Youtube</a>
             </div>
         <?php endif;
         if(isset($registro["twitter"]) && $registro["twitter"] != NULL):?>
             <div>
-                <img src=''>
-                <a href='<?=$registro["twitter"]?>'>Twitter</a>
+                <img src='../../imgs/twitterLogo.webp'>
+                <a class="hover-text-<?=$tema?>" href='<?=$registro["twitter"]?>'>Twitter</a>
             </div>
         <?php endif;
         if(isset($registro["twitch"]) && $registro["twitch"] != NULL):?>
             <div>
-                <img src=''>
-                <a href='<?=$registro["twitch"]?>'>Twitch</a>
+                <img src='../../imgs/twitchLogo.png'>
+                <a class="hover-text-<?=$tema?>" href='<?=$registro["twitch"]?>'>Twitch</a>
             </div>
         <?php endif;
-        if(isset($registro["Site"]) && $registro["site"] != NULL):?>
+        if(isset($registro["site"]) && $registro["site"] != NULL):?>
             <div>
-                <img src=''>
-                <a href='<?=$registro["Site"]?>'><?=$registro["$nome"]?></a>
+                <img src='../../imgs/webLogo.png'>
+                <a class="hover-text-<?=$tema?>" href='<?=$registro["site"]?>'><?=$registro["$nome"]?></a>
             </div>
         <?php endif;?>
         </div>
         <!-- Jogos da Dev/Pub -->
-        <div>
+        <div class="game-dev-pub-profile">
         <?php while($registroJogosDevPub = mysqli_fetch_assoc($resultadoJogosDevPub)):
             if($registroJogosDevPub["ordem"] == '1'):?>
-                <a class="card-game" href="../store/gamePage.php?idJogo=<?=$registroJogosDevPub["idJogo"]?>">
+                <a class="card-game back-emphasys-<?=$tema?>" href="../store/gamePage.php?idJogo=<?=$registroJogosDevPub["idJogo"]?>">
                     <img class="card-game-img" src="<?=$registroJogosDevPub["foto"]?>">
                     <div class="card-game-content">
                         <span class="card-game-text"><?=$registroJogosDevPub["nome"]?></span>
@@ -128,7 +128,7 @@ $resultadoJogosDevPub = mysqli_query($conexao, $comandoJogosDevPub);
             <?php endif;
             endwhile;?>   
         </div>
-        <a href="../store/listGames.php?inicio=0&acao=mais&<?=$nomeColuna?>=<?=$idDevPub?>">Ver Mais Jogos de <?=$registro["$nome"]?></a>
+        <a class="back-emphasys-<?=$tema?> text-color-<?=$tema?>" href="../store/listGames.php?inicio=0&acao=mais&<?=$nomeColuna?>=<?=$idDevPub?>">Ver Mais Jogos de <?=$registro["$nome"]?></a>
     </session>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>

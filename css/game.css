@@ -1,0 +1,271 @@
+/* Controle dos Jogos */
+.manage-games-session {
+    display: flex;
+    width: 90vw;
+    margin: 25px auto;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.manage-games-session > form {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.manage-games-session > form > input,
+.manage-games-session > form > button {
+    border: none;
+    outline: none;
+    height: 100%;
+}
+
+.manage-games-session > form > input {
+    padding: 5px;
+    width: 30vw;
+}
+
+.manage-games-session > form > button {
+    width: 50px;
+}
+
+.manage-games-session > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.manage-games-session > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    height: 25vh;
+}
+
+.manage-games-session > div > div > img {
+    height: 15vh;
+}
+
+/* Publicar Jogo */
+.pub-game-session {
+    background-image: url("../imgs/backLogin.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    min-height: 65vh;
+}
+
+.pub-game-session > form {
+    margin: 25px auto;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+}
+
+.pub-game-session > form > span {
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.pub-game-session > form > input,
+.pub-game-session > form > label,
+.pub-game-session > form > select,
+.pub-game-session > form > button {
+    outline: none;
+    border: none;
+    padding: 3px 5px;
+    font-size: 18px;
+}
+
+.pub-game-session > form > button {
+    padding: 5px;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.pub-game-session > form > button:hover {
+    filter: brightness(1.2);
+}
+
+/* Atualizar jogo */
+.edit-game-session > form {
+    width: 30vw;
+    min-height: 60vh;
+    height: fit-content;
+}
+
+.category-game-edit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.category-game-edit > div,
+.category-game-edit > .pop-up > div {
+    border-radius: 3px;
+    padding: 3px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.buttons-edit-game {
+    border: none;
+    outline: none;
+    height: 22px;
+    width: 22px;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.buttons-edit-game:hover {
+    filter: brightness(1.2);
+}
+
+.category-game-edit > .pop-up {
+    padding: 5px;
+    display: none;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.plus-category {
+    display: block;
+}
+
+.close-category {
+    display: none;
+}
+
+.edit-game-session > div {
+    margin: 25px auto;
+    padding: 10px;
+}
+
+.edit-img-game > span {
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.edit-img-game > div {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+}
+
+.edit-img-game > div > img {
+    height: 100%;
+    width: 10vw;
+}
+
+.add-img-game > form > * {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.add-img-game > form > button:hover {
+    filter: brightness(1.2);
+}
+
+@media (max-width: 900px) {
+    /* Controle dos Jogos */   
+    .manage-games-session > form > input {
+        width: 50vw;
+    }
+    
+    .manage-games-session > div > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        height: 25vh;
+    }
+    
+    .manage-games-session > div > div > img {
+        height: 15vh;
+    }
+
+    /* Publicar Jogo */
+    .pub-game-session {
+        min-height: 80vh;
+    }
+
+    .pub-game-session > form {
+        margin: 25px auto;
+        padding: 10px;
+        gap: 10px;
+        justify-content: space-around;
+    }
+
+    .pub-game-session > form > span {
+        font-size: 23px;
+    }
+
+    .pub-game-session > form > input,
+    .pub-game-session > form > label,
+    .pub-game-session > form > select,
+    .pub-game-session > form > button {
+        width: 80vw;
+        font-size: 17px;
+        height: 30px;
+    }
+
+    .pub-game-session > form > button {
+        font-size: 20px;
+        height: 40px;
+    }
+
+    /* Atualizar jogo */
+    .edit-game-session {
+        flex-direction: column;
+    }
+
+    .edit-game-session > form {
+        width: 90vw;
+    }
+    
+    .category-game-edit > .pop-up {
+        padding: 5px;
+        display: none;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .edit-game-session > div {
+        margin: 15px auto;
+        padding: 10px;
+        width: 90vw;
+    }
+
+    .edit-img-game > div {
+        height: 8vh;
+        text-align: center;
+    }
+
+    .edit-img-game > div > img {
+        width: 30vw;
+    }
+
+    .edit-game-session > form > button {
+        align-self: center;
+    }
+}

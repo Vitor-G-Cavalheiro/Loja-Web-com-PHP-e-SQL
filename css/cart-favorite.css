@@ -110,7 +110,96 @@
 .cart-buy > a:hover {
     filter: brightness(1.2);
     color: var(--black);
+}  
+
+/* Lista de Desejos */
+.fav-session {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: auto;
+    width: 80vw;
+    min-height: 60vh;
 }
+
+.fav-session > form {
+    padding: 0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 100%;
+    margin: 25px;
+}
+
+.fav-session > form > input {
+    border: none;
+    outline: none;
+    height: 100%;
+    padding-left: 5px;
+    width: 50%;
+}
+
+.fav-session > form > button {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 10%;
+}
+
+.fav-game {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    height: 13vh;
+}
+
+.fav-game > a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+}
+
+.fav-game > a > span {
+    font-size: 30px;
+}
+
+.fav-game > a > img {
+    height: 100%;
+}
+
+.fav-game > div {
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+}
+
+.fav-game > div > a:first-child {
+    background-color: var(--green-neon);
+    color: var(--white);
+    padding: 10px;
+    margin: 10px 0px;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.fav-game > div > a:first-child:hover {
+    filter: brightness(1.2);
+    color: var(--black);
+}
+
 
 @media (max-width: 900px) {
     /* Carrinho */
@@ -123,7 +212,7 @@
     .cart-session {
         width: 90vw;
         padding: 15px;
-        min-height: 70vh;
+        min-height: 65vh;
         gap: 10px;
         flex-direction: column;
     }
@@ -188,5 +277,63 @@
 
     .cart-buy > a {
         font-size: 20px;
+    }
+
+    /* Lista de Desejos */
+    .fav-session {
+        width: 90vw;
+        min-height: 80vh;
+    }
+
+    .fav-session > form {
+        height: 2rem;
+        margin: 15px;
+    }
+
+    .fav-session > form > input {
+        border: none;
+        outline: none;
+        height: 100%;
+        padding-left: 5px;
+        width: 50%;
+    }
+
+    .fav-session > form > button {
+        border: none;
+        outline: none;
+        height: 100%;
+        width: 1.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        width: 10%;
+    }
+
+    .fav-game {
+        margin: 5px;
+        height: 6vh;
+    }
+
+    .fav-game > a {
+        gap: 5px;
+    }
+
+    .fav-game > a > span {
+        font-size: 15px;
+    }
+
+    .fav-game > div {
+        margin: 15px;
+    }
+
+    .fav-game > div > a:first-child {
+        padding: 5px;
+        margin: 5px 0px;
+        font-size: 13px;
+    }
+
+    .fav-game > div > a:last-child {
+        font-size: 10px;
     }
 }

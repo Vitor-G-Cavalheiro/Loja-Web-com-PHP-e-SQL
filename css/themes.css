@@ -113,6 +113,18 @@ body.light {
     filter: opacity(1);
 }
 
+.contrast-classic {
+    background-color: var(--blue-light);
+}
+
+.contrast-dark {
+    background-color: var(--black-gray);
+}
+
+.contrast-light {
+    background-color: var(--white-gray);
+}
+
 /* Backgrounds */
 .background-classic {
     background-color: var(--blue-light);
@@ -292,4 +304,27 @@ body.light {
 .favorite-game > a.text-color-dark:hover {
     background-color: var(--orange-dark);
     color: var(--black);
+}
+
+.swiper-content-recomedation.classic:hover,
+.swiper-content-recomedation.light:hover {
+    background-color: var(--blue-neon);
+}
+
+.swiper-content-recomedation.dark:hover {
+    background-color: var(--orange-dark);
+}
+
+/* Formulários */
+.pub-game-session > form > input.back-emphasys-dark {
+    border: 1px solid var(--white);
+}
+
+.pub-game-session > form > input.back-emphasys-light {
+    border: 1px solid var(--black);
+}
+
+.pub-game-session > form > button.back-emphasys-light,
+.add-img-game > form > button.back-emphasys-light {
+    background-color: var(--blue-light);
 }

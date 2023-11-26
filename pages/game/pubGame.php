@@ -41,41 +41,44 @@ $resultadoCategoria = mysqli_query($conexao, $comandoCategoria);
 </head>
 <body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
-    <form action="./pubGameBD.php" method="post" enctype="multipart/form-data">
-        <label for="nome">Nome: </label>
-        <input type="text" name="nome" required>
-        <label for="preco">Preço: </label>
-        <input type="number" name="preco" placeholder="00,00" step="0.01" required>
-        <label for="descricao">Descrição: </label>
-        <input type="text" name="descricao" required>
-        <label for="desenvolvedora">Desenvolvedora: </label>
-        <select name="desenvolvedora">
-            <?php
-            while($registroDesenvolvedora = mysqli_fetch_assoc($resultadoDesenvolvedora)){
-                echo "<option value='".$registroDesenvolvedora["idDesenvolvedora"]."'>".$registroDesenvolvedora["nomeDev"]."</option>";
-            }
-            ?>
-        </select>
-        <label for="publicadora">Publicadora: </label>
-        <select name="publicadora">
-            <?php
-            while($registroPublicadora = mysqli_fetch_assoc($resultadoPublicadora)){
-                echo "<option value='".$registroPublicadora["idPublicadora"]."'>".$registroPublicadora["nomePub"]."</option>";
-            }
-            ?>
-        </select>
-        <label for="categoria">Categoria: </label>
-        <select name="categoria">
-            <?php
-            while($registroCategoria = mysqli_fetch_assoc($resultadoCategoria)){
-                echo "<option value='".$registroCategoria["idCategoria"]."'>".$registroCategoria["nome"]."</option>";
-            }
-            ?>
-        </select>
-        <label for="foto">Capa do Jogo: </label>
-        <input type="file" name="foto" required>
-        <button type="submit">Publicar</button>
-    </form>
+    <session class="pub-game-session">
+        <form class="back-<?=$tema?>" action="./pubGameBD.php" method="post" enctype="multipart/form-data">
+        <span class="text-emphasys-<?=$tema?>">PUBLICAR JOGO</span>
+            <label class="text-color-<?=$tema?>" for="nome">Nome: </label>
+            <input class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" type="text" name="nome" required>
+            <label class="text-color-<?=$tema?>" for="preco">Preço: </label>
+            <input class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" type="number" name="preco" placeholder="00,00" step="0.01" required>
+            <label class="text-color-<?=$tema?>" for="descricao">Descrição: </label>
+            <input class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" type="text" name="descricao" required>
+            <label class="text-color-<?=$tema?>" for="desenvolvedora">Desenvolvedora: </label>
+            <select class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" name="desenvolvedora">
+                <?php
+                while($registroDesenvolvedora = mysqli_fetch_assoc($resultadoDesenvolvedora)){
+                    echo "<option value='".$registroDesenvolvedora["idDesenvolvedora"]."'>".$registroDesenvolvedora["nomeDev"]."</option>";
+                }
+                ?>
+            </select>
+            <label class="text-color-<?=$tema?>" for="publicadora">Publicadora: </label>
+            <select class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" name="publicadora">
+                <?php
+                while($registroPublicadora = mysqli_fetch_assoc($resultadoPublicadora)){
+                    echo "<option value='".$registroPublicadora["idPublicadora"]."'>".$registroPublicadora["nomePub"]."</option>";
+                }
+                ?>
+            </select>
+            <label class="text-color-<?=$tema?>" for="categoria">Categoria: </label>
+            <select class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" name="categoria">
+                <?php
+                while($registroCategoria = mysqli_fetch_assoc($resultadoCategoria)){
+                    echo "<option value='".$registroCategoria["idCategoria"]."'>".$registroCategoria["nome"]."</option>";
+                }
+                ?>
+            </select>
+            <label class="text-color-<?=$tema?>" for="foto">Capa do Jogo: </label>
+            <input class="text-color-<?=$tema?>" type="file" name="foto" required>
+            <button class="text-color-<?=$tema?> back-emphasys-<?=$tema?>" type="submit">Publicar</button>
+        </form>
+    </session>
     <?php require('../components/footer.php') ?>
     <script src="../../js/index.js"></script>
 </body>

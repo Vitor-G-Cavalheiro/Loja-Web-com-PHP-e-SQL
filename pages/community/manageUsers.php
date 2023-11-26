@@ -30,57 +30,66 @@ $resultadoPublicadoras = mysqli_query($conexao, $comandoPublicadoras);
 <body class="<?=$tema?>">
     <!-- Cabeçalho -->
     <?php require('../components/header.php') ?>
-    <session>
+    <session class="community-session">
         <!-- Lista Usuários -->
         <div>
-            <span>Usuários: </span>
+            <span class="text-color-<?=$tema?>">Usuários: </span>
             <?php while($registroUsuarios = mysqli_fetch_assoc($resultadoUsuarios)):?>
-                <a href="../user/profileUser.php?idUsuario=<?=$registroUsuarios["idUsuario"]?>">
-                    <div>
+                <div class="community-list back-<?=$tema?>">
+                    <a href="../user/profileUser.php?idUsuario=<?=$registroUsuarios["idUsuario"]?>">
                         <img src="<?=$registroUsuarios["foto"]?>">
-                        <span><?=$registroUsuarios["nome"]?></span>
-                        <?php if($_SESSION["user"] == "admin"):?>
-                        <a href="../user/editProfileUser.php?idUsuario=<?=$registroUsuarios["idUsuario"]?>">Editar Perfil</a>
-                        <a href="../user/editProfileUserBD.php?delete=sim&idUsuario=<?=$registroUsuarios["idUsuario"]?>">Deletar Perfil</a>
-                        <?php endif;?>
+                        <span class="text-color-<?=$tema?>"><?=$registroUsuarios["nome"]?></span>
+                        <span class="text-color-<?=$tema?>"><?=$registroUsuarios["descricao"]?></span>
+                    </a>
+                    <?php if($_SESSION["user"] == "admin"):?>
+                    <div>
+                        <a class="hover-text-<?=$tema?>" href="../user/editProfileUser.php?idUsuario=<?=$registroUsuarios["idUsuario"]?>">Editar Perfil</a>
+                        <a class="hover-text-<?=$tema?>" href="../user/editProfileUserBD.php?delete=sim&idUsuario=<?=$registroUsuarios["idUsuario"]?>">Deletar Perfil</a>
                     </div>
-                </a>
+                    <?php endif;?>
+                </div>
             <?php endwhile;?>
-            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=Usuarios">Ver Mais Usuários</a>
+            <a class="hover-text-<?=$tema?>" href="./listProfiles.php?inicio=0&acao=mais&tipo=Usuarios">Ver Mais Usuários</a>
         </div>
         <!-- Lista Desenvolvedoras -->
         <div>
-            <span>Desenvolvedoras: </span>
+            <span class="text-color-<?=$tema?>">Desenvolvedoras: </span>
             <?php while($registroDesenvolvedoras = mysqli_fetch_assoc($resultadoDesenvolvedoras)):?>
-                <a href="../devPub/profileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">
-                    <div>
+                <div class="community-list back-<?=$tema?>">
+                    <a href="../devPub/profileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">
                         <img src="<?=$registroDesenvolvedoras["foto"]?>">
-                        <span><?=$registroDesenvolvedoras["nomeDev"]?></span>
-                        <?php if($_SESSION["user"] == "admin"):?>
-                        <a href="../devPub/editProfileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">Editar Página</a>
-                        <a href="./editProfileDevPubBD.php?delete=sim&idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">Deletar Página</a>
-                        <?php endif;?>
+                        <span class="text-color-<?=$tema?>"><?=$registroDesenvolvedoras["nomeDev"]?></span>
+                        <span class="text-color-<?=$tema?>"><?=$registroDesenvolvedoras["descricao"]?></span>
+                    </a>
+                    <?php if($_SESSION["user"] == "admin"):?>
+                    <div>
+                        <a class="hover-text-<?=$tema?>" href="../devPub/editProfileDevPub.php?idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">Editar Página</a>
+                        <a class="hover-text-<?=$tema?>" href="./editProfileDevPubBD.php?delete=sim&idDesenvolvedora=<?=$registroDesenvolvedoras["idDesenvolvedora"]?>">Deletar Página</a>
                     </div>
-                </a>
+                    <?php endif;?>
+                </div>
             <?php endwhile;?>
-            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=Desenvolvedoras">Ver Mais Desenvolvedoras</a>
+            <a class="hover-text-<?=$tema?>" href="./listProfiles.php?inicio=0&acao=mais&tipo=Desenvolvedoras">Ver Mais Desenvolvedoras</a>
         </div>
         <!-- Lista Publicadoras -->
         <div>
-            <span>Publicadoras: </span>
+            <span class="text-color-<?=$tema?>">Publicadoras: </span>
             <?php while($registroPublicadoras = mysqli_fetch_assoc($resultadoPublicadoras)):?>
-                <a href="../devPub/profileDevPub.php?idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">
-                    <div>
+                <div class="community-list back-<?=$tema?>">
+                    <a href="../devPub/profileDevPub.php?idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">
                         <img src="<?=$registroPublicadoras["foto"]?>">
-                        <span><?=$registroPublicadoras["nomePub"]?></span>
-                        <?php if($_SESSION["user"] == "admin"):?>
-                        <a href="../devPub/editProfileDevPub.php?idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">Editar Página</a>
-                        <a href="./editProfileDevPubBD.php?delete=sim&idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">Deletar Página</a>
-                        <?php endif;?>
+                        <span class="text-color-<?=$tema?>"><?=$registroPublicadoras["nomePub"]?></span>
+                        <span class="text-color-<?=$tema?>"><?=$registroPublicadoras["descricao"]?></span>
+                    </a>
+                    <?php if($_SESSION["user"] == "admin"):?>
+                    <div>
+                        <a class="hover-text-<?=$tema?>" href="../devPub/editProfileDevPub.php?idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">Editar Página</a>
+                        <a class="hover-text-<?=$tema?>" href="./editProfileDevPubBD.php?delete=sim&idPublicadora=<?=$registroPublicadoras["idPublicadora"]?>">Deletar Página</a>
                     </div>
-                </a>
+                    <?php endif;?>
+                </div>
             <?php endwhile;?>
-            <a href="./listProfiles.php?inicio=0&acao=mais&tipo=Publicadoras">Ver Mais Publicadoras</a>
+            <a class="hover-text-<?=$tema?>" href="./listProfiles.php?inicio=0&acao=mais&tipo=Publicadoras">Ver Mais Publicadoras</a>
         </div>
     </session>
     <!-- Rodapé -->

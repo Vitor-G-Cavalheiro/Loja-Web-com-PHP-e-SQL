@@ -9,6 +9,9 @@ $comando = "SELECT * FROM Usuarios WHERE idUsuario = $idUsuario";
 $resultado = mysqli_query($conexao, $comando);
 $registro = mysqli_fetch_assoc($resultado);
 
+$comandoJogosSlide = "SELECT j.nome, fj.foto, j.preco, j.descricao, j.idJogo FROM JogosPublicados jp INNER JOIN Jogos j ON jp.idJogo = j.idJogo INNER JOIN FotosJogos fj ON fj.idJogo = jp.idJogo WHERE fj.ordem = 1 ORDER BY RAND() LIMIT 4";
+$resultadoJogosSlide = mysqli_query($conexao, $comandoJogosSlide);
+
 ?>
 
 <!DOCTYPE html>
@@ -26,14 +29,25 @@ $registro = mysqli_fetch_assoc($resultado);
 </head>
 <body class="<?=$tema?>">
     <?php require('../components/header.php') ?>
-    <session>
+    <session class="profile-session back-<?=$tema?>">
         <div>
             <img src="<?=$registro["foto"]?>">
-            <span><?=$registro["nome"]?></span>
-            <span><?=$registro["descricao"]?></span>
+            <span class="text-color-<?=$tema?>"><?=$registro["nome"]?></span>
+            <span class="text-color-<?=$tema?>"><?=$registro["descricao"]?></span>
             <?php if($idUsuario == $_SESSION["profile"] || $_SESSION["user"] == "admin"):?>
-                <a href="./editProfileUser.php?idUsuario=<?=$idUsuario?>">Editar Perfil</a>
+                <a class="hover-text-<?=$tema?> back-emphasys-<?=$tema?>" href="./editProfileUser.php?idUsuario=<?=$idUsuario?>">Editar Perfil</a>
             <?php endif;?>
+        </div>
+        <span class="text-color-<?=$tema?>">Atividade Recente: </span>
+        <?php while($registroJogosSlide = mysqli_fetch_assoc($resultadoJogosSlide)):?>
+        <div class="back-emphasys-<?=$tema?> profile-games">
+            <img src="<?=$registroJogosSlide["foto"]?>">
+            <span class="text-color-<?=$tema?>"><?=$registroJogosSlide["nome"]?></span>
+            <span class="text-color-<?=$tema?>"><?=$registroJogosSlide["descricao"]?></span>
+        </div>
+        <?php endwhile;?>
+        <div>
+            <span class="text-color-<?=$tema?>">EM BREVE BIBLIOTECA E MAIS...</span>
         </div>
     </session>
     <?php require('../components/footer.php') ?>

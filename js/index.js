@@ -1,11 +1,25 @@
 //Pop Up Genércio
 let popUps = document.querySelector(".pop-up");
+let plusCat = document.querySelector(".plus-category");
+let closeCat = document.querySelector(".close-category");
 
 function popUpGen (e) {
     if (e == "open"){
         popUps.style.display = "block";
     } else if (e == "close"){
         popUps.style.display = "none";
+    }
+}
+
+function popUpCat (e) {
+    if (e == "open"){
+        popUps.style.display = "flex";
+        plusCat.style.display = "none";
+        closeCat.style.display = "flex";
+    } else if (e == "close"){
+        popUps.style.display = "none";
+        plusCat.style.display = "flex";
+        closeCat.style.display = "none";
     }
 }
 
